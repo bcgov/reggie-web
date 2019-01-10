@@ -1,7 +1,7 @@
 //
 // Reggie Web
 //
-// Copyright © 2018 Province of British Columbia
+// Copyright © 2018 Province of British Columbia
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,24 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-10.
+// Created by Jason Leach on 2018-08-24.
 //
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './components/App';
-import './index.css';
-import serviceWorker from './serviceWorker';
-import configureStore from './configureStore';
+import { AUTHENTICATION } from '../constants';
 
-const store = configureStore();
+export const authenticateSuccess = () => {
+  return {
+    type: AUTHENTICATION.SUCCESS,
+  };
+};
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
-
-serviceWorker();
+export const authenticateFailed = () => {
+  return {
+    type: AUTHENTICATION.FAILED,
+  };
+};

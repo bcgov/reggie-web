@@ -1,7 +1,7 @@
 //
 // Reggie Web
 //
-// Copyright © 2018 Province of British Columbia
+// Copyright © 2018 Province of British Columbia
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,24 +15,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-10.
+// Created by Jason Leach on 2018-10-02.
 //
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './components/App';
-import './index.css';
-import serviceWorker from './serviceWorker';
-import configureStore from './configureStore';
+import { ImplicitAuthManager } from '@bcgov/common-web-utils';
 
-const store = configureStore();
+const config = {
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? '{{.Env.SSO_BASE_URL}}'
+      : 'https://sso-dev.pathfinder.gov.bc.ca',
+  realmName: 'devhub',
+  clientId: 'reggie-web',
+  kcIDPHint: 'idir', // Skip SSO, go directly to IDIR auth.
+};
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+const iam = new ImplicitAuthManager(config);
 
-serviceWorker();
+export default iam;

@@ -15,24 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-10.
+// Created by Jason Leach on 2018-09-17.
 //
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './components/App';
-import './index.css';
-import serviceWorker from './serviceWorker';
-import configureStore from './configureStore';
-
-const store = configureStore();
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
-
-serviceWorker();
+export const AUTHENTICATION = {
+  SUCCESS: 'AUTHENTICATE_SUCCESS',
+  FAILED: 'AUTHENTICATE_FAILED',
+};

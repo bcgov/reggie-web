@@ -18,21 +18,7 @@
 // Created by Shelly Xue Han on 2019-01-10.
 //
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './components/App';
-import './index.css';
-import serviceWorker from './serviceWorker';
-import configureStore from './configureStore';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-const store = configureStore();
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
-
-serviceWorker();
+configure({ adapter: new Adapter() });
