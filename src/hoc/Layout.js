@@ -16,8 +16,8 @@ limitations under the License.
 Created by Patrick Simonian
 */
 import React from 'react';
-import Footer from './UI/Footer';
-import Header from './UI/Header';
+import Footer from '../components/UI/Footer';
+import Header from '../components/UI/Header';
 
 const Layout = ({ children }) => (
   <div>
@@ -26,3 +26,5 @@ const Layout = ({ children }) => (
     <Footer />
   </div>
 );
+
+export default Layout;
