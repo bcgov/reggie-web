@@ -27,9 +27,8 @@ import implicitAuthManager from '../auth';
 import Home from '../containers/Home';
 import Registration from '../containers/Registration';
 import RocketChat from '../containers/RocketChat';
+import Layout from '../hoc/Layout';
 import './App.css';
-import Footer from './UI/Footer';
-import Header from './UI/Header';
 
 export class App extends Component {
   componentDidMount = () => {
@@ -51,8 +50,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header authentication={this.props.authentication} />
+      <Layout>
         <BrowserRouter>
           <Switch>
             <Route path="/registration" component={Registration} />
@@ -60,8 +58,7 @@ export class App extends Component {
             <Route path="/" component={Home} authentication={this.props.authentication} />
           </Switch>
         </BrowserRouter>
-        <Footer />
-      </div>
+      </Layout>
     );
   }
 }
