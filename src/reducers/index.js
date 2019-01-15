@@ -20,20 +20,35 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import { AUTHENTICATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from '../constants';
 
 const authentication = (state = { isAuthenticated: false }, action) => {
   switch (action.type) {
     case AUTHENTICATION.SUCCESS:
-      return { isAuthenticated: true };
+      return { isAuthenticated: true, email: implicitAuthManager.idToken.data.email };
     case AUTHENTICATION.FAILED:
       implicitAuthManager.clearAuthLocalStorage();
-      return { isAuthenticated: false };
+      return { isAuthenticated: false, email: null };
     default:
       return state;
   }
 };
 
-const rootReducer = combineReducers({ authentication });
+const authorization = (state = { isAuthorized: false }, action) => {
+  switch (action.type) {
+    case AUTHORIZATION.SUCCESS:
+      return {
+        isAuthorized: true,
+        email: action.payload.email,
+        ssoGroup: action.payload.ssoGroup,
+      };
+    case AUTHORIZATION.FAILED:
+      return { isAuthorized: false, email: action.payload.email, ssoGroup: null };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({ authentication, authorization });
 
 export default rootReducer;

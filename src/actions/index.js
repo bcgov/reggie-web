@@ -18,7 +18,7 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from '../constants';
 
 export const authenticateSuccess = () => {
   return {
@@ -29,5 +29,51 @@ export const authenticateSuccess = () => {
 export const authenticateFailed = () => {
   return {
     type: AUTHENTICATION.FAILED,
+  };
+};
+
+export const authorizationStart = () => {
+  return {
+    type: AUTHORIZATION.START,
+  };
+};
+
+export const authorizationSuccess = (ssoGroup, email) => {
+  return {
+    type: AUTHORIZATION.SUCCESS,
+    payload: {
+      ssoGroup,
+      email,
+    },
+  };
+};
+
+export const authorizationFailed = messages => {
+  return {
+    type: AUTHORIZATION.FAILED,
+    payload: {
+      messages,
+    },
+  };
+};
+
+//async
+export const authorize = async (ssoGroup, email) => {
+  console.log('authorizing------------');
+  return dispatch => {
+    dispatch(authorizationStart());
+    try {
+      // axios:
+      // const response = await xxx(ssoGroup, email);
+      if (ssoGroup !== 'rc') throw Error('noono');
+      const response = { data: { email: '123' } };
+      console.log('authorizing------worked------');
+      setTimeout(() => {
+        dispatch(authorizationSuccess(ssoGroup, response.data.email));
+      }, 250);
+    } catch (err) {
+      console.log('authorizing-----fail-------');
+      dispatch(authorizationFailed('not authorized'));
+    }
   };
 };
