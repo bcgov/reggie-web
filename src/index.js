@@ -17,7 +17,6 @@
 //
 // Created by Shelly Xue Han on 2019-01-10.
 //
-// eslint-disable-next-line
 
 import React from 'react';
 import ReactDOM from 'react-dom';

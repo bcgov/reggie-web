@@ -18,7 +18,6 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-// eslint-disable-next-line
 import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
