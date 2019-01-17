@@ -24,6 +24,4 @@ export const API = {
       ? 'http://localhost:8000/api/v1/'
       : `${window.location.origin}/api/v1/`,
   GET_SSO_USER: email => `sso/user?email=${email}`,
-  // UPDATE_SSO_USER: userInfo => `sso/user`,
-  // SEND_CONFIRM_EMAIL: email => `email/`,
 };

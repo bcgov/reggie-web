@@ -18,12 +18,13 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
+// eslint-disable-next-line
 import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-//redux debugging
+// redux debugging
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = () => {

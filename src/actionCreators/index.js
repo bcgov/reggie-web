@@ -21,13 +21,12 @@
 import axios from 'axios';
 import { authorizationStart, authorizationSuccess, authorizationFailed } from '../actions';
 import { API } from '../constants';
-
 const axi = axios.create({
   baseURL: API.BASE_URL(),
+  timeout: 4000,
 });
 
 export const authorize = (ssoGroup, email) => {
-  console.log(`-------started with ${email}`);
   return dispatch => {
     dispatch(authorizationStart());
     axi
@@ -37,12 +36,10 @@ export const authorize = (ssoGroup, email) => {
         },
       })
       .then(res => {
-        console.log(`-------success with ${res}`);
-        dispatch(authorizationSuccess(ssoGroup, email));
+        return dispatch(authorizationSuccess(ssoGroup, email));
       })
       .catch(err => {
-        console.log(`-------failed with ${err}`);
-        dispatch(authorizationFailed(ssoGroup, email));
+        return dispatch(authorizationFailed(ssoGroup, email));
       });
   };
 };

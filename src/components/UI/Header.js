@@ -20,6 +20,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AuthButton from '../AuthButton/AuthButton';
 import logo from './bcgovlogo.svg';
 import './Header.css';
@@ -29,7 +30,7 @@ const Header = ({ authentication }) => {
     <header>
       <div className="banner">
         <img src={logo} className="header-logo" alt="logo" />
-        <h1>BC Gov Reggistration Center</h1>
+        <h1>BC Gov Registration Center</h1>
       </div>
       <AuthButton isAuthenticated={authentication.isAuthenticated} />
     </header>
@@ -40,4 +41,17 @@ Header.propTypes = {
   authentication: PropTypes.object.isRequired,
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    authentication: state.authentication,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

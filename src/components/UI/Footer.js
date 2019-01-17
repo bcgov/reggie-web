@@ -25,12 +25,24 @@ const Footer = () => {
   return (
     <footer>
       <ul>
-        <li><a href=".">Home</a></li>
-        <li><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer">Disclaimer</a></li>
-        <li><a href="https://www2.gov.bc.ca/gov/content/home/privacy">Privacy</a></li>
-        <li><a href="https://www2.gov.bc.ca/gov/content/home/accessibility">Accessibility</a></li>
-        <li><a href="https://www2.gov.bc.ca/gov/content/home/copyright">Copyright</a></li>
-        <li><a href="https://github.com/bcgov/reggie-web">Contact Us</a></li>
+        <li>
+          <a href=".">Home</a>
+        </li>
+        <li>
+          <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer">Disclaimer</a>
+        </li>
+        <li>
+          <a href="https://www2.gov.bc.ca/gov/content/home/privacy">Privacy</a>
+        </li>
+        <li>
+          <a href="https://www2.gov.bc.ca/gov/content/home/accessibility">Accessibility</a>
+        </li>
+        <li>
+          <a href="https://www2.gov.bc.ca/gov/content/home/copyright">Copyright</a>
+        </li>
+        <li>
+          <a href="https://github.com/bcgov/reggie-web">Contact Us</a>
+        </li>
       </ul>
     </footer>
   );
