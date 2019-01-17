@@ -28,13 +28,16 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Rocket chat invite page</h1>
+        <h2>Hello {this.props.userInfo.firstName}</h2>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    userInfo: state.authorization.userInfo,
+  };
 };
 
 const mapDispatchToProps = dispatch => {

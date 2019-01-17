@@ -28,13 +28,16 @@ class Registration extends Component {
     return (
       <div>
         <h1>Registration page</h1>
+        <h2>Please fill in the form and register</h2>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    userInfo: state.authorization.userInfo,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
