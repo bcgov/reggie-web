@@ -19,11 +19,16 @@
 //
 
 import axios from 'axios';
-import { authorizationStart, authorizationSuccess, authorizationFailed } from '../actions';
+import {
+  authorizationStart,
+  authorizationSuccess,
+  authorizationFailed,
+  authorizationError,
+} from '../actions';
 import { API } from '../constants';
 const axi = axios.create({
   baseURL: API.BASE_URL(),
-  timeout: 4000,
+  timeout: API.TIME_OUT,
 });
 
 export const authorize = (ssoGroup, email) => {
@@ -36,10 +41,18 @@ export const authorize = (ssoGroup, email) => {
         },
       })
       .then(res => {
-        return dispatch(authorizationSuccess(ssoGroup, email));
+        const newUserInfo = {
+          email: res.data.email,
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          authorized: res.data.authorized,
+        };
+        if (newUserInfo.authorized) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
+        return dispatch(authorizationFailed(ssoGroup, newUserInfo));
       })
       .catch(err => {
-        return dispatch(authorizationFailed(ssoGroup, email));
+        console.log(err);
+        return dispatch(authorizationError([err.message]));
       });
   };
 };
