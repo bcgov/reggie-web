@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import * as actionCreators from '../actions/index';
+import { authorize } from '../actionCreators';
 //main container
 
 class Home extends Component {
@@ -10,10 +11,17 @@ class Home extends Component {
   render() {
     console.log(this.props.isAuthenticated);
     console.log(this.props.isAuthorized);
+    console.log(this.props.authorizationStarted);
     console.log(this.props.email);
 
-    const authorizedRedirect = this.props.isAuthorized ? <Redirect to="/rocketChat" /> : <Redirect to="/registration" />;
-    // const authorizedRedirect = this.props.isAuthorized ? <Redirect to="/rocketChat" /> : null;
+    let authorizedRedirect = null;
+
+    if (this.props.isAuthorized) {
+      authorizedRedirect = <Redirect to="/rocketChat" />;
+    } else if (this.props.authorizationStarted) {
+      authorizedRedirect = <Redirect to="/registration" />;
+    }
+
     const content = this.props.isAuthenticated ? (
       <div>
         <h1>Hello {this.props.email} ---</h1>
@@ -31,7 +39,7 @@ class Home extends Component {
             this.props.authorize('kk', this.props.email);
           }}
         >
-          Login to KK
+          Login to Other self-service app
         </button>
       </div>
     ) : (
@@ -53,13 +61,17 @@ const mapStateToProps = state => {
     isAuthenticated: state.authentication.isAuthenticated,
     email: state.authentication.email,
     isAuthorized: state.authorization.isAuthorized,
+    authorizationStarted: state.authorization.authorizationStarted,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    authorize: (ssoGroup, email) => dispatch(actionCreators.authorize(ssoGroup, email)),
-  };
+  return bindActionCreators(
+    {
+      authorize: (ssoGroup, email) => dispatch(authorize(ssoGroup, email)),
+    },
+    dispatch
+  );
 };
 
 export default connect(

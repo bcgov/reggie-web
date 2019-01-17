@@ -20,7 +20,7 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import { AUTHENTICATION, AUTHORIZATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from '../actions/actionTypes';
 
 const authentication = (state = { isAuthenticated: false }, action) => {
   switch (action.type) {
@@ -34,16 +34,38 @@ const authentication = (state = { isAuthenticated: false }, action) => {
   }
 };
 
-const authorization = (state = { isAuthorized: false }, action) => {
+const authorization = (
+  state = {
+    isAuthorized: false,
+    authorizationStarted: false,
+    email: null,
+    ssoGroup: null,
+  },
+  action
+) => {
   switch (action.type) {
+    case AUTHORIZATION.START:
+      return {
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: true,
+        },
+      };
     case AUTHORIZATION.SUCCESS:
       return {
         isAuthorized: true,
+        authorizationStarted: true,
         email: action.payload.email,
         ssoGroup: action.payload.ssoGroup,
       };
     case AUTHORIZATION.FAILED:
-      return { isAuthorized: false, email: action.payload.email, ssoGroup: null };
+      return {
+        isAuthorized: false,
+        authorizationStarted: true,
+        email: action.payload.email,
+        ssoGroup: action.payload.ssoGroup,
+      };
     default:
       return state;
   }

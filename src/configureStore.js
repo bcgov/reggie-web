@@ -18,10 +18,13 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+
+//redux debugging
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = () => {
   const middleware = [thunk];
@@ -29,7 +32,7 @@ const configureStore = () => {
     middleware.push(logger);
   }
 
-  return createStore(rootReducer, applyMiddleware(...middleware));
+  return createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
 };
 
 export default configureStore;

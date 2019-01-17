@@ -18,12 +18,13 @@
 // Created by Shelly Xue Han on 2019-01-16.
 //
 
-export const API = {
-  BASE_URL: () =>
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8000/api/v1/'
-      : `${window.location.origin}/api/v1/`,
-  GET_SSO_USER: email => `sso/user?email=${email}`,
-  // UPDATE_SSO_USER: userInfo => `sso/user`,
-  // SEND_CONFIRM_EMAIL: email => `email/`,
+export const AUTHENTICATION = {
+  SUCCESS: 'AUTHENTICATE_SUCCESS',
+  FAILED: 'AUTHENTICATE_FAILED',
+};
+
+export const AUTHORIZATION = {
+  START: 'AUTHORIZATION_START',
+  SUCCESS: 'AUTHORIZATION_SUCCESS',
+  FAILED: 'AUTHORIZATION_FAILED',
 };

@@ -18,7 +18,7 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION, AUTHORIZATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -48,32 +48,12 @@ export const authorizationSuccess = (ssoGroup, email) => {
   };
 };
 
-export const authorizationFailed = messages => {
+export const authorizationFailed = (ssoGroup, email) => {
   return {
     type: AUTHORIZATION.FAILED,
     payload: {
-      messages,
+      ssoGroup,
+      email,
     },
-  };
-};
-
-//async
-export const authorize = async (ssoGroup, email) => {
-  console.log('authorizing------------');
-  return dispatch => {
-    dispatch(authorizationStart());
-    try {
-      // axios:
-      // const response = await xxx(ssoGroup, email);
-      if (ssoGroup !== 'rc') throw Error('noono');
-      const response = { data: { email: '123' } };
-      console.log('authorizing------worked------');
-      setTimeout(() => {
-        dispatch(authorizationSuccess(ssoGroup, response.data.email));
-      }, 250);
-    } catch (err) {
-      console.log('authorizing-----fail-------');
-      dispatch(authorizationFailed('not authorized'));
-    }
   };
 };
