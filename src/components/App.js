@@ -53,8 +53,8 @@ export class App extends Component {
       <Layout>
         <BrowserRouter>
           <Switch>
-            <Route path="/registration" component={Registration} />
-            <Route path="/rocketChat" component={RocketChat} />
+            <Route path="/registration" component={Registration} authorization={this.props.authorization} />
+            <Route path="/rocketChat" component={RocketChat} authorization={this.props.authorization} />
             <Route path="/" component={Home} authentication={this.props.authentication} />
           </Switch>
         </BrowserRouter>
@@ -66,6 +66,7 @@ export class App extends Component {
 function mapStateToProps(state) {
   return {
     authentication: state.authentication,
+    authorization: state.authorization,
   };
 }
 

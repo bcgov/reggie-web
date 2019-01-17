@@ -38,22 +38,31 @@ export const authorizationStart = () => {
   };
 };
 
-export const authorizationSuccess = (ssoGroup, email) => {
+export const authorizationSuccess = (ssoGroup, userInfo) => {
   return {
     type: AUTHORIZATION.SUCCESS,
     payload: {
       ssoGroup,
-      email,
+      userInfo,
     },
   };
 };
 
-export const authorizationFailed = (ssoGroup, email) => {
+export const authorizationFailed = (ssoGroup, userInfo) => {
   return {
     type: AUTHORIZATION.FAILED,
     payload: {
       ssoGroup,
-      email,
+      userInfo,
+    },
+  };
+};
+
+export const authorizationError = errorMessages => {
+  return {
+    type: AUTHORIZATION.ERROR,
+    payload: {
+      errorMessages,
     },
   };
 };

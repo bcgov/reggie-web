@@ -22,13 +22,22 @@ import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
 import { AUTHENTICATION, AUTHORIZATION } from '../actions/actionTypes';
 
-const authentication = (state = { isAuthenticated: false }, action) => {
+const authentication = (state = { isAuthenticated: false, email: null }, action) => {
   switch (action.type) {
     case AUTHENTICATION.SUCCESS:
-      return { isAuthenticated: true, email: implicitAuthManager.idToken.data.email };
+      return {
+        ...state,
+        ...{
+          isAuthenticated: true,
+          email: implicitAuthManager.idToken.data.email,
+        },
+      };
     case AUTHENTICATION.FAILED:
       implicitAuthManager.clearAuthLocalStorage();
-      return { isAuthenticated: false, email: null };
+      return {
+        ...state,
+        ...{ isAuthenticated: false },
+      };
     default:
       return state;
   }
@@ -38,8 +47,9 @@ const authorization = (
   state = {
     isAuthorized: false,
     authorizationStarted: false,
-    email: null,
+    userInfo: { email: null, firstName: null, lastName: null },
     ssoGroup: null,
+    errorMessages: [],
   },
   action
 ) => {
@@ -49,22 +59,37 @@ const authorization = (
         ...state,
         ...{
           isAuthorized: false,
-          authorizationStarted: true,
+          authorizationStarted: false,
         },
       };
     case AUTHORIZATION.SUCCESS:
       return {
-        isAuthorized: true,
-        authorizationStarted: true,
-        email: action.payload.email,
-        ssoGroup: action.payload.ssoGroup,
+        ...state,
+        ...{
+          isAuthorized: true,
+          authorizationStarted: true,
+          userInfo: action.payload.userInfo,
+          ssoGroup: action.payload.ssoGroup,
+        },
       };
     case AUTHORIZATION.FAILED:
       return {
-        isAuthorized: false,
-        authorizationStarted: true,
-        email: action.payload.email,
-        ssoGroup: action.payload.ssoGroup,
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: true,
+          userInfo: action.payload.userInfo,
+          ssoGroup: action.payload.ssoGroup,
+        },
+      };
+    case AUTHORIZATION.ERROR:
+      return {
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: false,
+          errorMessages: action.payload.errorMessages,
+        },
       };
     default:
       return state;

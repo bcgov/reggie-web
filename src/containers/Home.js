@@ -28,17 +28,25 @@ class Home extends Component {
   static displayName = '[Component Home]';
 
   render() {
+    // TODO: combine isAuthorized and authorizationStarted:
     let authorizedRedirect = null;
-
     if (this.props.isAuthorized) {
-      authorizedRedirect = <Redirect to="/rocketChat" />;
+      authorizedRedirect = (
+        <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />
+      );
     } else if (this.props.authorizationStarted) {
-      authorizedRedirect = <Redirect to="/registration" />;
+      authorizedRedirect = (
+        <Redirect to={{ pathname: '/registration', state: { userInfo: this.props.userInfo } }} />
+      );
     }
+    // const redirectPath = this.props.isAuthorized ? '/rocketChat' : '/registration';
+    // const authorizedRedirect = (
+    //   <Redirect to={{ pathname: redirectPath, state: { userInfo: this.props.userInfo } }} />
+    // );
 
     const content = this.props.isAuthenticated ? (
       <div>
-        <h1>Hello {this.props.email} ---</h1>
+        <h1>Hello --- {this.props.email}</h1>
         <button
           className="rc-button"
           onClick={() => {
@@ -49,6 +57,7 @@ class Home extends Component {
         </button>
         <button
           className="kk-button"
+          disabled="true"
           onClick={() => {
             this.props.authorize('kk', this.props.email);
           }}
@@ -64,6 +73,7 @@ class Home extends Component {
       <div className="authed">
         {authorizedRedirect}
         <h1>Welcome to Reggie web</h1>
+        <h2>{this.props.errorMessages}</h2>
         {content}
       </div>
     );
@@ -76,6 +86,8 @@ const mapStateToProps = state => {
     email: state.authentication.email,
     isAuthorized: state.authorization.isAuthorized,
     authorizationStarted: state.authorization.authorizationStarted,
+    userInfo: state.authorization.userInfo,
+    errorMessages: state.authorization.errorMessages,
   };
 };
 
