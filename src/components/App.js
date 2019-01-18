@@ -21,7 +21,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
 import Home from '../containers/Home';
@@ -51,13 +51,27 @@ export class App extends Component {
   render() {
     return (
       <Layout>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/registration" component={Registration} authorization={this.props.authorization} />
-            <Route path="/rocketChat" component={RocketChat} authorization={this.props.authorization} />
-            <Route path="/" component={Home} authentication={this.props.authentication} />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route path="/registration" component={Registration} />
+          <Route
+            path="/rocketChat"
+            component={RocketChat}
+            authorization={this.props.authorization}
+          />
+          <Route
+            path="/login"
+            component={() => {
+              window.location = implicitAuthManager.getSSOLoginURI();
+            }}
+          />
+          <Route
+            path="/logout"
+            component={() => {
+              window.location = implicitAuthManager.getSSOLogoutURI();
+            }}
+          />
+          <Route path="/" component={Home} authentication={this.props.authentication} />
+        </Switch>
       </Layout>
     );
   }

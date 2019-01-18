@@ -19,17 +19,47 @@
 //
 
 import React, { Component } from 'react';
+import { Grid, Row, Col, PageHeader, Button } from 'react-bootstrap';
+import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 
 class Registration extends Component {
   static displayName = '[Component Registration]';
 
   render() {
+    const schema = {
+      title: 'Please register to continue',
+      type: 'object',
+      required: ['firstName', 'lastName', 'email'],
+      properties: {
+        firstName: { type: 'string', title: 'First Name', default: '' },
+        lastName: { type: 'string', title: 'Last Name', default: '' },
+        email: { type: 'string', format: 'email', title: 'Email', default: '' },
+      },
+    };
+
     return (
-      <div>
-        <h1>Registration page</h1>
-        <h2>Please fill in the form and register</h2>
-      </div>
+      <Grid componentClass="main">
+        <Row>
+          <Col xs={12}>
+            <PageHeader>Registration Page</PageHeader>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form
+              schema={schema}
+              onChange={console.log('changed')}
+              onSubmit={console.log('submitted')}
+              onError={console.log('errors')}
+            >
+              <Button type="submit" bsStyle="primary">
+                Submit
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

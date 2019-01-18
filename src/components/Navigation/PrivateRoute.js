@@ -15,19 +15,28 @@ limitations under the License.
 
 Created by Patrick Simonian
 */
-import React from 'react';
-import Footer from '../components/UI/Footer';
-import Header from '../components/UI/Header';
-import { BrowserRouter } from 'react-router-dom';
 
-const Layout = ({ children }) => (
-  <BrowserRouter>
-    <div>
-      <Header />
-      {children}
-      <Footer />
-    </div>
-  </BrowserRouter>
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
+
+const PrivateRoute = ({ component: Component, shouldRender, redirectTo, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      shouldRender === true ? <Component {...props} /> : <Redirect to={redirectTo} />
+    }
+  />
 );
 
-export default Layout;
+PrivateRoute.propTypes = {
+  shouldRender: PropTypes.bool.isRequired,
+  component: PropTypes.node.isRequired,
+  redirectTo: PropTypes.string,
+};
+
+PrivateRoute.defaultProps = {
+  redirectTo: '/',
+};
+
+export default PrivateRoute;
