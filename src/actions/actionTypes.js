@@ -18,11 +18,14 @@
 // Created by Shelly Xue Han on 2019-01-16.
 //
 
-export const API = {
-  BASE_URL: () =>
-    process.env.NODE_ENV === 'development'
-      ? `${process.env.API_URL}/api/v1/`
-      : `${window.location.origin}/api/v1/`,
-  GET_SSO_USER: email => `sso/user?email=${email}`,
-  TIME_OUT: 40000,
+export const AUTHENTICATION = {
+  SUCCESS: 'AUTHENTICATE_SUCCESS',
+  FAILED: 'AUTHENTICATE_FAILED',
+};
+
+export const AUTHORIZATION = {
+  START: 'AUTHORIZATION_START',
+  SUCCESS: 'AUTHORIZATION_SUCCESS',
+  FAILED: 'AUTHORIZATION_FAILED',
+  ERROR: 'AUTHORIZATION_ERROR',
 };

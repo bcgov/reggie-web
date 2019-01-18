@@ -20,20 +20,79 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import { AUTHENTICATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from '../actions/actionTypes';
 
-const authentication = (state = { isAuthenticated: false }, action) => {
+const authentication = (state = { isAuthenticated: false, email: null }, action) => {
   switch (action.type) {
     case AUTHENTICATION.SUCCESS:
-      return { isAuthenticated: true };
+      return {
+        ...state,
+        ...{
+          isAuthenticated: true,
+          email: implicitAuthManager.idToken.data.email,
+        },
+      };
     case AUTHENTICATION.FAILED:
       implicitAuthManager.clearAuthLocalStorage();
-      return { isAuthenticated: false };
+      return state;
     default:
       return state;
   }
 };
 
-const rootReducer = combineReducers({ authentication });
+const authorization = (
+  state = {
+    isAuthorized: false,
+    authorizationStarted: false,
+    userInfo: { email: null, firstName: null, lastName: null },
+    ssoGroup: null,
+    errorMessages: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case AUTHORIZATION.START:
+      return {
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: false,
+        },
+      };
+    case AUTHORIZATION.SUCCESS:
+      return {
+        ...state,
+        ...{
+          isAuthorized: true,
+          authorizationStarted: true,
+          userInfo: action.payload.userInfo,
+          ssoGroup: action.payload.ssoGroup,
+        },
+      };
+    case AUTHORIZATION.FAILED:
+      return {
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: true,
+          userInfo: action.payload.userInfo,
+          ssoGroup: action.payload.ssoGroup,
+        },
+      };
+    case AUTHORIZATION.ERROR:
+      return {
+        ...state,
+        ...{
+          isAuthorized: false,
+          authorizationStarted: false,
+          errorMessages: action.payload.errorMessages,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({ authentication, authorization });
 
 export default rootReducer;

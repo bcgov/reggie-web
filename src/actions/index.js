@@ -18,7 +18,7 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION } from '../constants';
+import { AUTHENTICATION, AUTHORIZATION } from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -29,5 +29,40 @@ export const authenticateSuccess = () => {
 export const authenticateFailed = () => {
   return {
     type: AUTHENTICATION.FAILED,
+  };
+};
+
+export const authorizationStart = () => {
+  return {
+    type: AUTHORIZATION.START,
+  };
+};
+
+export const authorizationSuccess = (ssoGroup, userInfo) => {
+  return {
+    type: AUTHORIZATION.SUCCESS,
+    payload: {
+      ssoGroup,
+      userInfo,
+    },
+  };
+};
+
+export const authorizationFailed = (ssoGroup, userInfo) => {
+  return {
+    type: AUTHORIZATION.FAILED,
+    payload: {
+      ssoGroup,
+      userInfo,
+    },
+  };
+};
+
+export const authorizationError = errorMessages => {
+  return {
+    type: AUTHORIZATION.ERROR,
+    payload: {
+      errorMessages,
+    },
   };
 };

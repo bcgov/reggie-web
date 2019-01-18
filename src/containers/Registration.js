@@ -15,14 +15,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-16.
+// Created by Shelly Xue Han on 2019-01-15.
 //
 
-export const API = {
-  BASE_URL: () =>
-    process.env.NODE_ENV === 'development'
-      ? `${process.env.API_URL}/api/v1/`
-      : `${window.location.origin}/api/v1/`,
-  GET_SSO_USER: email => `sso/user?email=${email}`,
-  TIME_OUT: 40000,
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class Registration extends Component {
+  static displayName = '[Component Registration]';
+
+  render() {
+    return (
+      <div>
+        <h1>Registration page</h1>
+        <h2>Please fill in the form and register</h2>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    userInfo: state.authorization.userInfo,
+  };
 };
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Registration);
