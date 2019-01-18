@@ -20,36 +20,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import implicitAuthManager from '../../auth';
+import { Link } from 'react-router-dom';
 import './AuthButton.css';
 
-const titleForAuthenticationState = isAuthenticated => {
-  if (isAuthenticated) {
-    return 'Logout';
-  }
+const titleForAuthenticationState = isAuthenticated => (isAuthenticated ? 'Logout' : 'Login');
 
-  return 'Login';
-};
-
-const locationForCurrentState = isAuthenticated => {
-  if (isAuthenticated) {
-    return implicitAuthManager.getSSOLogoutURI();
-  }
-
-  return implicitAuthManager.getSSOLoginURI();
-};
+const linkForAuthenticationState = isAuthenticated => (isAuthenticated ? '/logout' : '/login');
 
 const AuthButton = ({ isAuthenticated }) => {
   return (
     <span>
-      <button
-        className="auth-button"
-        onClick={() => {
-          window.location.assign(locationForCurrentState(isAuthenticated));
-        }}
-      >
+      <Link className="auth-button" to={linkForAuthenticationState(isAuthenticated)}>
         {titleForAuthenticationState(isAuthenticated)}
-      </button>
+      </Link>
     </span>
   );
 };

@@ -27,7 +27,7 @@ import './Header.css';
 
 const Header = ({ authentication }) => {
   return (
-    <header>
+    <header className="header">
       <div className="banner">
         <img src={logo} className="header-logo" alt="logo" />
         <h1>BC Gov Registration Center</h1>
