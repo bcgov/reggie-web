@@ -52,11 +52,7 @@ export class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route
-            path="/registration"
-            component={Registration}
-            authorization={this.props.authorization}
-          />
+          <Route path="/registration" component={Registration} />
           <Route
             path="/rocketChat"
             component={RocketChat}
