@@ -18,13 +18,16 @@ Created by Patrick Simonian
 import React from 'react';
 import Footer from '../components/UI/Footer';
 import Header from '../components/UI/Header';
+import { BrowserRouter } from 'react-router-dom';
 
 const Layout = ({ children }) => (
-  <div>
-    <Header />
-    {children}
-    <Footer />
-  </div>
+  <BrowserRouter>
+    <div>
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  </BrowserRouter>
 );
 
 export default Layout;
