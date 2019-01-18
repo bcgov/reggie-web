@@ -26,6 +26,7 @@ import {
   authorizationError,
 } from '../actions';
 import { API } from '../constants';
+
 const axi = axios.create({
   baseURL: API.BASE_URL(),
   timeout: API.TIME_OUT,
