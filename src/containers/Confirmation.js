@@ -20,15 +20,18 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import qs from 'query-string';
 
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
 
   render() {
+    const parsed = qs.parse(this.props.location.search);
+
     return (
       <div>
         <h1>Welcome back,</h1>
-        <h2>{this.props.location.search}</h2>
+        <h2>{parsed}</h2>
       </div>
     );
   }
