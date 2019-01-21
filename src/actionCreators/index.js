@@ -21,6 +21,7 @@
 import axios from 'axios';
 import {
   authorizationStart,
+  authorizationPending,
   authorizationSuccess,
   authorizationFailed,
   authorizationError,
@@ -32,6 +33,13 @@ const axi = axios.create({
   timeout: API.TIME_OUT,
 });
 
+const checkStatus = (isPending = false, isAuthorized = false, isRejected = false) => {
+  if (isRejected) return 3;
+  if (isPending) return 1;
+  if (isAuthorized) return 2;
+  return 0;
+};
+
 export const authorize = (ssoGroup, email) => {
   return dispatch => {
     dispatch(authorizationStart());
@@ -42,14 +50,20 @@ export const authorize = (ssoGroup, email) => {
         },
       })
       .then(res => {
+        const userStatus = checkStatus(
+          res.data.isPending,
+          res.data.isAuthorized,
+          res.data.isRejected
+        );
         const newUserInfo = {
+          id: res.data.id,
           email: res.data.email,
           firstName: res.data.firstName,
           lastName: res.data.lastName,
-          authorized: res.data.authorized,
         };
-        if (newUserInfo.authorized) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
-        return dispatch(authorizationFailed(ssoGroup, newUserInfo));
+        if (userStatus === 2) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
+        if (userStatus === 3) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
+        return dispatch(authorizationPending(ssoGroup, newUserInfo));
       })
       .catch(err => {
         console.log(err);
