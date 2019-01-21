@@ -57,6 +57,7 @@ export class App extends Component {
             path="/registration"
             component={Registration}
             authorization={this.props.authorization}
+            updateUser={this.props.updateUser}
           />
           <Route
             path="/rocketChat"
@@ -87,6 +88,7 @@ function mapStateToProps(state) {
   return {
     authentication: state.authentication,
     authorization: state.authorization,
+    updateUser: state.updateUser,
   };
 }
 

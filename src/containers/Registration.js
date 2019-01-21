@@ -19,9 +19,11 @@
 //
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { Grid, Row, Col, PageHeader, Button } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
+import { updateUser } from '../actionCreators';
 
 class Registration extends Component {
   static displayName = '[Component Registration]';
@@ -43,6 +45,23 @@ class Registration extends Component {
       },
     };
 
+    const onSubmit = ({ formData }) => {
+      this.props.updateUser(this.props.userInfo.id, formData);
+    };
+
+    const updatedContent = this.props.updated ? (
+      <h4>Thank you for registering, please check your email!</h4>
+    ) : (
+      <Form schema={schema} onSubmit={onSubmit}>
+        <Button type="submit" bsStyle="primary">
+          Submit
+        </Button>
+        <h4>{this.props.errorMessages[0]}</h4>
+      </Form>
+    );
+
+    const pageContent = this.props.updateStarted ? <h4>Loading....</h4> : updatedContent;
+
     return (
       <Grid componentClass="main">
         <Row>
@@ -51,18 +70,7 @@ class Registration extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Form
-              schema={schema}
-              onChange={console.log('changed')}
-              onSubmit={console.log('submitted')}
-              onError={console.log('errors')}
-            >
-              <Button type="submit" bsStyle="primary">
-                Submit
-              </Button>
-            </Form>
-          </Col>
+          <Col>{pageContent}</Col>
         </Row>
       </Grid>
     );
@@ -72,11 +80,19 @@ class Registration extends Component {
 const mapStateToProps = state => {
   return {
     userInfo: state.authorization.userInfo,
+    updateStarted: state.updateUser.updateStarted,
+    updated: state.updateUser.updated,
+    errorMessages: state.updateUser.errorMessages,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return bindActionCreators(
+    {
+      updateUser,
+    },
+    dispatch
+  );
 };
 
 export default connect(
