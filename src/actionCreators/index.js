@@ -25,6 +25,9 @@ import {
   authorizationSuccess,
   authorizationFailed,
   authorizationError,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserError,
 } from '../actions';
 import { API } from '../constants';
 
@@ -66,8 +69,30 @@ export const authorize = (ssoGroup, email) => {
         return dispatch(authorizationPending(ssoGroup, newUserInfo));
       })
       .catch(err => {
-        console.log(err);
         return dispatch(authorizationError([err.message]));
+      });
+  };
+};
+
+export const updateUser = (userId, userProfile) => {
+  return dispatch => {
+    dispatch(updateUserStart());
+    axi
+      .put(
+        API.UPDATE_SSO_USER(userId),
+        { ...userProfile },
+        {
+          headers: {
+            Accept: 'application/json',
+          },
+        }
+      )
+      .then(res => {
+        return dispatch(updateUserSuccess());
+      })
+      .catch(err => {
+        const errMsg = 'Fail to register your account, please try again.';
+        return dispatch(updateUserError([errMsg, err.response.data.error]));
       });
   };
 };
