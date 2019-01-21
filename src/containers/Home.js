@@ -34,7 +34,7 @@ class Home extends Component {
         <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />
       );
     } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
-      authorizedRedirect = <Redirect to={{ pathname: '/Rejection' }} />;
+      authorizedRedirect = <Redirect to={{ pathname: '/rejection' }} />;
     } else if (this.props.authorizationStarted) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/registration', state: { userInfo: this.props.userInfo } }} />

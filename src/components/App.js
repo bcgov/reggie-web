@@ -66,8 +66,8 @@ export class App extends Component {
             component={RocketChat}
             authorization={this.props.authorization}
           />
-          <Route path="/Rejection" component={Rejection} />
-          <Route path="/Confirmation" component={Confirmation} />
+          <Route path="/rejection" component={Rejection} />
+          <Route path="/confirmation" component={Confirmation} />
           <Route
             path="/login"
             component={() => {

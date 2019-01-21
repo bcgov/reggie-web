@@ -25,12 +25,10 @@ class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
 
   render() {
-    console.log('-----------------------------------props');
-    console.log(this.props);
     return (
       <div>
         <h1>Welcome back,</h1>
-        {/* <h2>{this.props}</h2> */}
+        <h2>{this.props.location.search}</h2>
       </div>
     );
   }
