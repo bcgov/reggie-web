@@ -28,7 +28,19 @@ class Home extends Component {
   static displayName = '[Component Home]';
 
   render() {
+    // get email jwt from localStorage:
+    const emailJwt = localStorage.getItem('emailJwt');
+
+    // if there exist emailJwt in localstorage, go to confirmation page
+    // if user is authorized for Rocket chat, go to invitation page
+    // if user does not meet the requirement to join Rocket chat, go to rejection page
+    // else, stay in the home page untill user pick an option
     let authorizedRedirect = null;
+    if (emailJwt) {
+      authorizedRedirect = (
+        <Redirect to={{ pathname: '/confirmation', state: { email: this.props.email } }} />
+      );
+    }
     if (this.props.isAuthorized === 2) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />

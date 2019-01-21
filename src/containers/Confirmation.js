@@ -19,30 +19,61 @@
 //
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import qs from 'query-string';
+import { confirmEmail } from '../actionCreators';
 
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
+  componentWillMount = () => {
+    try {
+      const parsed = qs.parse(this.props.location.search);
+      console.log('-----------------------parsed.jwt');
+      console.log(parsed.jwt);
+      if (parsed.jwt) {
+        localStorage.setItem('emailJwt', parsed.jwt);
+      }
+    } catch (err) {
+      console.log('---email confirmation JWT not found---');
+    }
+  };
 
   render() {
-    const parsed = qs.parse(this.props.location.search);
-
+    const emailJwt = localStorage.getItem('emailJwt');
     return (
       <div>
         <h1>Welcome back,</h1>
-        <h2>{parsed}</h2>
+        <h2>------------{emailJwt}</h2>
+        <h2>------------{this.props.email}</h2>
+        <button
+          onClick={() => {
+            localStorage.removeItem('emailJwt');
+          }}
+        >
+          clear jwt
+        </button>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return null;
+  return {
+    email: state.authentication.email,
+    updateStarted: state.confirmEmail.updateStarted,
+    updated: state.confirmEmail.updated,
+    errorMessages: state.confirmEmail.errorMessages,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return null;
+  return bindActionCreators(
+    {
+      confirmEmail,
+    },
+    dispatch
+  );
 };
 
 export default connect(
