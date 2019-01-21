@@ -32,9 +32,14 @@ class Registration extends Component {
       type: 'object',
       required: ['firstName', 'lastName', 'email'],
       properties: {
-        firstName: { type: 'string', title: 'First Name', default: '' },
-        lastName: { type: 'string', title: 'Last Name', default: '' },
-        email: { type: 'string', format: 'email', title: 'Email', default: '' },
+        email: {
+          type: 'string',
+          format: 'email',
+          title: 'Email',
+          default: this.props.userInfo.email,
+        },
+        firstName: { type: 'string', title: 'First Name', default: this.props.userInfo.firstName },
+        lastName: { type: 'string', title: 'Last Name', default: this.props.userInfo.lastName },
       },
     };
 
