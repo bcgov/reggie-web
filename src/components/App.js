@@ -27,6 +27,7 @@ import implicitAuthManager from '../auth';
 import Home from '../containers/Home';
 import Registration from '../containers/Registration';
 import RocketChat from '../containers/RocketChat';
+import Rejection from '../containers/Rejection';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -52,12 +53,17 @@ export class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route path="/registration" component={Registration} />
+          <Route
+            path="/registration"
+            component={Registration}
+            authorization={this.props.authorization}
+          />
           <Route
             path="/rocketChat"
             component={RocketChat}
             authorization={this.props.authorization}
           />
+          <Route path="/Rejection" component={Rejection} />
           <Route
             path="/login"
             component={() => {

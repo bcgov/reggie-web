@@ -28,21 +28,18 @@ class Home extends Component {
   static displayName = '[Component Home]';
 
   render() {
-    // TODO: combine isAuthorized and authorizationStarted:
     let authorizedRedirect = null;
-    if (this.props.isAuthorized) {
+    if (this.props.isAuthorized === 2) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />
       );
+    } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
+      authorizedRedirect = <Redirect to={{ pathname: '/Rejection' }} />;
     } else if (this.props.authorizationStarted) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/registration', state: { userInfo: this.props.userInfo } }} />
       );
     }
-    // const redirectPath = this.props.isAuthorized ? '/rocketChat' : '/registration';
-    // const authorizedRedirect = (
-    //   <Redirect to={{ pathname: redirectPath, state: { userInfo: this.props.userInfo } }} />
-    // );
 
     const content = this.props.isAuthenticated ? (
       <div>

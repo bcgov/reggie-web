@@ -21,31 +21,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class RocketChat extends Component {
-  static displayName = '[Component RocketChat]';
+class Rejection extends Component {
+  static displayName = '[Component Rejection]';
 
   render() {
     return (
       <div>
-        <h1>Rocket chat invite page</h1>
-        <h2>Hello {this.props.userInfo.firstName}</h2>
-        <h2>Hello {this.props.userInfo.id}</h2>
+        <h1>Sorry you do not meet the requirement to join Rocket chat</h1>
+        <h2>Please request invitation from your team lead</h2>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    userInfo: state.authorization.userInfo,
-  };
+  return null;
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return null;
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RocketChat);
+)(Rejection);
