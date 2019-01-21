@@ -24,10 +24,12 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
-import Home from '../containers/Home';
-import Registration from '../containers/Registration';
-import RocketChat from '../containers/RocketChat';
-import Rejection from '../containers/Rejection';
+import { Confirmation, Home, Registration, RocketChat, Rejection } from '../containers';
+// import Confirmation from '../containers/Confirmation';
+// import Home from '../containers/Home';
+// import Registration from '../containers/Registration';
+// import RocketChat from '../containers/RocketChat';
+// import Rejection from '../containers/Rejection';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -65,6 +67,7 @@ export class App extends Component {
             authorization={this.props.authorization}
           />
           <Route path="/Rejection" component={Rejection} />
+          <Route path="/Confirmation" component={Confirmation} />
           <Route
             path="/login"
             component={() => {
