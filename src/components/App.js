@@ -25,11 +25,6 @@ import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
 import { Confirmation, Home, Registration, RocketChat, Rejection } from '../containers';
-// import Confirmation from '../containers/Confirmation';
-// import Home from '../containers/Home';
-// import Registration from '../containers/Registration';
-// import RocketChat from '../containers/RocketChat';
-// import Rejection from '../containers/Rejection';
 import Layout from '../hoc/Layout';
 import './App.css';
 

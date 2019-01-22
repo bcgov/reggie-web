@@ -37,14 +37,14 @@ class Home extends Component {
     // else, stay in the home page untill user pick an option
     let authorizedRedirect = null;
     if (emailJwt) {
-      authorizedRedirect = <Redirect to={{ pathname: '/confirmation' }} />;
+      authorizedRedirect = <Redirect to="/confirmation" />;
     }
     if (this.props.isAuthorized === 2) {
-      authorizedRedirect = <Redirect to={{ pathname: '/rocketChat' }} />;
+      authorizedRedirect = <Redirect to="/rocketChat" />;
     } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
-      authorizedRedirect = <Redirect to={{ pathname: '/rejection' }} />;
+      authorizedRedirect = <Redirect to="/rejection" />;
     } else if (this.props.authorizationStarted) {
-      authorizedRedirect = <Redirect to={{ pathname: '/registration' }} />;
+      authorizedRedirect = <Redirect to="/registration" />;
     }
 
     const content = this.props.isAuthenticated ? (
@@ -87,7 +87,7 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
     email: state.authentication.email,
-    isAuthorized: state.authorization.isAuthorized,
+    authCode: state.authorization.authCode,
     authorizationStarted: state.authorization.authorizationStarted,
     userInfo: state.authorization.userInfo,
     errorMessages: state.authorization.errorMessages,
