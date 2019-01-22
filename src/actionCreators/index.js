@@ -34,6 +34,7 @@ import { API } from '../constants';
 const axi = axios.create({
   baseURL: API.BASE_URL(),
   timeout: API.TIME_OUT,
+  headers: { Accept: 'application/json' },
 });
 
 const checkStatus = (isPending = false, isAuthorized = false, isRejected = false) => {
@@ -47,11 +48,7 @@ export const authorize = (ssoGroup, email) => {
   return dispatch => {
     dispatch(authorizationStart());
     axi
-      .get(API.GET_SSO_USER(email), {
-        headers: {
-          Accept: 'application/json',
-        },
-      })
+      .get(API.GET_SSO_USER(email))
       .then(res => {
         const userStatus = checkStatus(
           res.data.isPending,
@@ -78,15 +75,7 @@ export const updateUser = (userId, userProfile) => {
   return dispatch => {
     dispatch(updateUserStart());
     axi
-      .put(
-        API.UPDATE_SSO_USER(userId),
-        { ...userProfile },
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-        }
-      )
+      .put(API.UPDATE_SSO_USER(userId), userProfile)
       .then(res => {
         return dispatch(updateUserSuccess());
       })
