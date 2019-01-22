@@ -19,9 +19,8 @@
 //
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-class Rejection extends Component {
+export class Rejection extends Component {
   static displayName = '[Component Rejection]';
 
   render() {
@@ -33,16 +32,3 @@ class Rejection extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return null;
-};
-
-const mapDispatchToProps = dispatch => {
-  return null;
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Rejection);
