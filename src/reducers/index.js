@@ -42,9 +42,9 @@ const authentication = (state = { isAuthenticated: false, email: null }, action)
 
 const authorization = (
   state = {
-    isAuthorized: false,
+    authCode: 0,
     authorizationStarted: false,
-    userInfo: { email: null, firstName: null, lastName: null },
+    userInfo: { id: null, email: null, firstName: null, lastName: null },
     ssoGroup: null,
     errorMessages: [],
   },
@@ -55,15 +55,25 @@ const authorization = (
       return {
         ...state,
         ...{
-          isAuthorized: false,
+          authCode: 0,
           authorizationStarted: false,
+        },
+      };
+    case AUTHORIZATION.PENDING:
+      return {
+        ...state,
+        ...{
+          authCode: 1,
+          authorizationStarted: true,
+          userInfo: action.payload.userInfo,
+          ssoGroup: action.payload.ssoGroup,
         },
       };
     case AUTHORIZATION.SUCCESS:
       return {
         ...state,
         ...{
-          isAuthorized: true,
+          authCode: 2,
           authorizationStarted: true,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -73,7 +83,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          isAuthorized: false,
+          authCode: 3,
           authorizationStarted: true,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -83,7 +93,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          isAuthorized: false,
+          authCode: 0,
           authorizationStarted: false,
           errorMessages: action.payload.errorMessages,
         },
