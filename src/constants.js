@@ -24,5 +24,6 @@ export const API = {
       ? 'http://localhost:8000/api/v1/'
       : `${window.location.origin}/api/v1/`,
   GET_SSO_USER: email => `sso/user?email=${email}`,
+  UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   TIME_OUT: 40000,
 };

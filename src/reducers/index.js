@@ -20,7 +20,7 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import { AUTHENTICATION, AUTHORIZATION } from '../actions/actionTypes';
+import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER } from '../actions/actionTypes';
 
 const authentication = (state = { isAuthenticated: false, email: null }, action) => {
   switch (action.type) {
@@ -103,6 +103,39 @@ const authorization = (
   }
 };
 
-const rootReducer = combineReducers({ authentication, authorization });
+const updateUser = (
+  state = { updateStarted: false, updated: false, errorMessages: [] },
+  action
+) => {
+  switch (action.type) {
+    case UPDATE_USER.START:
+      return {
+        ...state,
+        ...{
+          updateStarted: true,
+        },
+      };
+    case UPDATE_USER.SUCCESS:
+      return {
+        ...state,
+        ...{
+          updateStarted: false,
+          updated: true,
+        },
+      };
+    case UPDATE_USER.ERROR:
+      return {
+        ...state,
+        ...{
+          updateStarted: false,
+          errorMessages: action.payload.errorMessages,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({ authentication, authorization, updateUser });
 
 export default rootReducer;

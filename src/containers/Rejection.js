@@ -19,7 +19,6 @@
 //
 
 import React, { Component } from 'react';
-
 export class Rejection extends Component {
   static displayName = '[Component Rejection]';
 

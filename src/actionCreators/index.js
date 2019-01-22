@@ -25,12 +25,16 @@ import {
   authorizationSuccess,
   authorizationFailed,
   authorizationError,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserError,
 } from '../actions';
 import { API } from '../constants';
 
 const axi = axios.create({
   baseURL: API.BASE_URL(),
   timeout: API.TIME_OUT,
+  headers: { Accept: 'application/json' },
 });
 
 const checkStatus = (isPending = false, isAuthorized = false, isRejected = false) => {
@@ -44,11 +48,7 @@ export const authorize = (ssoGroup, email) => {
   return dispatch => {
     dispatch(authorizationStart());
     axi
-      .get(API.GET_SSO_USER(email), {
-        headers: {
-          Accept: 'application/json',
-        },
-      })
+      .get(API.GET_SSO_USER(email))
       .then(res => {
         const userStatus = checkStatus(
           res.data.isPending,
@@ -66,8 +66,22 @@ export const authorize = (ssoGroup, email) => {
         return dispatch(authorizationPending(ssoGroup, newUserInfo));
       })
       .catch(err => {
-        console.log(err);
         return dispatch(authorizationError([err.message]));
+      });
+  };
+};
+
+export const updateUser = (userId, userProfile) => {
+  return dispatch => {
+    dispatch(updateUserStart());
+    axi
+      .put(API.UPDATE_SSO_USER(userId), userProfile)
+      .then(res => {
+        return dispatch(updateUserSuccess());
+      })
+      .catch(err => {
+        const errMsg = 'Fail to register your account, please try again.';
+        return dispatch(updateUserError([errMsg, err.response.data.error]));
       });
   };
 };

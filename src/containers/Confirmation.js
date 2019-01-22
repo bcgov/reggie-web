@@ -15,24 +15,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-16.
+// Created by Shelly Xue Han on 2019-01-15.
 //
 
-export const AUTHENTICATION = {
-  SUCCESS: 'AUTHENTICATE_SUCCESS',
-  FAILED: 'AUTHENTICATE_FAILED',
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class Confirmation extends Component {
+  static displayName = '[Component Confirmation]';
+
+  render() {
+    return (
+      <div>
+        <h1>Welcome back,</h1>
+        <h2>{this.props.location.search}</h2>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return null;
 };
 
-export const AUTHORIZATION = {
-  START: 'AUTHORIZATION_START',
-  PENDING: 'AUTHORIZATION_PENDING',
-  SUCCESS: 'AUTHORIZATION_SUCCESS',
-  FAILED: 'AUTHORIZATION_FAILED',
-  ERROR: 'AUTHORIZATION_ERROR',
+const mapDispatchToProps = dispatch => {
+  return null;
 };
 
-export const UPDATE_USER = {
-  START: 'UPDATE_USER_START',
-  SUCCESS: 'UPDATE_USER_SUCCESS',
-  ERROR: 'UPDATE_USER_ERROR',
-};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Confirmation);

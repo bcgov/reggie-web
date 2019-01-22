@@ -24,10 +24,7 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
-import Home from '../containers/Home';
-import Registration from '../containers/Registration';
-import RocketChat from '../containers/RocketChat';
-import Rejection from '../containers/Rejection';
+import { Confirmation, Home, Registration, RocketChat, Rejection } from '../containers';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -57,13 +54,15 @@ export class App extends Component {
             path="/registration"
             component={Registration}
             authorization={this.props.authorization}
+            updateUser={this.props.updateUser}
           />
           <Route
             path="/rocketChat"
             component={RocketChat}
             authorization={this.props.authorization}
           />
-          <Route path="/Rejection" component={Rejection} />
+          <Route path="/rejection" component={Rejection} />
+          <Route path="/confirmation" component={Confirmation} />
           <Route
             path="/login"
             component={() => {
@@ -87,6 +86,7 @@ function mapStateToProps(state) {
   return {
     authentication: state.authentication,
     authorization: state.authorization,
+    updateUser: state.updateUser,
   };
 }
 

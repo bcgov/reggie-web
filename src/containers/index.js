@@ -15,24 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Shelly Xue Han on 2019-01-16.
+// Created by Shelly Xue Han on 2019-01-15.
 //
 
-export const AUTHENTICATION = {
-  SUCCESS: 'AUTHENTICATE_SUCCESS',
-  FAILED: 'AUTHENTICATE_FAILED',
-};
-
-export const AUTHORIZATION = {
-  START: 'AUTHORIZATION_START',
-  PENDING: 'AUTHORIZATION_PENDING',
-  SUCCESS: 'AUTHORIZATION_SUCCESS',
-  FAILED: 'AUTHORIZATION_FAILED',
-  ERROR: 'AUTHORIZATION_ERROR',
-};
-
-export const UPDATE_USER = {
-  START: 'UPDATE_USER_START',
-  SUCCESS: 'UPDATE_USER_SUCCESS',
-  ERROR: 'UPDATE_USER_ERROR',
-};
+export { default as Confirmation } from './Confirmation';
+export { default as Home } from './Home';
+export { default as Registration } from './Registration';
+export { default as RocketChat } from './RocketChat';
+export { default as Rejection } from './Rejection';

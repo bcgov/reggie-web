@@ -18,7 +18,7 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION, AUTHORIZATION } from './actionTypes';
+import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER } from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -71,6 +71,27 @@ export const authorizationFailed = (ssoGroup, userInfo) => {
 export const authorizationError = errorMessages => {
   return {
     type: AUTHORIZATION.ERROR,
+    payload: {
+      errorMessages,
+    },
+  };
+};
+
+export const updateUserStart = () => {
+  return {
+    type: UPDATE_USER.START,
+  };
+};
+
+export const updateUserSuccess = () => {
+  return {
+    type: UPDATE_USER.SUCCESS,
+  };
+};
+
+export const updateUserError = errorMessages => {
+  return {
+    type: UPDATE_USER.ERROR,
     payload: {
       errorMessages,
     },
