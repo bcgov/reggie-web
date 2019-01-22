@@ -22,4 +22,4 @@ export { default as Confirmation } from './Confirmation';
 export { default as Home } from './Home';
 export { default as Registration } from './Registration';
 export { default as RocketChat } from './RocketChat';
-export { default as Rejection } from './Rejection';
+export { Rejection } from './Rejection';

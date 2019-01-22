@@ -39,9 +39,9 @@ class Home extends Component {
     if (emailJwt) {
       authorizedRedirect = <Redirect to="/confirmation" />;
     }
-    if (this.props.isAuthorized === 2) {
+    if (this.props.authCode === 2) {
       authorizedRedirect = <Redirect to="/rocketChat" />;
-    } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
+    } else if (this.props.authorizationStarted && this.props.authCode === 3) {
       authorizedRedirect = <Redirect to="/rejection" />;
     } else if (this.props.authorizationStarted) {
       authorizedRedirect = <Redirect to="/registration" />;
