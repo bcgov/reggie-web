@@ -32,29 +32,24 @@ class Home extends Component {
     const emailJwt = localStorage.getItem('emailJwt');
 
     // if there exist emailJwt in localstorage, go to confirmation page
-    // if user is authorized for Rocket chat, go to invitation page
-    // if user does not meet the requirement to join Rocket chat, go to rejection page
+    // if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
+    // else if user does not meet the requirement to join Rocket chat, go to rejection page
     // else, stay in the home page untill user pick an option
     let authorizedRedirect = null;
     if (emailJwt) {
-      authorizedRedirect = (
-        <Redirect to={{ pathname: '/confirmation', state: { email: this.props.email } }} />
-      );
+      authorizedRedirect = <Redirect to={{ pathname: '/confirmation' }} />;
     }
     if (this.props.isAuthorized === 2) {
-      authorizedRedirect = (
-        <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />
-      );
+      authorizedRedirect = <Redirect to={{ pathname: '/rocketChat' }} />;
     } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
       authorizedRedirect = <Redirect to={{ pathname: '/rejection' }} />;
     } else if (this.props.authorizationStarted) {
-      authorizedRedirect = (
-        <Redirect to={{ pathname: '/registration', state: { userInfo: this.props.userInfo } }} />
-      );
+      authorizedRedirect = <Redirect to={{ pathname: '/registration' }} />;
     }
 
     const content = this.props.isAuthenticated ? (
       <div>
+        {authorizedRedirect}
         <h1>Hello --- {this.props.email}</h1>
         <button
           className="rc-button"
@@ -80,9 +75,8 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        {authorizedRedirect}
         <h1>Welcome to Reggie web</h1>
-        <h2>{this.props.errorMessages}</h2>
+        <h2>{this.props.errorMessages[0]}</h2>
         {content}
       </div>
     );

@@ -29,8 +29,6 @@ class Confirmation extends Component {
   componentWillMount = () => {
     try {
       const parsed = qs.parse(this.props.location.search);
-      console.log('-----------------------parsed.jwt');
-      console.log(parsed.jwt);
       if (parsed.jwt) {
         localStorage.setItem('emailJwt', parsed.jwt);
       }
@@ -41,18 +39,27 @@ class Confirmation extends Component {
 
   render() {
     const emailJwt = localStorage.getItem('emailJwt');
+    // TODO: maybe redirect after?
+    const verifiedContent = this.props.confirmed ? (
+      <h4>Confirmed!</h4>
+    ) : (
+      <div>
+        <h4>Do you want to confirm registration for email: {this.props.email} ?</h4>
+        <button
+          onClick={() => {
+            this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
+          }}
+        >
+          Confirm
+        </button>
+        <h4>{this.props.errorMessages[0]}</h4>
+      </div>
+    );
+    const pageContent = this.props.verifyStarted ? <h4>Verifying....</h4> : verifiedContent;
     return (
       <div>
         <h1>Welcome back,</h1>
-        <h2>------------{emailJwt}</h2>
-        <h2>------------{this.props.email}</h2>
-        <button
-          onClick={() => {
-            localStorage.removeItem('emailJwt');
-          }}
-        >
-          clear jwt
-        </button>
+        {pageContent}
       </div>
     );
   }
@@ -61,8 +68,9 @@ class Confirmation extends Component {
 const mapStateToProps = state => {
   return {
     email: state.authentication.email,
-    updateStarted: state.confirmEmail.updateStarted,
-    updated: state.confirmEmail.updated,
+    userId: state.authentication.userId,
+    verifyStarted: state.confirmEmail.verifyStarted,
+    confirmed: state.confirmEmail.confirmed,
     errorMessages: state.confirmEmail.errorMessages,
   };
 };

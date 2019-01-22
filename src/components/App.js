@@ -67,7 +67,12 @@ export class App extends Component {
             authorization={this.props.authorization}
           />
           <Route path="/rejection" component={Rejection} />
-          <Route path="/confirmation" component={Confirmation} />
+          <Route
+            path="/confirmation"
+            component={Confirmation}
+            authentication={this.props.authentication}
+            confirmEmail={this.props.confirmEmail}
+          />
           <Route
             path="/login"
             component={() => {
@@ -92,6 +97,7 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     authorization: state.authorization,
     updateUser: state.updateUser,
+    confirmEmail: state.confirmEmail,
   };
 }
 
