@@ -29,12 +29,12 @@ class Home extends Component {
 
   render() {
     let authorizedRedirect = null;
-    if (this.props.isAuthorized === 2) {
+    if (this.props.authCode === 2) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/rocketChat', state: { userInfo: this.props.userInfo } }} />
       );
-    } else if (this.props.authorizationStarted && this.props.isAuthorized === 3) {
-      authorizedRedirect = <Redirect to={{ pathname: '/rejection' }} />;
+    } else if (this.props.authorizationStarted && this.props.authCode === 3) {
+      authorizedRedirect = <Redirect to={{ pathname: '/Rejection' }} />;
     } else if (this.props.authorizationStarted) {
       authorizedRedirect = (
         <Redirect to={{ pathname: '/registration', state: { userInfo: this.props.userInfo } }} />
@@ -81,7 +81,7 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
     email: state.authentication.email,
-    isAuthorized: state.authorization.isAuthorized,
+    authCode: state.authorization.authCode,
     authorizationStarted: state.authorization.authorizationStarted,
     userInfo: state.authorization.userInfo,
     errorMessages: state.authorization.errorMessages,
