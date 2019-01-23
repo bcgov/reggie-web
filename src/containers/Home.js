@@ -24,7 +24,6 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import './Home.css';
 
 class Home extends Component {
   static displayName = '[Component Home]';

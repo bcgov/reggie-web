@@ -16,6 +16,7 @@ limitations under the License.
 Created by Patrick Simonian
 */
 import React from 'react';
+import { Grid } from 'react-bootstrap';
 import Footer from '../components/UI/Footer';
 import Header from '../components/UI/Header';
 import { BrowserRouter } from 'react-router-dom';
@@ -24,7 +25,7 @@ const Layout = ({ children }) => (
   <BrowserRouter>
     <div>
       <Header />
-      {children}
+      <Grid>{children}</Grid>
       <Footer />
     </div>
   </BrowserRouter>
