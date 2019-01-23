@@ -20,6 +20,7 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
@@ -51,16 +52,14 @@ class Home extends Component {
     const content = this.props.isAuthenticated ? (
       <div>
         {authorizedRedirect}
-        <button
-          className="primarybutton"
-          type="button"
-          name="button"
+        <Button
+          bsStyle="primary"
           onClick={() => {
             this.props.authorize('rc', this.props.email);
           }}
         >
           Login to Rocket Chat
-        </button>
+        </Button>
       </div>
     ) : (
       <h5>Please log in to SSO to proceed</h5>
