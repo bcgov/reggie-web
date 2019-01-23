@@ -28,6 +28,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserError,
+  confirmEmailStart,
+  confirmEmailSuccess,
+  confirmEmailError,
 } from '../actions';
 import { API } from '../constants';
 
@@ -82,6 +85,21 @@ export const updateUser = (userId, userProfile) => {
       .catch(err => {
         const errMsg = 'Fail to register your account, please try again.';
         return dispatch(updateUserError([errMsg, err.response.data.error]));
+      });
+  };
+};
+
+export const confirmEmail = (userId, email, jwt) => {
+  return dispatch => {
+    dispatch(confirmEmailStart());
+    axi
+      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
+      .then(res => {
+        return dispatch(confirmEmailSuccess());
+      })
+      .catch(err => {
+        const errMsg = 'Fail to confirm your email, please register again.';
+        return dispatch(confirmEmailError([errMsg]));
       });
   };
 };

@@ -20,9 +20,9 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER } from '../actions/actionTypes';
+import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER, CONFIRM_EMAIL } from '../actions/actionTypes';
 
-const authentication = (state = { isAuthenticated: false, email: null }, action) => {
+const authentication = (state = { isAuthenticated: false, email: null, userId: null }, action) => {
   switch (action.type) {
     case AUTHENTICATION.SUCCESS:
       return {
@@ -30,6 +30,7 @@ const authentication = (state = { isAuthenticated: false, email: null }, action)
         ...{
           isAuthenticated: true,
           email: implicitAuthManager.idToken.data.email,
+          userId: implicitAuthManager.idToken.data.sub,
         },
       };
     case AUTHENTICATION.FAILED:
@@ -136,6 +137,41 @@ const updateUser = (
   }
 };
 
-const rootReducer = combineReducers({ authentication, authorization, updateUser });
+const confirmEmail = (
+  state = { verifyStarted: false, confirmed: false, errorMessages: [] },
+  action
+) => {
+  switch (action.type) {
+    case CONFIRM_EMAIL.START:
+      return {
+        ...state,
+        ...{
+          verifyStarted: true,
+        },
+      };
+    case CONFIRM_EMAIL.SUCCESS:
+      localStorage.removeItem('emailJwt');
+      return {
+        ...state,
+        ...{
+          verifyStarted: false,
+          confirmed: true,
+        },
+      };
+    case CONFIRM_EMAIL.ERROR:
+      localStorage.removeItem('emailJwt');
+      return {
+        ...state,
+        ...{
+          verifyStarted: false,
+          errorMessages: action.payload.errorMessages,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({ authentication, authorization, updateUser, confirmEmail });
 
 export default rootReducer;

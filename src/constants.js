@@ -25,5 +25,6 @@ export const API = {
       : `${window.location.origin}/api/v1/`,
   GET_SSO_USER: email => `sso/user?email=${email}`,
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
+  CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   TIME_OUT: 40000,
 };

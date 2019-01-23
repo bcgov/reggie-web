@@ -19,27 +19,69 @@
 //
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import qs from 'query-string';
+import { confirmEmail } from '../actionCreators';
 
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
+  componentWillMount = () => {
+    try {
+      const parsed = qs.parse(this.props.location.search);
+      if (parsed.jwt) {
+        localStorage.setItem('emailJwt', parsed.jwt);
+      }
+    } catch (err) {
+      console.log('---email confirmation JWT not found---');
+    }
+  };
 
   render() {
+    const emailJwt = localStorage.getItem('emailJwt');
+    // TODO: maybe redirect after?
+    const verifiedContent = this.props.confirmed ? (
+      <h4>Confirmed!</h4>
+    ) : (
+      <div>
+        <h4>Do you want to confirm registration for email: {this.props.email} ?</h4>
+        <button
+          onClick={() => {
+            this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
+          }}
+        >
+          Confirm
+        </button>
+        <h4>{this.props.errorMessages[0]}</h4>
+      </div>
+    );
+    const pageContent = this.props.verifyStarted ? <h4>Verifying....</h4> : verifiedContent;
     return (
       <div>
         <h1>Welcome back,</h1>
-        <h2>{this.props.location.search}</h2>
+        {pageContent}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return null;
+  return {
+    email: state.authentication.email,
+    userId: state.authentication.userId,
+    verifyStarted: state.confirmEmail.verifyStarted,
+    confirmed: state.confirmEmail.confirmed,
+    errorMessages: state.confirmEmail.errorMessages,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return null;
+  return bindActionCreators(
+    {
+      confirmEmail,
+    },
+    dispatch
+  );
 };
 
 export default connect(
