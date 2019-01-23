@@ -152,3 +152,7 @@ input.form-control :focus {
     outline: 2px solid #38598a;
     outline-offset: 1px;
 }
+
+div {
+  text-align: center;
+}

@@ -27,7 +27,7 @@ export class Rejection extends Component {
     return (
       <div>
         <h1>Sorry you do not meet the requirement to join Rocket chat</h1>
-        <h2>Please request invitation from your team lead</h2>
+        <h5>Please request invitation from your team lead</h5>
       </div>
     );
   }

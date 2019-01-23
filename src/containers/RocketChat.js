@@ -20,6 +20,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { SELF_SERVER_APP } from '../constants';
 
 class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
@@ -28,8 +29,8 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Rocket chat invite page</h1>
-        <h2>Hello {this.props.userInfo.firstName}</h2>
-        <h2>Hello {this.props.userInfo.id}</h2>
+        <h5>Hello {this.props.userInfo.firstName}</h5>
+        <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
       </div>
     );
   }
