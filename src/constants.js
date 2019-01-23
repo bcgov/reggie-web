@@ -28,3 +28,7 @@ export const API = {
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   TIME_OUT: 40000,
 };
+
+export const SELF_SERVER_APP = {
+  ROCKETCHAT: 'https://www.google.ca',
+};

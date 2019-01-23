@@ -23,6 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
+import './Home.css';
 
 class Home extends Component {
   static displayName = '[Component Home]';
@@ -50,33 +51,25 @@ class Home extends Component {
     const content = this.props.isAuthenticated ? (
       <div>
         {authorizedRedirect}
-        <h1>Hello --- {this.props.email}</h1>
         <button
-          className="rc-button"
+          className="primarybutton"
+          type="button"
+          name="button"
           onClick={() => {
             this.props.authorize('rc', this.props.email);
           }}
         >
           Login to Rocket Chat
         </button>
-        <button
-          className="kk-button"
-          disabled="true"
-          onClick={() => {
-            this.props.authorize('kk', this.props.email);
-          }}
-        >
-          Login to Other self-service app
-        </button>
       </div>
     ) : (
-      <h1>Please log in to SSO to proceed</h1>
+      <h5>Please log in to SSO to proceed</h5>
     );
 
     return (
       <div className="authed">
         <h1>Welcome to Reggie web</h1>
-        <h2>{this.props.errorMessages[0]}</h2>
+        <h5>{this.props.errorMessages[0]}</h5>
         {content}
       </div>
     );
