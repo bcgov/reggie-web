@@ -20,10 +20,13 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Grid, Row, Col, PageHeader, Button } from 'react-bootstrap';
+import { Grid, Row, Button } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 import { updateUser } from '../actionCreators';
+// import Loader from '../components/UI/Loader';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 
 class Registration extends Component {
   static displayName = '[Component Registration]';
@@ -60,19 +63,27 @@ class Registration extends Component {
       </Form>
     );
 
-    const pageContent = this.props.updateStarted ? <h4>Loading....</h4> : updatedContent;
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: #003366;
+    `;
+
+    const pageContent = this.props.updateStarted ? (
+      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    ) : (
+      updatedContent
+    );
 
     return (
-      <Grid componentClass="main">
-        <Row>
-          <Col xs={12}>
-            <PageHeader>Registration Page</PageHeader>
-          </Col>
-        </Row>
-        <Row>
-          <Col>{pageContent}</Col>
-        </Row>
-      </Grid>
+      <div>
+        <h1>Rocket Chat Registration Form</h1>
+        <Grid componentClass="main">
+          <Row>
+            <div className="col-4 mx-auto">{pageContent}</div>
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }
