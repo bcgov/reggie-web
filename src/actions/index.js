@@ -18,7 +18,13 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER, CONFIRM_EMAIL } from './actionTypes';
+import {
+  AUTHENTICATION,
+  AUTHORIZATION,
+  UPDATE_USER,
+  CONFIRM_EMAIL,
+  INIVITE_USER,
+} from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -113,6 +119,27 @@ export const confirmEmailSuccess = () => {
 export const confirmEmailError = errorMessages => {
   return {
     type: CONFIRM_EMAIL.ERROR,
+    payload: {
+      errorMessages,
+    },
+  };
+};
+
+export const inviteUserStart = () => {
+  return {
+    type: INIVITE_USER.START,
+  };
+};
+
+export const inviteUserSuccess = () => {
+  return {
+    type: INIVITE_USER.SUCCESS,
+  };
+};
+
+export const inviteUserError = errorMessages => {
+  return {
+    type: INIVITE_USER.ERROR,
     payload: {
       errorMessages,
     },

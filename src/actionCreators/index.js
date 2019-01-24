@@ -31,6 +31,9 @@ import {
   confirmEmailStart,
   confirmEmailSuccess,
   confirmEmailError,
+  inviteUserStart,
+  inviteUserSuccess,
+  inviteUserError,
 } from '../actions';
 import { API } from '../constants';
 
@@ -100,6 +103,21 @@ export const confirmEmail = (userId, email, jwt) => {
       .catch(err => {
         const errMsg = 'Fail to confirm your email, please register again.';
         return dispatch(confirmEmailError([errMsg]));
+      });
+  };
+};
+
+export const inviteUser = (userId, email, invitationCode) => {
+  return dispatch => {
+    dispatch(inviteUserStart());
+    axi
+      .put(API.INVITE_USER(userId), { userEmail: email, code: invitationCode })
+      .then(res => {
+        return dispatch(inviteUserSuccess());
+      })
+      .catch(err => {
+        const errMsg = 'Fail to invite the user.';
+        return dispatch(inviteUserError([errMsg]));
       });
   };
 };
