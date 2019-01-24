@@ -28,8 +28,8 @@ class RocketChat extends Component {
   render() {
     return (
       <div>
-        <h1>Rocket chat invite page</h1>
-        <h5>Hello {this.props.userInfo.firstName}</h5>
+        <h1>Hello {this.props.userInfo.firstName}</h1>
+        <p>Welcome to Rocket chat invite page</p>
         <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
       </div>
     );
