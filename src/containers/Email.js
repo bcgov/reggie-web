@@ -18,9 +18,24 @@
 // Created by Shelly Xue Han on 2019-01-15.
 //
 
-export { default as Confirmation } from './Confirmation';
-export { default as Home } from './Home';
-export { default as Registration } from './Registration';
-export { default as RocketChat } from './RocketChat';
-export { Rejection } from './Rejection';
-export { Email } from './Email';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import qs from 'query-string';
+
+// Here checks for the parameters that come with the email link:
+export class Email extends Component {
+  static displayName = '[Component Confirmation]';
+  componentWillMount = () => {
+    try {
+      const parsed = qs.parse(this.props.location.search);
+      localStorage.setItem('emailJwt', parsed.jwt);
+      localStorage.setItem('emailIntention', parsed.emailIntention);
+    } catch (err) {
+      console.log('---email confirmation JWT not found---');
+    }
+  };
+
+  render() {
+    return <Redirect to="/" />;
+  }
+}

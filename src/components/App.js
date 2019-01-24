@@ -24,7 +24,7 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
-import { Confirmation, Home, Registration, RocketChat, Rejection } from '../containers';
+import { Confirmation, Home, Registration, RocketChat, Rejection, Email } from '../containers';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -62,6 +62,7 @@ export class App extends Component {
             authorization={this.props.authorization}
           />
           <Route path="/rejection" component={Rejection} />
+          <Route path="/email" component={Email} />
           <Route
             path="/confirmation"
             component={Confirmation}

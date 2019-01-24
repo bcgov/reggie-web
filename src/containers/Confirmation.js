@@ -21,21 +21,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import qs from 'query-string';
 import { confirmEmail } from '../actionCreators';
 
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
-  componentWillMount = () => {
-    try {
-      const parsed = qs.parse(this.props.location.search);
-      if (parsed.jwt) {
-        localStorage.setItem('emailJwt', parsed.jwt);
-      }
-    } catch (err) {
-      console.log('---email confirmation JWT not found---');
-    }
-  };
 
   render() {
     const emailJwt = localStorage.getItem('emailJwt');

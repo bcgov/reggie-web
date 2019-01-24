@@ -157,6 +157,7 @@ const confirmEmail = (
       };
     case CONFIRM_EMAIL.SUCCESS:
       localStorage.removeItem('emailJwt');
+      localStorage.removeItem('intention');
       return {
         ...state,
         ...{
@@ -166,6 +167,7 @@ const confirmEmail = (
       };
     case CONFIRM_EMAIL.ERROR:
       localStorage.removeItem('emailJwt');
+      localStorage.removeItem('intention');
       return {
         ...state,
         ...{

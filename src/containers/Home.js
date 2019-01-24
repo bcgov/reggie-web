@@ -29,8 +29,9 @@ class Home extends Component {
   static displayName = '[Component Home]';
 
   render() {
-    // get email jwt from localStorage:
+    // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
+    const intention = localStorage.getItem('emailIntention');
 
     // if there exist emailJwt in localstorage, go to confirmation page
     // if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
@@ -38,7 +39,12 @@ class Home extends Component {
     // else, stay in the home page untill user pick an option
     let authorizedRedirect = null;
     if (emailJwt) {
-      authorizedRedirect = <Redirect to="/confirmation" />;
+      if (intention === 'confirm') {
+        authorizedRedirect = <Redirect to="/confirmation" />;
+      }
+      if (intention === 'invite') {
+        authorizedRedirect = <Redirect to="/verify" />;
+      }
     }
     if (this.props.authCode === 2) {
       authorizedRedirect = <Redirect to="/rocketChat" />;
