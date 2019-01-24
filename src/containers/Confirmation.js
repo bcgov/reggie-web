@@ -23,6 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { confirmEmail } from '../actionCreators';
 
+// Here to confirm if the user email in use is matching the account email:
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
 

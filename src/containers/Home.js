@@ -25,6 +25,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
 
+// Here provides option to access different services/apps
 class Home extends Component {
   static displayName = '[Component Home]';
 
@@ -33,7 +34,7 @@ class Home extends Component {
     const emailJwt = localStorage.getItem('emailJwt');
     const intention = localStorage.getItem('emailIntention');
 
-    // if there exist emailJwt in localstorage, go to confirmation page
+    // if there exist email payloads in localstorage, go to confirmation page
     // if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
     // else if user does not meet the requirement to join Rocket chat, go to rejection page
     // else, stay in the home page untill user pick an option

@@ -25,6 +25,7 @@ import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 import { updateUser } from '../actionCreators';
 
+// Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
   static displayName = '[Component Registration]';
 

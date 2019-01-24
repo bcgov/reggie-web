@@ -26,7 +26,7 @@ import Form from 'react-jsonschema-form';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';
 
-
+// Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
 
