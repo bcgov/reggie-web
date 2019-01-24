@@ -77,7 +77,7 @@ class Registration extends Component {
 
     return (
       <div>
-        <h1>Rocket Chat Registration Form</h1>
+        <h1>Rocket Chat Registration</h1>
         <Grid componentClass="main">
           <Row>
             <div className="col-4 mx-auto">{pageContent}</div>
