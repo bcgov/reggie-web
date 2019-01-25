@@ -21,8 +21,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Grid, Row, Button } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';
 
@@ -63,16 +65,28 @@ class RocketChat extends Component {
       </div>
     );
 
-    const pageContent = this.props.invitationStarted ? <h4>Sending....</h4> : updatedContent;
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: #003366;
+    `;
+
+    const pageContent = this.props.invitationStarted ? (
+      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    ) : (
+      updatedContent
+    );
 
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
         <p>Welcome to Rocket chat invite page</p>
         <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
-        <br />
-        <br />
-        {pageContent}
+        <Grid componentClass="main">
+          <Row>
+            <div className="col-4 mx-auto">{pageContent}</div>
+          </Row>
+        </Grid>
       </div>
     );
   }
