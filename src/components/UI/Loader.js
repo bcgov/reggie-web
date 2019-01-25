@@ -18,17 +18,22 @@
 // Created by Shelly Xue Han on 2019-01-15.
 //
 
-import React, { Component } from 'react';
+import React from 'react';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 
-export class Rejection extends Component {
-  static displayName = '[Component Rejection]';
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #003366;
+`;
 
-  render() {
-    return (
-      <div>
-        <h1>Sorry you do not meet the requirement to join Rocket chat</h1>
-        <p>Please request invitation from your team lead</p>
-      </div>
-    );
-  }
-}
+const Loader = (loading = true, color = '#003366') => {
+  return (
+    <div className="loader">
+      <BeatLoader css={override} sizeUnit={'px'} size={30} color={color} loading={loading} />
+    </div>
+  );
+};
+
+export default Loader;

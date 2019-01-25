@@ -25,6 +25,7 @@ import {
   authorizationSuccess,
   authorizationFailed,
   authorizationError,
+  authorizationStop,
   updateUserStart,
   updateUserSuccess,
   updateUserError,
@@ -74,6 +75,12 @@ export const authorize = (ssoGroup, email) => {
   };
 };
 
+export const clearAuthorizationProcess = () => {
+  return dispatch => {
+    dispatch(authorizationStop());
+  };
+};
+
 export const updateUser = (userId, userProfile) => {
   return dispatch => {
     dispatch(updateUserStart());
@@ -84,7 +91,7 @@ export const updateUser = (userId, userProfile) => {
       })
       .catch(err => {
         const errMsg = 'Fail to register your account, please try again.';
-        return dispatch(updateUserError([errMsg, err.response.data.error]));
+        return dispatch(updateUserError([errMsg]));
       });
   };
 };
@@ -98,7 +105,10 @@ export const confirmEmail = (userId, email, jwt) => {
         return dispatch(confirmEmailSuccess());
       })
       .catch(err => {
-        const errMsg = 'Fail to confirm your email, please register again.';
+        let errMsg = 'Fail to confirm your email, please register again.';
+        if (err.response) {
+          errMsg = `${err.response.data}. Please register again.`;
+        }
         return dispatch(confirmEmailError([errMsg]));
       });
   };

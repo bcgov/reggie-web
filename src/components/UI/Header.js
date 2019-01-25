@@ -21,6 +21,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AuthButton from '../AuthButton/AuthButton';
 import logo from './bcgovlogo.svg';
 import './Header.css';
@@ -29,8 +30,10 @@ const Header = ({ authentication }) => {
   return (
     <header className="header">
       <div className="banner">
-        <img src={logo} className="header-logo" alt="logo" />
-        <h1>BC Gov Registration Center</h1>
+        <Link to="/">
+          <img src={logo} className="header-logo" alt="logo" />
+        </Link>
+        <h1>BC Gov Reggie</h1>
       </div>
       <AuthButton isAuthenticated={authentication.isAuthenticated} />
     </header>

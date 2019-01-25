@@ -99,6 +99,13 @@ const authorization = (
           errorMessages: action.payload.errorMessages,
         },
       };
+    case AUTHORIZATION.STOP:
+      return {
+        ...state,
+        ...{
+          authorizationStarted: false,
+        },
+      };
     default:
       return state;
   }
