@@ -81,9 +81,9 @@ class RocketChat extends Component {
 const mapStateToProps = state => {
   return {
     userInfo: state.authorization.userInfo,
-    invitationStarted: state.updateUser.updateStarted,
-    sent: state.updateUser.updated,
-    errorMessages: state.updateUser.errorMessages,
+    invitationStarted: state.inviteUser.invitationStarted,
+    sent: state.inviteUser.sent,
+    errorMessages: state.inviteUser.errorMessages,
   };
 };
 
