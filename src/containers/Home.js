@@ -68,13 +68,13 @@ class Home extends Component {
         </Button>
       </div>
     ) : (
-      <h5>Please log in to SSO to proceed</h5>
+      <p>Please log in to SSO to proceed</p>
     );
 
     return (
       <div className="authed">
         <h1>Welcome to Reggie web</h1>
-        <h5>{this.props.errorMessages[0]}</h5>
+        <p>{this.props.errorMessages[0]}</p>
         {content}
       </div>
     );

@@ -20,8 +20,12 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { confirmEmail } from '../actionCreators';
+// import Loader from '../components/UI/Loader';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 
 // Here to confirm if the user email in use is matching the account email:
 class Confirmation extends Component {
@@ -31,24 +35,36 @@ class Confirmation extends Component {
     const emailJwt = localStorage.getItem('emailJwt');
     // TODO: maybe redirect after?
     const verifiedContent = this.props.confirmed ? (
-      <h4>Confirmed!</h4>
+      <h5>Confirmed!</h5>
     ) : (
       <div>
-        <h4>Do you want to confirm registration for email: {this.props.email} ?</h4>
-        <button
+        <h5>Do you want to confirm registration for email: </h5>
+        <h5>{this.props.email}</h5>
+        <Button
+          bsStyle="primary"
           onClick={() => {
             this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
           }}
         >
           Confirm
-        </button>
+        </Button>
         <h4>{this.props.errorMessages[0]}</h4>
       </div>
     );
-    const pageContent = this.props.verifyStarted ? <h4>Verifying....</h4> : verifiedContent;
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: #003366;
+    `;
+    const pageContent = this.props.verifyStarted ? (
+      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    ) : (
+      verifiedContent
+    );
+
     return (
       <div>
-        <h1>Welcome back,</h1>
+        <h1>Welcome back</h1>
         {pageContent}
       </div>
     );

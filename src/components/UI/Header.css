@@ -7,16 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* flex-flow: row wrap; */
 }
 
-header .banner {
+.header .banner{
   display: flex;
   align-items: center;
-
 }
 
-header h1 {
+.header h1 {
   font-family: 'Noto Sans','Calibri', 'Arial', 'Sans Serif';
   font-size: 24px;
   font-weight: normal;
@@ -29,19 +27,12 @@ header h1 {
   height: 80px;
 }
 
-/* header .left {
-  display: flex;
-} */
-
 .header-intro {
   font-size: large;
 }
 
-/* @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 10px;
   }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+}

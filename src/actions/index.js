@@ -83,6 +83,12 @@ export const authorizationError = errorMessages => {
   };
 };
 
+export const authorizationStop = () => {
+  return {
+    type: AUTHORIZATION.STOP,
+  };
+};
+
 export const updateUserStart = () => {
   return {
     type: UPDATE_USER.START,
