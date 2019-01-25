@@ -129,7 +129,8 @@ export const inviteUser = (userId, email, invitationCode) => {
         return dispatch(inviteUserSuccess());
       })
       .catch(err => {
-        const errMsg = 'Fail to invite the user.';
+        const errMsg =
+          'Unable to send out invitation to email provided, please double check the email address';
         return dispatch(inviteUserError([errMsg]));
       });
   };
