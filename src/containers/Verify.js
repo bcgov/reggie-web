@@ -22,7 +22,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Row, Button } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
@@ -33,14 +33,14 @@ class Verify extends Component {
   static displayName = '[Component Verify]';
 
   // check for authorization status first:
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.props.authorize('rc', this.props.userId);
   };
 
   render() {
     let invitationRedirect = null;
     // if user is matching the Rocket chat schema, redirect to registration directly:
-    if (this.props.authCode !== 3) {
+    if (this.props.authCode !== 3 && this.props.authorizationStarted) {
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       invitationRedirect = <Redirect to="/registration" />;
@@ -64,9 +64,13 @@ class Verify extends Component {
       this.props.verifyEmail(this.props.userId, formData.email, formData.invitationCode, emailJwt);
     };
 
-    // TODO: instead of h4, will redirect:
     const updatedContent = this.props.verfied ? (
-      <h4>Verified, please register</h4>
+      <div>
+        <h4>Verified, please register</h4>
+        <Link className="btn btn-primary" to="/registration">
+          Registration
+        </Link>
+      </div>
     ) : (
       <div>
         <h5>Enter your email and the security code</h5>
@@ -102,7 +106,7 @@ class Verify extends Component {
     return (
       <div>
         {invitationRedirect}
-        <p>Welcome to Rocket chat</p>
+        <h1>Welcome to Rocket chat</h1>
         <h4>{this.props.authErrorMessages[0]}</h4>
         {pageContent}
       </div>
