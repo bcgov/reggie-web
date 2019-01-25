@@ -22,17 +22,30 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Row, Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
-import { verifyEmail } from '../actionCreators';
+import { authorize, verifyEmail } from '../actionCreators';
 
 // Here check if invited user is valid:
 class Verify extends Component {
   static displayName = '[Component Verify]';
 
-  // check for authorization first:
+  // check for authorization status first:
+  componentDidMount = () => {
+    this.props.authorize('rc', this.props.userId);
+  };
+
   render() {
+    let invitationRedirect = null;
+    // if user is matching the Rocket chat schema, redirect to registration directly:
+    if (this.props.authCode !== 3) {
+      localStorage.removeItem('emailJwt');
+      localStorage.removeItem('emailIntention');
+      invitationRedirect = <Redirect to="/registration" />;
+    }
+
     const emailJwt = localStorage.getItem('emailJwt');
     const schema = {
       type: 'object',
@@ -72,20 +85,26 @@ class Verify extends Component {
       border-color: #003366;
     `;
 
-    const pageContent = this.props.verifyStarted ? (
-      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
+
+    const loadedContent = this.props.verifyStarted ? (
+      loader
     ) : (
-      updatedContent
+      <Grid componentClass="main">
+        <Row>
+          <div className="col-4 mx-auto">{updatedContent}</div>
+        </Row>
+      </Grid>
     );
+
+    const pageContent = this.props.userInfo.id === null ? loader : loadedContent;
 
     return (
       <div>
+        {invitationRedirect}
         <p>Welcome to Rocket chat</p>
-        <Grid componentClass="main">
-          <Row>
-            <div className="col-4 mx-auto">{pageContent}</div>
-          </Row>
-        </Grid>
+        <h4>{this.props.authErrorMessages[0]}</h4>
+        {pageContent}
       </div>
     );
   }
@@ -97,12 +116,17 @@ const mapStateToProps = state => {
     verifyStarted: state.verifyEmail.verifyStarted,
     verfied: state.verifyEmail.verfied,
     errorMessages: state.verifyEmail.errorMessages,
+    authCode: state.authorization.authCode,
+    authorizationStarted: state.authorization.authorizationStarted,
+    userInfo: state.authorization.userInfo,
+    authErrorMessages: state.authorization.errorMessages,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      authorize,
       verifyEmail,
     },
     dispatch
