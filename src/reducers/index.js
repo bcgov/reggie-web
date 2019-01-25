@@ -26,6 +26,7 @@ import {
   UPDATE_USER,
   CONFIRM_EMAIL,
   INIVITE_USER,
+  VERIFY_EMAIL,
 } from '../actions/actionTypes';
 
 const authentication = (state = { isAuthenticated: false, email: null, userId: null }, action) => {
@@ -164,7 +165,7 @@ const confirmEmail = (
       };
     case CONFIRM_EMAIL.SUCCESS:
       localStorage.removeItem('emailJwt');
-      localStorage.removeItem('intention');
+      localStorage.removeItem('emailIntention');
       return {
         ...state,
         ...{
@@ -174,7 +175,7 @@ const confirmEmail = (
       };
     case CONFIRM_EMAIL.ERROR:
       localStorage.removeItem('emailJwt');
-      localStorage.removeItem('intention');
+      localStorage.removeItem('emailIntention');
       return {
         ...state,
         ...{
@@ -220,12 +221,50 @@ const inviteUser = (
   }
 };
 
+const verifyEmail = (
+  state = { verifyStarted: false, verfied: false, errorMessages: [] },
+  action
+) => {
+  switch (action.type) {
+    case VERIFY_EMAIL.START:
+      return {
+        ...state,
+        ...{
+          verifyStarted: true,
+        },
+      };
+    case VERIFY_EMAIL.SUCCESS:
+      localStorage.removeItem('emailJwt');
+      localStorage.removeItem('emailIntention');
+      return {
+        ...state,
+        ...{
+          verifyStarted: false,
+          verfied: true,
+        },
+      };
+    case VERIFY_EMAIL.ERROR:
+      localStorage.removeItem('emailJwt');
+      localStorage.removeItem('emailIntention');
+      return {
+        ...state,
+        ...{
+          verifyStarted: false,
+          errorMessages: action.payload.errorMessages,
+        },
+      };
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   authentication,
   authorization,
   updateUser,
   confirmEmail,
   inviteUser,
+  verifyEmail,
 });
 
 export default rootReducer;

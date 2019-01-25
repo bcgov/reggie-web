@@ -35,6 +35,9 @@ import {
   inviteUserStart,
   inviteUserSuccess,
   inviteUserError,
+  verifyEmailStart,
+  verifyEmailSuccess,
+  verifyEmailError,
 } from '../actions';
 import { API } from '../constants';
 
@@ -128,6 +131,27 @@ export const inviteUser = (userId, email, invitationCode) => {
       .catch(err => {
         const errMsg = 'Fail to invite the user.';
         return dispatch(inviteUserError([errMsg]));
+      });
+  };
+};
+
+export const verifyEmail = (userId, email, code, jwt) => {
+  return dispatch => {
+    dispatch(verifyEmailStart());
+    axi
+      .get(API.VERIFY_SSO_USER(userId), {
+        params: {
+          email,
+          code,
+          token: jwt,
+        },
+      })
+      .then(res => {
+        return dispatch(verifyEmailSuccess());
+      })
+      .catch(err => {
+        let errMsg = 'Your email + code pair is invalid.';
+        return dispatch(verifyEmailError([errMsg]));
       });
   };
 };

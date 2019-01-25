@@ -24,6 +24,7 @@ import {
   UPDATE_USER,
   CONFIRM_EMAIL,
   INIVITE_USER,
+  VERIFY_EMAIL,
 } from './actionTypes';
 
 export const authenticateSuccess = () => {
@@ -146,6 +147,27 @@ export const inviteUserSuccess = () => {
 export const inviteUserError = errorMessages => {
   return {
     type: INIVITE_USER.ERROR,
+    payload: {
+      errorMessages,
+    },
+  };
+};
+
+export const verifyEmailStart = () => {
+  return {
+    type: VERIFY_EMAIL.START,
+  };
+};
+
+export const verifyEmailSuccess = () => {
+  return {
+    type: VERIFY_EMAIL.SUCCESS,
+  };
+};
+
+export const verifyEmailError = errorMessages => {
+  return {
+    type: VERIFY_EMAIL.ERROR,
     payload: {
       errorMessages,
     },

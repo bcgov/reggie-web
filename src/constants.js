@@ -27,6 +27,7 @@ export const API = {
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   INVITE_USER: userId => `sso/user/invite/${userId}`,
+  VERIFY_SSO_USER: userId => `sso/user/verify/${userId}`,
   TIME_OUT: 40000,
 };
 
