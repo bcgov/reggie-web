@@ -39,22 +39,20 @@ class RocketChat extends Component {
         email: {
           type: 'string',
           format: 'email',
-          title: 'Email',
-          default: this.props.userInfo.email,
+          title: 'Email to invite',
         },
-        firstName: { type: 'string', title: 'invitationCode' },
+        invitationCode: { type: 'string', title: 'Invitation Code' },
       },
     };
 
     const onSubmit = ({ formData }) => {
-      this.props.inviteUser(this.props.userInfo.id, formData);
+      this.props.inviteUser(this.props.userInfo.id, formData.email, formData.invitationCode);
     };
 
-    return (
+    const updatedContent = this.props.sent ? (
+      <h4>Invitation sent, please pass your invitation code in person!</h4>
+    ) : (
       <div>
-        <h1>Rocket chat invite page</h1>
-        <h5>Hello {this.props.userInfo.firstName}</h5>
-        <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
         <h5>To invite new user, please provide the email and enter a security code</h5>
         <Form schema={schema} onSubmit={onSubmit}>
           <Button type="submit" bsStyle="primary">
@@ -64,12 +62,28 @@ class RocketChat extends Component {
         </Form>
       </div>
     );
+
+    const pageContent = this.props.invitationStarted ? <h4>Sending....</h4> : updatedContent;
+
+    return (
+      <div>
+        <h1>Rocket chat invite page</h1>
+        <h5>Hello {this.props.userInfo.firstName}</h5>
+        <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
+        <br />
+        <br />
+        {pageContent}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
     userInfo: state.authorization.userInfo,
+    invitationStarted: state.updateUser.updateStarted,
+    sent: state.updateUser.updated,
+    errorMessages: state.updateUser.errorMessages,
   };
 };
 

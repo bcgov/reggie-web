@@ -111,7 +111,7 @@ export const inviteUser = (userId, email, invitationCode) => {
   return dispatch => {
     dispatch(inviteUserStart());
     axi
-      .put(API.INVITE_USER(userId), { userEmail: email, code: invitationCode })
+      .post(API.INVITE_USER(userId), { email, code: invitationCode })
       .then(res => {
         return dispatch(inviteUserSuccess());
       })
