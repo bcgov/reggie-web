@@ -61,7 +61,7 @@ class Home extends Component {
         <Button
           bsStyle="primary"
           onClick={() => {
-            this.props.authorize('rc', this.props.email);
+            this.props.authorize('rc', this.props.userId);
           }}
         >
           Login to Rocket Chat
@@ -84,7 +84,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    email: state.authentication.email,
+    userId: state.authentication.userId,
     authCode: state.authorization.authCode,
     authorizationStarted: state.authorization.authorizationStarted,
     userInfo: state.authorization.userInfo,

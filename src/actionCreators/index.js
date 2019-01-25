@@ -54,11 +54,11 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
   return 0;
 };
 
-export const authorize = (ssoGroup, email) => {
+export const authorize = (ssoGroup, userId) => {
   return dispatch => {
     dispatch(authorizationStart());
     axi
-      .get(API.GET_SSO_USER(email))
+      .get(API.GET_SSO_USER(userId))
       .then(res => {
         const userStatus = checkStatus(
           res.data.isPending,

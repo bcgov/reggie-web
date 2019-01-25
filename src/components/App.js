@@ -48,7 +48,9 @@ export class App extends Component {
       implicitAuthManager.handleOnPageLoad();
     }
     try {
-      console.log(implicitAuthManager.idToken.data.email);
+      console.log(implicitAuthManager.idToken.data.sub);
+      // Notice: instead of verifying aganst email, it's more rubst to check again sub(ID)
+      // console.log(implicitAuthManager.idToken.data.email);
     } catch (err) {
       console.log('---implicitAuthManager----not logged in');
     }
