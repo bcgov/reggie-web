@@ -22,5 +22,6 @@ export { default as Confirmation } from './Confirmation';
 export { default as Home } from './Home';
 export { default as Registration } from './Registration';
 export { default as RocketChat } from './RocketChat';
+export { default as Verify } from './Verify';
 export { Rejection } from './Rejection';
 export { Email } from './Email';

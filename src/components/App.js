@@ -24,7 +24,15 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
-import { Confirmation, Home, Registration, RocketChat, Rejection, Email } from '../containers';
+import {
+  Confirmation,
+  Home,
+  Registration,
+  RocketChat,
+  Rejection,
+  Email,
+  Verify,
+} from '../containers';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -70,6 +78,13 @@ export class App extends Component {
             confirmEmail={this.props.confirmEmail}
           />
           <Route
+            path="/verify"
+            component={Verify}
+            authentication={this.props.authentication}
+            authorization={this.props.authorization}
+            verifyEmail={this.props.verifyEmail}
+          />
+          <Route
             path="/login"
             component={() => {
               window.location = implicitAuthManager.getSSOLoginURI();
@@ -94,6 +109,7 @@ function mapStateToProps(state) {
     authorization: state.authorization,
     updateUser: state.updateUser,
     confirmEmail: state.confirmEmail,
+    verifyEmail: state.verifyEmail,
   };
 }
 
