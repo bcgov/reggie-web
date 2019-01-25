@@ -48,10 +48,8 @@ class Confirmation extends Component {
       <h5>Confirmed!</h5>
     ) : (
       <div>
-        <br />
         <h5>Do you want to confirm registration for email: </h5>
         <h5>{this.props.email}</h5>
-        <br />
         <Button
           bsStyle="primary"
           onClick={() => {
