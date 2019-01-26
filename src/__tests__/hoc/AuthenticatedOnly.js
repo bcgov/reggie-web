@@ -27,11 +27,11 @@ describe('withAuthentication', () => {
     expect(para.text()).toBe('hello world');
   });
 
-  it('returns a redirect component when not authenticated', () => {
+  it('returns null when not authenticated', () => {
     const component = <p>hello world</p>;
     const wrapper = shallow(<AuthenticatedOnly>{component}</AuthenticatedOnly>);
     const para = wrapper.find('p');
     expect(para.length).toBe(0);
-    expect(wrapper.text()).toBe('<Redirect />');
+    expect(wrapper).toBe(null);
   });
 });
