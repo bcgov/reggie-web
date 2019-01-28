@@ -60,7 +60,7 @@ export const authorize = (ssoGroup, userId) => {
     axi
       .get(API.GET_SSO_USER(userId))
       .then(res => {
-        const userStatus = checkStatus(
+        const authCode = checkStatus(
           res.data.isPending,
           res.data.isAuthorized,
           res.data.isRejected
@@ -71,12 +71,17 @@ export const authorize = (ssoGroup, userId) => {
           firstName: res.data.firstName,
           lastName: res.data.lastName,
         };
-        if (userStatus === 2) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
-        if (userStatus === 3) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
-        return dispatch(authorizationPending(ssoGroup, newUserInfo));
+        // TODO: remove extra actions. Will keep them for now in case needed.
+        // Use general action for successful request,
+        // Pass in the user status into authorizationSuccess in general for 0, 1, 2, 3
+        // if (userStatus === 2) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
+        // if (userStatus === 3) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
+        // return dispatch(authorizationPending(ssoGroup, newUserInfo));
+        return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
       })
       .catch(err => {
-        return dispatch(authorizationError([err.message]));
+        const message = 'Fail to connect to KeyCloak, please refresh!';
+        return dispatch(authorizationError([message]));
       });
   };
 };
