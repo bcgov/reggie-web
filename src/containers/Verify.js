@@ -40,7 +40,7 @@ class Verify extends Component {
   render() {
     let invitationRedirect = null;
     // if user is matching the Rocket chat schema, redirect to registration directly:
-    if (this.props.authCode !== 3 && this.props.authorizationStarted) {
+    if (this.props.authCode !== 3 && this.props.isAuthorizing) {
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       invitationRedirect = <Redirect to="/registration" />;
@@ -121,7 +121,7 @@ const mapStateToProps = state => {
     verfied: state.verifyEmail.verfied,
     errorMessages: state.verifyEmail.errorMessages,
     authCode: state.authorization.authCode,
-    authorizationStarted: state.authorization.authorizationStarted,
+    isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,
     authErrorMessages: state.authorization.errorMessages,
   };
