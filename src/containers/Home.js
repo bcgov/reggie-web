@@ -65,8 +65,7 @@ class Home extends Component {
           if (intention === 'invite') {
             authorizedRedirect = <Redirect to="/verify" />;
           }
-        }
-        if (this.props.authCode === 2) {
+        } else if (this.props.authCode === 2) {
           authorizedRedirect = <Redirect to="/rocketChat" />;
         } else if (this.props.authCode === 3) {
           authorizedRedirect = <Redirect to="/rejection" />;
