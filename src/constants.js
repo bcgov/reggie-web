@@ -23,9 +23,11 @@ export const API = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:8000/api/v1/'
       : `${window.location.origin}/api/v1/`,
-  GET_SSO_USER: email => `sso/user?email=${email}`,
+  GET_SSO_USER: userId => `sso/user/${userId}`,
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
+  INVITE_USER: userId => `sso/user/invite/${userId}`,
+  VERIFY_SSO_USER: userId => `sso/user/verify/${userId}`,
   TIME_OUT: 40000,
 };
 

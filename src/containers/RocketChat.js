@@ -19,18 +19,74 @@
 //
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Grid, Row, Button } from 'react-bootstrap';
+import Form from 'react-jsonschema-form';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 import { SELF_SERVER_APP } from '../constants';
+import { inviteUser } from '../actionCreators';
 
+// Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
 
   render() {
+    const schema = {
+      // title: 'Please register to continue',
+      type: 'object',
+      required: ['invitationCode', 'email'],
+      properties: {
+        email: {
+          type: 'string',
+          format: 'email',
+          title: 'Email to invite',
+        },
+        invitationCode: { type: 'string', title: 'Invitation Code' },
+      },
+    };
+
+    const onSubmit = ({ formData }) => {
+      this.props.inviteUser(this.props.userInfo.id, formData.email, formData.invitationCode);
+    };
+
+    const updatedContent = this.props.sent ? (
+      <h4>Invitation sent, please pass your invitation code in person!</h4>
+    ) : (
+      <div>
+        <h5>To invite new user, please provide the email and enter a security code</h5>
+        <Form schema={schema} onSubmit={onSubmit}>
+          <Button type="submit" bsStyle="primary">
+            Submit
+          </Button>
+          <h4>{this.props.errorMessages[0]}</h4>
+        </Form>
+      </div>
+    );
+
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: #003366;
+    `;
+
+    const pageContent = this.props.invitationStarted ? (
+      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    ) : (
+      updatedContent
+    );
+
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
         <p>Welcome to Rocket chat invite page</p>
         <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
+        <Grid componentClass="main">
+          <Row>
+            <div className="col-4 mx-auto">{pageContent}</div>
+          </Row>
+        </Grid>
       </div>
     );
   }
@@ -39,11 +95,19 @@ class RocketChat extends Component {
 const mapStateToProps = state => {
   return {
     userInfo: state.authorization.userInfo,
+    invitationStarted: state.inviteUser.invitationStarted,
+    sent: state.inviteUser.sent,
+    errorMessages: state.inviteUser.errorMessages,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return bindActionCreators(
+    {
+      inviteUser,
+    },
+    dispatch
+  );
 };
 
 export default connect(

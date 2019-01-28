@@ -18,7 +18,14 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import { AUTHENTICATION, AUTHORIZATION, UPDATE_USER, CONFIRM_EMAIL } from './actionTypes';
+import {
+  AUTHENTICATION,
+  AUTHORIZATION,
+  UPDATE_USER,
+  CONFIRM_EMAIL,
+  INIVITE_USER,
+  VERIFY_EMAIL,
+} from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -119,6 +126,48 @@ export const confirmEmailSuccess = () => {
 export const confirmEmailError = errorMessages => {
   return {
     type: CONFIRM_EMAIL.ERROR,
+    payload: {
+      errorMessages,
+    },
+  };
+};
+
+export const inviteUserStart = () => {
+  return {
+    type: INIVITE_USER.START,
+  };
+};
+
+export const inviteUserSuccess = () => {
+  return {
+    type: INIVITE_USER.SUCCESS,
+  };
+};
+
+export const inviteUserError = errorMessages => {
+  return {
+    type: INIVITE_USER.ERROR,
+    payload: {
+      errorMessages,
+    },
+  };
+};
+
+export const verifyEmailStart = () => {
+  return {
+    type: VERIFY_EMAIL.START,
+  };
+};
+
+export const verifyEmailSuccess = () => {
+  return {
+    type: VERIFY_EMAIL.SUCCESS,
+  };
+};
+
+export const verifyEmailError = errorMessages => {
+  return {
+    type: VERIFY_EMAIL.ERROR,
     payload: {
       errorMessages,
     },

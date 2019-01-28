@@ -22,24 +22,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import qs from 'query-string';
 import { confirmEmail } from '../actionCreators';
 // import Loader from '../components/UI/Loader';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 
+// Here to confirm if the user email in use is matching the account email:
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
-  componentWillMount = () => {
-    try {
-      const parsed = qs.parse(this.props.location.search);
-      if (parsed.jwt) {
-        localStorage.setItem('emailJwt', parsed.jwt);
-      }
-    } catch (err) {
-      console.log('---email confirmation JWT not found---');
-    }
-  };
 
   render() {
     const emailJwt = localStorage.getItem('emailJwt');

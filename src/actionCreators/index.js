@@ -32,6 +32,12 @@ import {
   confirmEmailStart,
   confirmEmailSuccess,
   confirmEmailError,
+  inviteUserStart,
+  inviteUserSuccess,
+  inviteUserError,
+  verifyEmailStart,
+  verifyEmailSuccess,
+  verifyEmailError,
 } from '../actions';
 import { API } from '../constants';
 
@@ -48,11 +54,11 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
   return 0;
 };
 
-export const authorize = (ssoGroup, email) => {
+export const authorize = (ssoGroup, userId) => {
   return dispatch => {
     dispatch(authorizationStart());
     axi
-      .get(API.GET_SSO_USER(email))
+      .get(API.GET_SSO_USER(userId))
       .then(res => {
         const userStatus = checkStatus(
           res.data.isPending,
@@ -110,6 +116,43 @@ export const confirmEmail = (userId, email, jwt) => {
           errMsg = `${err.response.data}. Please register again.`;
         }
         return dispatch(confirmEmailError([errMsg]));
+      });
+  };
+};
+
+export const inviteUser = (userId, email, invitationCode) => {
+  return dispatch => {
+    dispatch(inviteUserStart());
+    axi
+      .post(API.INVITE_USER(userId), { email, code: invitationCode })
+      .then(res => {
+        return dispatch(inviteUserSuccess());
+      })
+      .catch(err => {
+        const errMsg =
+          'Unable to send out invitation to email provided, please double check the email address';
+        return dispatch(inviteUserError([errMsg]));
+      });
+  };
+};
+
+export const verifyEmail = (userId, email, code, jwt) => {
+  return dispatch => {
+    dispatch(verifyEmailStart());
+    axi
+      .get(API.VERIFY_SSO_USER(userId), {
+        params: {
+          email,
+          code,
+          token: jwt,
+        },
+      })
+      .then(res => {
+        return dispatch(verifyEmailSuccess());
+      })
+      .catch(err => {
+        let errMsg = 'Your email + code pair is invalid.';
+        return dispatch(verifyEmailError([errMsg]));
       });
   };
 };

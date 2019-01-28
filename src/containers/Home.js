@@ -25,20 +25,27 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
 
+// Here provides option to access different services/apps
 class Home extends Component {
   static displayName = '[Component Home]';
 
   render() {
-    // get email jwt from localStorage:
+    // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
+    const intention = localStorage.getItem('emailIntention');
 
-    // if there exist emailJwt in localstorage, go to confirmation page
+    // if there exist email payloads in localstorage, go to confirmation page
     // if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
     // else if user does not meet the requirement to join Rocket chat, go to rejection page
     // else, stay in the home page untill user pick an option
     let authorizedRedirect = null;
     if (emailJwt) {
-      authorizedRedirect = <Redirect to="/confirmation" />;
+      if (intention === 'confirm') {
+        authorizedRedirect = <Redirect to="/confirmation" />;
+      }
+      if (intention === 'invite') {
+        authorizedRedirect = <Redirect to="/verify" />;
+      }
     }
     if (this.props.authCode === 2) {
       authorizedRedirect = <Redirect to="/rocketChat" />;
@@ -54,7 +61,7 @@ class Home extends Component {
         <Button
           bsStyle="primary"
           onClick={() => {
-            this.props.authorize('rc', this.props.email);
+            this.props.authorize('rc', this.props.userId);
           }}
         >
           Login to Rocket Chat
@@ -77,7 +84,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    email: state.authentication.email,
+    userId: state.authentication.userId,
     authCode: state.authorization.authCode,
     authorizationStarted: state.authorization.authorizationStarted,
     userInfo: state.authorization.userInfo,

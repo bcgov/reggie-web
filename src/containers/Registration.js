@@ -28,6 +28,7 @@ import { updateUser } from '../actionCreators';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 
+// Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
   static displayName = '[Component Registration]';
 

@@ -24,7 +24,15 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
-import { Confirmation, Home, Registration, RocketChat, Rejection } from '../containers';
+import {
+  Confirmation,
+  Home,
+  Registration,
+  RocketChat,
+  Rejection,
+  Email,
+  Verify,
+} from '../containers';
 import Layout from '../hoc/Layout';
 import './App.css';
 
@@ -40,7 +48,9 @@ export class App extends Component {
       implicitAuthManager.handleOnPageLoad();
     }
     try {
-      console.log(implicitAuthManager.idToken.data.email);
+      console.log(implicitAuthManager.idToken.data.sub);
+      // Notice: instead of verifying aganst email, it's more rubst to check again sub(ID)
+      // console.log(implicitAuthManager.idToken.data.email);
     } catch (err) {
       console.log('---implicitAuthManager----not logged in');
     }
@@ -62,11 +72,19 @@ export class App extends Component {
             authorization={this.props.authorization}
           />
           <Route path="/rejection" component={Rejection} />
+          <Route path="/email" component={Email} />
           <Route
             path="/confirmation"
             component={Confirmation}
             authentication={this.props.authentication}
             confirmEmail={this.props.confirmEmail}
+          />
+          <Route
+            path="/verify"
+            component={Verify}
+            authentication={this.props.authentication}
+            authorization={this.props.authorization}
+            verifyEmail={this.props.verifyEmail}
           />
           <Route
             path="/login"
@@ -93,6 +111,7 @@ function mapStateToProps(state) {
     authorization: state.authorization,
     updateUser: state.updateUser,
     confirmEmail: state.confirmEmail,
+    verifyEmail: state.verifyEmail,
   };
 }
 

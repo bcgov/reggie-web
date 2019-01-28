@@ -18,6 +18,7 @@
 // Created by Shelly Xue Han on 2019-01-15.
 //
 
+// Here shows the infomation/next step if user is rejected to enter the app:
 import React, { Component } from 'react';
 
 export class Rejection extends Component {
