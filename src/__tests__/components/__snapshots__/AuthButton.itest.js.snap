@@ -19,26 +19,28 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <button
+      "children": <Link
         className="auth-button"
-        onClick={[Function]}
+        replace={false}
+        to="/logout"
       >
         Logout
-      </button>,
+      </Link>,
     },
     "ref": null,
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "class",
       "props": Object {
         "children": "Logout",
         "className": "auth-button",
-        "onClick": [Function],
+        "replace": false,
+        "to": "/logout",
       },
       "ref": null,
       "rendered": "Logout",
-      "type": "button",
+      "type": [Function],
     },
     "type": "span",
   },
@@ -48,26 +50,28 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <button
+        "children": <Link
           className="auth-button"
-          onClick={[Function]}
+          replace={false}
+          to="/logout"
         >
           Logout
-        </button>,
+        </Link>,
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "class",
         "props": Object {
           "children": "Logout",
           "className": "auth-button",
-          "onClick": [Function],
+          "replace": false,
+          "to": "/logout",
         },
         "ref": null,
         "rendered": "Logout",
-        "type": "button",
+        "type": [Function],
       },
       "type": "span",
     },
@@ -111,26 +115,28 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <button
+      "children": <Link
         className="auth-button"
-        onClick={[Function]}
+        replace={false}
+        to="/login"
       >
         Login
-      </button>,
+      </Link>,
     },
     "ref": null,
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "class",
       "props": Object {
         "children": "Login",
         "className": "auth-button",
-        "onClick": [Function],
+        "replace": false,
+        "to": "/login",
       },
       "ref": null,
       "rendered": "Login",
-      "type": "button",
+      "type": [Function],
     },
     "type": "span",
   },
@@ -140,26 +146,28 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <button
+        "children": <Link
           className="auth-button"
-          onClick={[Function]}
+          replace={false}
+          to="/login"
         >
           Login
-        </button>,
+        </Link>,
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "class",
         "props": Object {
           "children": "Login",
           "className": "auth-button",
-          "onClick": [Function],
+          "replace": false,
+          "to": "/login",
         },
         "ref": null,
         "rendered": "Login",
-        "type": "button",
+        "type": [Function],
       },
       "type": "span",
     },
