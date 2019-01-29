@@ -28,6 +28,7 @@ import {
   INIVITE_USER,
   VERIFY_EMAIL,
 } from '../actions/actionTypes';
+import { AUTH_CODE } from '../constants';
 
 const authentication = (state = { isAuthenticated: false, email: null, userId: null }, action) => {
   switch (action.type) {
@@ -50,7 +51,7 @@ const authentication = (state = { isAuthenticated: false, email: null, userId: n
 
 const authorization = (
   state = {
-    authCode: 0,
+    authCode: AUTH_CODE.NEW,
     isAuthorizing: false,
     userInfo: { id: null, email: null, firstName: null, lastName: null },
     ssoGroup: null,
@@ -63,7 +64,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          authCode: 0,
+          authCode: AUTH_CODE.NEW,
           isAuthorizing: true,
         },
       };
@@ -71,7 +72,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          authCode: 1,
+          authCode: AUTH_CODE.PENDING,
           isAuthorizing: false,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -81,7 +82,6 @@ const authorization = (
       return {
         ...state,
         ...{
-          // authCode: 2,
           authCode: action.payload.authCode,
           isAuthorizing: false,
           userInfo: action.payload.userInfo,
@@ -92,7 +92,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          authCode: 3,
+          authCode: AUTH_CODE.REJECTED,
           isAuthorizing: false,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -102,7 +102,7 @@ const authorization = (
       return {
         ...state,
         ...{
-          authCode: 0,
+          authCode: AUTH_CODE.NEW,
           isAuthorizing: false,
           errorMessages: action.payload.errorMessages,
         },

@@ -21,9 +21,9 @@
 import axios from 'axios';
 import {
   authorizationStart,
-  authorizationPending,
+  // authorizationPending,
   authorizationSuccess,
-  authorizationFailed,
+  // authorizationFailed,
   authorizationError,
   authorizationStop,
   updateUserStart,
@@ -39,7 +39,7 @@ import {
   verifyEmailSuccess,
   verifyEmailError,
 } from '../actions';
-import { API } from '../constants';
+import { API, AUTH_CODE } from '../constants';
 
 const axi = axios.create({
   baseURL: API.BASE_URL(),
@@ -48,10 +48,10 @@ const axi = axios.create({
 });
 
 const checkStatus = (isPending = false, isAuthorized = false, isRejected = false) => {
-  if (isRejected) return 3;
-  if (isPending) return 1;
-  if (isAuthorized) return 2;
-  return 0;
+  if (isRejected) return AUTH_CODE.REJECTED;
+  if (isPending) return AUTH_CODE.PENDING;
+  if (isAuthorized) return AUTH_CODE.AUTHORIZED;
+  return AUTH_CODE.NEW;
 };
 
 export const authorize = (ssoGroup, userId) => {
@@ -73,9 +73,9 @@ export const authorize = (ssoGroup, userId) => {
         };
         // TODO: remove extra actions. Will keep them for now in case needed.
         // Use general action for successful request,
-        // Pass in the user status into authorizationSuccess in general for 0, 1, 2, 3
-        // if (userStatus === 2) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
-        // if (userStatus === 3) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
+        // Pass in the user status into authorizationSuccess in general for different AUTH_CODE
+        // if (userStatus === AUTH_CODE.AUTHORIZED) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
+        // if (userStatus === AUTH_CODE.REJECTED) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
         // return dispatch(authorizationPending(ssoGroup, newUserInfo));
         return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
       })
