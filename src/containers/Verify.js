@@ -27,6 +27,7 @@ import Form from 'react-jsonschema-form';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 import { authorize, verifyEmail } from '../actionCreators';
+import { AUTH_CODE } from '../constants';
 
 // Here check if invited user is valid:
 class Verify extends Component {
@@ -40,7 +41,8 @@ class Verify extends Component {
   render() {
     let invitationRedirect = null;
     // if user is matching the Rocket chat schema, redirect to registration directly:
-    if (this.props.authCode !== 3 && this.props.authorizationStarted) {
+    // TODO: update the check that uses isAuthorizing:
+    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.isAuthorizing) {
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       invitationRedirect = <Redirect to="/registration" />;
@@ -121,7 +123,7 @@ const mapStateToProps = state => {
     verfied: state.verifyEmail.verfied,
     errorMessages: state.verifyEmail.errorMessages,
     authCode: state.authorization.authCode,
-    authorizationStarted: state.authorization.authorizationStarted,
+    isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,
     authErrorMessages: state.authorization.errorMessages,
   };

@@ -55,12 +55,13 @@ export const authorizationPending = (ssoGroup, userInfo) => {
   };
 };
 
-export const authorizationSuccess = (ssoGroup, userInfo) => {
+export const authorizationSuccess = (ssoGroup, userInfo, authCode) => {
   return {
     type: AUTHORIZATION.SUCCESS,
     payload: {
       ssoGroup,
       userInfo,
+      authCode,
     },
   };
 };

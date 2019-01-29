@@ -34,3 +34,17 @@ export const API = {
 export const SELF_SERVER_APP = {
   ROCKETCHAT: 'https://www.google.ca',
 };
+
+export const ROUTES = {
+  EMAIL: {
+    CONFIRM: 'confirm',
+    VERIFY: 'invite',
+  },
+};
+
+export const AUTH_CODE = {
+  NEW: 'new',
+  PENDING: 'pending',
+  AUTHORIZED: 'authorized',
+  REJECTED: 'rejected',
+};
