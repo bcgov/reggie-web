@@ -20,52 +20,65 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { BeatLoader } from 'react-spinners';
+import { css } from 'react-emotion';
+import { Redirect, Link } from 'react-router-dom';
 import { confirmEmail } from '../actionCreators';
 // import Loader from '../components/UI/Loader';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
 
 // Here to confirm if the user email in use is matching the account email:
 class Confirmation extends Component {
   static displayName = '[Component Confirmation]';
 
-  render() {
+  componentDidMount = () => {
     const emailJwt = localStorage.getItem('emailJwt');
-    // TODO: maybe redirect after?
-    const verifiedContent = this.props.confirmed ? (
-      <h5>Confirmed!</h5>
-    ) : (
-      <div>
-        <h5>Do you want to confirm registration for email: </h5>
-        <h5>{this.props.email}</h5>
-        <Button
-          bsStyle="primary"
-          onClick={() => {
-            this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
-          }}
-        >
-          Confirm
-        </Button>
-        <h4>{this.props.errorMessages[0]}</h4>
-      </div>
-    );
+    if (this.props.isAuthenticated && this.props.userId) {
+      if (
+        !this.props.confirmed &&
+        !this.props.verifyStarted &&
+        this.props.errorMessages.length === 0
+      ) {
+        this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
+      }
+    }
+  };
+
+  render() {
+    // Error message:
+    const errMsg =
+      this.props.errorMessages.length > 0 ? (
+        <div>
+          <div className="display-linebreak">{this.props.errorMessages[0]}</div>
+          <Link className="btn btn-primary" to="/registration">
+            Registration
+          </Link>
+        </div>
+      ) : null;
+
+    // verified action:
+    const verifiedRedirect = this.props.confirmed ? <Redirect to="/" /> : null;
+
+    // Loader:
+    // TODO: fix loader component!
     const override = css`
       display: block;
       margin: 0 auto;
       border-color: #003366;
     `;
-    const pageContent = this.props.verifyStarted ? (
-      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
-    ) : (
-      verifiedContent
-    );
+    const loader = this.props.verifyStarted ? (
+      <div>
+        <p>Verifying your email as {this.props.email}</p>
+        <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+      </div>
+    ) : null;
 
     return (
       <div>
         <h1>Welcome back</h1>
-        {pageContent}
+        {errMsg}
+        {loader}
+        {verifiedRedirect}
       </div>
     );
   }
@@ -73,6 +86,7 @@ class Confirmation extends Component {
 
 const mapStateToProps = state => {
   return {
+    isAuthenticated: state.authentication.isAuthenticated,
     email: state.authentication.email,
     userId: state.authentication.userId,
     verifyStarted: state.confirmEmail.verifyStarted,
