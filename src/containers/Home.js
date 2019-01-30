@@ -25,7 +25,7 @@ import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE } from '../constants';
+import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 
 // Here provides option to access different services/apps
 class Home extends Component {
@@ -34,7 +34,7 @@ class Home extends Component {
   componentDidUpdate = () => {
     if (this.props.isAuthenticated && this.props.userId) {
       if (this.props.userInfo.id === null && !this.props.isAuthorizing) {
-        this.props.authorize('rc', this.props.userId);
+        this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
       }
     }
   };
