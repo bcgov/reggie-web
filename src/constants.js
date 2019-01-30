@@ -35,6 +35,7 @@ export const SELF_SERVER_APP = {
   ROCKETCHAT: {
     URL: 'https://www.google.ca',
     NAME: 'rc',
+    INVITATION_CODE: 'rc',
   },
 };
 

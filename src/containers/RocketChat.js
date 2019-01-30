@@ -42,20 +42,19 @@ class RocketChat extends Component {
     const schema = {
       // title: 'Please register to continue',
       type: 'object',
-      required: ['invitationCode', 'email'],
+      required: ['email'],
       properties: {
         email: {
           type: 'string',
           format: 'email',
           title: 'Email to invite',
         },
-        invitationCode: { type: 'string', title: 'Invitation Code' },
       },
     };
 
     // TODO: disable button when in progress
     const onSubmit = ({ formData }) => {
-      this.props.inviteUser(this.props.userInfo.id, formData.email, formData.invitationCode);
+      this.props.inviteUser(this.props.userInfo.id, formData.email);
     };
 
     const onClick = () => {

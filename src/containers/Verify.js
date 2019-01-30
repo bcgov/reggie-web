@@ -42,7 +42,11 @@ class Verify extends Component {
     let invitationRedirect = null;
     // if user is matching the Rocket chat schema, redirect to registration directly:
     // TODO: update the check that uses isAuthorizing:
-    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.isAuthorizing) {
+    console.log('------------status!!');
+    console.log(this.props.authCode);
+    console.log(AUTH_CODE.REJECTED);
+    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.userInfo.id !== null) {
+      console.log('-------------this user is good');
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       invitationRedirect = <Redirect to="/registration" />;
@@ -51,19 +55,18 @@ class Verify extends Component {
     const emailJwt = localStorage.getItem('emailJwt');
     const schema = {
       type: 'object',
-      required: ['invitationCode', 'email'],
+      required: ['email'],
       properties: {
         email: {
           type: 'string',
           format: 'email',
-          title: 'Your Email Address',
+          title: 'Email',
         },
-        invitationCode: { type: 'string', title: 'Invitation Code' },
       },
     };
 
     const onSubmit = ({ formData }) => {
-      this.props.verifyEmail(this.props.userId, formData.email, formData.invitationCode, emailJwt);
+      this.props.verifyEmail(this.props.userId, formData.email, emailJwt);
     };
 
     const updatedContent = this.props.verfied ? (
@@ -75,7 +78,7 @@ class Verify extends Component {
       </div>
     ) : (
       <div>
-        <h5>Enter your email and the security code</h5>
+        <h5>Enter your email to verify invitation</h5>
         <Form schema={schema} onSubmit={onSubmit}>
           <Button type="submit" bsStyle="primary">
             Submit

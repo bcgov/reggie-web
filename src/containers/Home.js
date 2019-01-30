@@ -72,9 +72,7 @@ class Home extends Component {
     // Redirect based on Email:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) {
-        return <Redirect to="/confirmation" />;
-      }
+      if (intention === ROUTES.EMAIL.CONFIRM) return <Redirect to="/confirmation" />;
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
