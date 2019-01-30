@@ -71,13 +71,19 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
-        {/* External link */}
-        <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-          <Button bsStyle="primary">Go to Rocket Chat</Button>
-        </a>
-        <Button bsStyle="primary" onClick={onClick}>
-          Invite New User
-        </Button>
+        <div class="flex-container">
+          <div>
+            {/* External link */}
+            <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
+              <Button bsStyle="primary">Go to Rocket Chat</Button>
+            </a>
+          </div>
+          <div>
+            <Button bsStyle="primary" onClick={onClick}>
+              Invite New User
+            </Button>
+          </div>
+        </div>
         <JSForm
           formSchema={schema}
           toggled={this.state.toggled}
