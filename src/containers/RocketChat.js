@@ -81,7 +81,7 @@ class RocketChat extends Component {
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
         <p>Welcome to Rocket chat invite page</p>
-        <a href={SELF_SERVER_APP.ROCKETCHAT}>Rocket Chat Website</a>
+        <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>Rocket Chat Website</a>
         <Grid componentClass="main">
           <Row>
             <div className="col-4 mx-auto">{pageContent}</div>
