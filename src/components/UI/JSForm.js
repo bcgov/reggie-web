@@ -26,9 +26,9 @@ import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 import './JSForm.css';
 
-export const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
+const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
   // TODO: replace with toast for success
-  const successMsg = status.success ? <h5>Invitation sent!</h5> : null;
+  const successMsg = status.success ? <h5>Success!</h5> : null;
 
   // Loader:
   const override = css`
@@ -69,3 +69,5 @@ JSForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   status: PropTypes.object.isRequired,
 };
+
+export default JSForm;

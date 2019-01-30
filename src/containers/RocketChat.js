@@ -20,19 +20,18 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Grid, Row, Button } from 'react-bootstrap';
-import Form from 'react-jsonschema-form';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';
+import JSForm from '../components/UI/JSForm';
 
 // Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
 
   render() {
+    // Json Schema Form:
     const schema = {
       // title: 'Please register to continue',
       type: 'object',
@@ -51,42 +50,34 @@ class RocketChat extends Component {
       this.props.inviteUser(this.props.userInfo.id, formData.email, formData.invitationCode);
     };
 
-    const updatedContent = this.props.sent ? (
-      <h4>Invitation sent, please pass your invitation code in person!</h4>
-    ) : (
-      <div>
-        <h5>To invite new user, please provide the email and enter a security code</h5>
-        <Form schema={schema} onSubmit={onSubmit}>
-          <Button type="submit" bsStyle="primary">
-            Submit
-          </Button>
-          <h4>{this.props.errorMessages[0]}</h4>
-        </Form>
-      </div>
-    );
+    const onClick = () => {
+      console.log('------------clicked');
+    };
 
-    const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: #003366;
-    `;
+    const toggled = false;
 
-    const pageContent = this.props.invitationStarted ? (
-      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
-    ) : (
-      updatedContent
+    const formStatus = {
+      inProgress: this.props.invitationStarted,
+      success: this.props.sent,
+      errMsg: this.props.errorMessages,
+    };
+
+    const jsf = (
+      <JSForm formSchema={schema} toggled={toggled} onSubmit={onSubmit} status={formStatus} />
     );
 
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
-        <p>Welcome to Rocket chat invite page</p>
-        <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>Rocket Chat Website</a>
-        <Grid componentClass="main">
-          <Row>
-            <div className="col-4 mx-auto">{pageContent}</div>
-          </Row>
-        </Grid>
+        <p>Welcome to Rocket chat</p>
+        {/* External link */}
+        <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
+          <Button bsStyle="primary">Rocket Chat</Button>
+        </a>
+        <Button bsStyle="primary" onClick={onClick}>
+          Invite New User
+        </Button>
+        {jsf}
       </div>
     );
   }
