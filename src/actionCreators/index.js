@@ -39,7 +39,7 @@ import {
   verifyEmailSuccess,
   verifyEmailError,
 } from '../actions';
-import { API, AUTH_CODE } from '../constants';
+import { API, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 
 const axi = axios.create({
   baseURL: API.BASE_URL(),
@@ -98,9 +98,12 @@ export const updateUser = (userId, userProfile) => {
     axi
       .put(API.UPDATE_SSO_USER(userId), userProfile)
       .then(res => {
+        // Get the updated the current user info after the API request:
+        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
         return dispatch(updateUserSuccess());
       })
       .catch(err => {
+        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
         const errMsg = 'Fail to register your account, please try again.';
         return dispatch(updateUserError([errMsg]));
       });
@@ -113,14 +116,20 @@ export const confirmEmail = (userId, email, jwt) => {
     axi
       .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
       .then(res => {
+        // Get the updated the current user info after the API request:
+        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
         return dispatch(confirmEmailSuccess());
       })
       .catch(err => {
-        let errMsg = 'Fail to confirm your email, please register again.';
+        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
+        // Handle error message based on error code:
+        const hint = '\nPlease register again.';
+        let errMsg = 'Fail to confirm your email.';
         if (err.response) {
-          errMsg = `${err.response.data}. Please register again.`;
+          errMsg = err.response.data;
+          if (err.response.status === 500) errMsg = err.response.data.error;
         }
-        return dispatch(confirmEmailError([errMsg]));
+        return dispatch(confirmEmailError([errMsg.concat(hint)]));
       });
   };
 };
