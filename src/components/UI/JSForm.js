@@ -24,23 +24,29 @@ import { Grid, Row, Button } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 import './JSForm.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Toast message:
+const toastMsg = (status, msg) => {
+  if (!msg) return toast('Something went wrong!');
+  if (status) return toast.success(msg, { position: toast.POSITION.BOTTOM_CENTER });
+  return toast.error(msg, { position: toast.POSITION.BOTTOM_CENTER });
+};
+
+// Loader:
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #003366;
+`;
+const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
 
 const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
-  // TODO: replace with toast for success
-  const successMsg = status.success ? <h5>Success!</h5> : null;
-
-  // Loader:
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: #003366;
-  `;
-
-  const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
-
-  // Error Message:
-  const errMsg = status.errMsg.length > 0 ? <p>{status.errMsg[0]}</p> : null;
+  // Success or error message:
+  if (status.success) toastMsg(true, 'Success!');
+  if (status.errMsg.length > 0) toastMsg(false, status.errMsg[0]);
 
   // Form:
   const jsform = (
@@ -62,8 +68,7 @@ const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
 
   return (
     <div className={toggled ? 'jsform toggled' : 'jsform'}>
-      {errMsg}
-      {successMsg}
+      <ToastContainer />
       {formContent}
     </div>
   );
