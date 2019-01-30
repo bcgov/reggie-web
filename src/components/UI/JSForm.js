@@ -37,28 +37,34 @@ const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
     border-color: #003366;
   `;
 
-  const loader = status.inProgress ? (
-    <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
-  ) : null;
+  const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
 
+  // Error Message:
   const errMsg = status.errMsg.length > 0 ? <p>{status.errMsg[0]}</p> : null;
 
+  // Form:
+  const jsform = (
+    <Grid componentClass="main">
+      <Row>
+        <div className="col-4 mx-auto">
+          <Form schema={formSchema} onSubmit={onSubmit}>
+            <Button type="submit" bsStyle="primary">
+              Submit
+            </Button>
+          </Form>
+        </div>
+      </Row>
+    </Grid>
+  );
+
+  // Alter between form and loading indication:
+  const formContent = status.inProgress ? loader : jsform;
+
   return (
-    <div>
-      {loader}
-      <Grid componentClass="main" className={toggled ? 'form toggled' : 'form'}>
-        <Row>
-          <div className="col-4 mx-auto">
-            <Form schema={formSchema} onSubmit={onSubmit}>
-              <Button type="submit" bsStyle="primary">
-                Submit
-              </Button>
-            </Form>
-          </div>
-        </Row>
-      </Grid>
+    <div className={toggled ? 'jsform toggled' : 'jsform'}>
       {errMsg}
       {successMsg}
+      {formContent}
     </div>
   );
 };

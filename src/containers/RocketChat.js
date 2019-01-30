@@ -29,6 +29,13 @@ import JSForm from '../components/UI/JSForm';
 // Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
+  state = { toggled: false };
+
+  // TODO: check for user info, do authorization or redirect to home
+  // componentDidMount = () => {
+  //   if (this.props.userInfo.id === null) {
+  //   }
+  // };
 
   render() {
     // Json Schema Form:
@@ -46,15 +53,14 @@ class RocketChat extends Component {
       },
     };
 
+    // TODO: disable button when in progress
     const onSubmit = ({ formData }) => {
       this.props.inviteUser(this.props.userInfo.id, formData.email, formData.invitationCode);
     };
 
     const onClick = () => {
-      console.log('------------clicked');
+      this.setState({ toggled: !this.state.toggled });
     };
-
-    const toggled = false;
 
     const formStatus = {
       inProgress: this.props.invitationStarted,
@@ -62,22 +68,22 @@ class RocketChat extends Component {
       errMsg: this.props.errorMessages,
     };
 
-    const jsf = (
-      <JSForm formSchema={schema} toggled={toggled} onSubmit={onSubmit} status={formStatus} />
-    );
-
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
-        <p>Welcome to Rocket chat</p>
         {/* External link */}
         <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-          <Button bsStyle="primary">Rocket Chat</Button>
+          <Button bsStyle="primary">Go to Rocket Chat</Button>
         </a>
         <Button bsStyle="primary" onClick={onClick}>
           Invite New User
         </Button>
-        {jsf}
+        <JSForm
+          formSchema={schema}
+          toggled={this.state.toggled}
+          onSubmit={onSubmit}
+          status={formStatus}
+        />
       </div>
     );
   }
