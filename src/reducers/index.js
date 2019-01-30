@@ -126,26 +126,21 @@ const updateUser = (
   switch (action.type) {
     case UPDATE_USER.START:
       return {
-        ...state,
-        ...{
-          updateStarted: true,
-        },
+        updateStarted: true,
+        updated: false,
+        errorMessages: [],
       };
     case UPDATE_USER.SUCCESS:
       return {
-        ...state,
-        ...{
-          updateStarted: false,
-          updated: true,
-        },
+        updateStarted: false,
+        updated: true,
+        errorMessages: [],
       };
     case UPDATE_USER.ERROR:
       return {
-        ...state,
-        ...{
-          updateStarted: false,
-          errorMessages: action.payload.errorMessages,
-        },
+        updateStarted: false,
+        updated: false,
+        errorMessages: action.payload.errorMessages,
       };
     default:
       return state;
@@ -162,6 +157,7 @@ const confirmEmail = (
         ...state,
         ...{
           verifyStarted: true,
+          errorMessages: [],
         },
       };
     case CONFIRM_EMAIL.SUCCESS:
@@ -172,6 +168,7 @@ const confirmEmail = (
         ...{
           verifyStarted: false,
           confirmed: true,
+          errorMessages: [],
         },
       };
     case CONFIRM_EMAIL.ERROR:
@@ -196,26 +193,21 @@ const inviteUser = (
   switch (action.type) {
     case INIVITE_USER.START:
       return {
-        ...state,
-        ...{
-          invitationStarted: true,
-        },
+        invitationStarted: true,
+        sent: false,
+        errorMessages: [],
       };
     case INIVITE_USER.SUCCESS:
       return {
-        ...state,
-        ...{
-          invitationStarted: false,
-          sent: true,
-        },
+        invitationStarted: false,
+        sent: true,
+        errorMessages: [],
       };
     case INIVITE_USER.ERROR:
       return {
-        ...state,
-        ...{
-          invitationStarted: false,
-          errorMessages: action.payload.errorMessages,
-        },
+        invitationStarted: false,
+        sent: false,
+        errorMessages: action.payload.errorMessages,
       };
     default:
       return state;
@@ -229,30 +221,25 @@ const verifyEmail = (
   switch (action.type) {
     case VERIFY_EMAIL.START:
       return {
-        ...state,
-        ...{
-          verifyStarted: true,
-        },
+        verifyStarted: true,
+        verfied: false,
+        errorMessages: [],
       };
     case VERIFY_EMAIL.SUCCESS:
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          verfied: true,
-        },
+        verifyStarted: false,
+        verfied: true,
+        errorMessages: [],
       };
     case VERIFY_EMAIL.ERROR:
       localStorage.removeItem('emailJwt');
       localStorage.removeItem('emailIntention');
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          errorMessages: action.payload.errorMessages,
-        },
+        verifyStarted: false,
+        verfied: false,
+        errorMessages: action.payload.errorMessages,
       };
     default:
       return state;
