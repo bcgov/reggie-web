@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../../components/UI/Header';
+import { Header } from '../../components/UI/Header';
 
 describe('Header Component', () => {
   it('matches snapshot when authenticated', () => {
