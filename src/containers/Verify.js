@@ -38,18 +38,17 @@ class Verify extends Component {
     this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
   };
 
+  // Remove localstorage when done with the flow:
+  componentWillUnmount = () => {
+    localStorage.removeItem('emailJwt');
+    localStorage.removeItem('emailIntention');
+  };
+
   render() {
     let invitationRedirect = null;
-    // if user is matching the Rocket chat schema, redirect to registration directly:
-    // TODO: update the check that uses isAuthorizing:
-    console.log('------------status!!');
-    console.log(this.props.authCode);
-    console.log(AUTH_CODE.REJECTED);
+    // if user is matching the Rocket chat schema, redirect to home directly:
     if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.userInfo.id !== null) {
-      console.log('-------------this user is good');
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
-      invitationRedirect = <Redirect to="/registration" />;
+      invitationRedirect = <Redirect to="/" />;
     }
 
     const emailJwt = localStorage.getItem('emailJwt');
@@ -71,7 +70,7 @@ class Verify extends Component {
 
     const updatedContent = this.props.verfied ? (
       <div>
-        <h4>Verified, please register</h4>
+        <h4>Verified, please register your profile first (or straigt forward to registration?)</h4>
         <Link className="btn btn-primary" to="/registration">
           Registration
         </Link>
