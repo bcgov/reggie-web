@@ -21,7 +21,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
 import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
 import { JSForm } from '../components/UI/JSForm';
@@ -48,6 +48,8 @@ class Verify extends Component {
     if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.userInfo.id !== null) {
       invitationRedirect = <Redirect to="/" />;
     }
+    // After user verifies, go to registration:
+    if (this.props.verfied) invitationRedirect = <Redirect to="/registration" />;
 
     const emailJwt = localStorage.getItem('emailJwt');
     const schema = {
@@ -72,18 +74,12 @@ class Verify extends Component {
       failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
     };
 
-    const formContent = this.props.verfied ? (
-      <div>
-        <p>Verified, please register your profile first (TBD or straigt forward to registration?)</p>
-        <Link className="btn btn-primary" to="/registration">
-          Registration
-        </Link>
-      </div>
-    ) : (
-      <JSForm formSchema={schema} toggled={true} onSubmit={onSubmit} status={formStatus} />
-    );
-
-    const pageContent = this.props.userInfo.id === null ? Loader : formContent;
+    const pageContent =
+      this.props.userInfo.id === null ? (
+        Loader
+      ) : (
+        <JSForm formSchema={schema} toggled={true} onSubmit={onSubmit} status={formStatus} />
+      );
 
     return (
       <div>
