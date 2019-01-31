@@ -24,7 +24,8 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
 import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
-import { JSForm, loader } from '../components/UI/JSForm';
+import { JSForm } from '../components/UI/JSForm';
+import { Loader } from '../components/UI/Loader';
 
 // Here check if invited user is valid:
 class Verify extends Component {
@@ -82,7 +83,7 @@ class Verify extends Component {
       <JSForm formSchema={schema} toggled={true} onSubmit={onSubmit} status={formStatus} />
     );
 
-    const pageContent = this.props.userInfo.id === null ? loader : formContent;
+    const pageContent = this.props.userInfo.id === null ? Loader : formContent;
 
     return (
       <div>

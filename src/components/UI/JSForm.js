@@ -22,19 +22,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Button } from 'react-bootstrap';
 import Form from 'react-jsonschema-form';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
-import './JSForm.css';
 import 'react-toastify/dist/ReactToastify.css';
-
-// Loader:
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: #003366;
-`;
-export const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
+import { Loader } from './Loader';
+import './JSForm.css';
 
 /**
  * Json Schema Form
@@ -75,7 +66,7 @@ export const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
   );
 
   // Alter between form and loading indication:
-  const formContent = status.inProgress ? loader : jsform;
+  const formContent = status.inProgress ? Loader : jsform;
 
   return (
     <div className={toggled ? 'jsform toggled' : 'jsform'}>
