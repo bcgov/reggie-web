@@ -61,3 +61,7 @@ div {
 h1 {
   margin-bottom: 50px;
 }
+
+.display-linebreak {
+  white-space: pre-line;
+}

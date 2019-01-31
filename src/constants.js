@@ -32,7 +32,10 @@ export const API = {
 };
 
 export const SELF_SERVER_APP = {
-  ROCKETCHAT: 'https://www.google.ca',
+  ROCKETCHAT: {
+    URL: 'https://www.google.ca',
+    NAME: 'rc',
+  },
 };
 
 export const ROUTES = {

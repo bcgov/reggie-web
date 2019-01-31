@@ -27,7 +27,7 @@ import Form from 'react-jsonschema-form';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 import { authorize, verifyEmail } from '../actionCreators';
-import { AUTH_CODE } from '../constants';
+import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
 
 // Here check if invited user is valid:
 class Verify extends Component {
@@ -35,7 +35,7 @@ class Verify extends Component {
 
   // check for authorization status first:
   componentWillMount = () => {
-    this.props.authorize('rc', this.props.userId);
+    this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
   };
 
   render() {
