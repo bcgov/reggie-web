@@ -34,7 +34,7 @@ const override = css`
   margin: 0 auto;
   border-color: #003366;
 `;
-const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
+export const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
 
 /**
  * Json Schema Form
@@ -45,7 +45,7 @@ const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#0033
  * @param {Object} status The form submission status: in process, successful or failed msg
  * @return {Object} The form
  */
-const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
+export const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
   // Success or error message:
   if (status.successMsg)
     toast.success(status.successMsg, {
@@ -92,4 +92,4 @@ JSForm.propTypes = {
   status: PropTypes.object.isRequired,
 };
 
-export default JSForm;
+// export default JSForm;
