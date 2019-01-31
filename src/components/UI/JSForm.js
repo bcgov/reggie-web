@@ -28,13 +28,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import './JSForm.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Toast message:
-const toastMsg = (status, msg) => {
-  if (!msg) return toast('Something went wrong!');
-  if (status) return toast.success(msg, { position: toast.POSITION.BOTTOM_CENTER });
-  return toast.error(msg, { position: toast.POSITION.BOTTOM_CENTER });
-};
-
 // Loader:
 const override = css`
   display: block;
@@ -43,10 +36,28 @@ const override = css`
 `;
 const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
 
+/**
+ * Json Schema Form
+ *
+ * @param {Object} formSchema The schema to pass into the form
+ * @param {boolean} toggled Display the whole form or not
+ * @param {Function} onSubmit The action upon clicking submit button
+ * @param {Object} status The form submission status: in process, successful or failed msg
+ * @return {Object} The form
+ */
 const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
   // Success or error message:
-  if (status.success) toastMsg(true, 'Success!');
-  if (status.errMsg.length > 0) toastMsg(false, status.errMsg[0]);
+  if (status.successMsg)
+    toast.success(status.successMsg, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+  // TODO: fix the issue as this get triggered twice, use active check for now
+  if (status.failureMsg && !toast.isActive('failToast')) {
+    toast.error(status.failureMsg, {
+      position: toast.POSITION.BOTTOM_CENTER,
+      toastId: 'failToast',
+    });
+  }
 
   // Form:
   const jsform = (
