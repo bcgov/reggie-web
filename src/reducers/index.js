@@ -161,8 +161,6 @@ const confirmEmail = (
         },
       };
     case CONFIRM_EMAIL.SUCCESS:
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
       return {
         ...state,
         ...{
@@ -172,8 +170,6 @@ const confirmEmail = (
         },
       };
     case CONFIRM_EMAIL.ERROR:
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
       return {
         ...state,
         ...{
@@ -226,16 +222,12 @@ const verifyEmail = (
         errorMessages: [],
       };
     case VERIFY_EMAIL.SUCCESS:
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
       return {
         verifyStarted: false,
         verfied: true,
         errorMessages: [],
       };
     case VERIFY_EMAIL.ERROR:
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
       return {
         verifyStarted: false,
         verfied: false,

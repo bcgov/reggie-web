@@ -44,6 +44,12 @@ class Confirmation extends Component {
     }
   };
 
+  // Remove localstorage when done with the flow:
+  componentWillUnmount = () => {
+    localStorage.removeItem('emailJwt');
+    localStorage.removeItem('emailIntention');
+  };
+
   render() {
     // Error message:
     const errMsg =

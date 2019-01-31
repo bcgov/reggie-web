@@ -129,7 +129,7 @@ export const confirmEmail = (userId, email, jwt) => {
           errMsg = err.response.data;
           if (err.response.status === 500) errMsg = err.response.data.error;
         }
-        return dispatch(confirmEmailError([errMsg.concat(hint)]));
+        return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
       });
   };
 };
