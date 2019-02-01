@@ -138,9 +138,9 @@ parameters:
   name: HOST
   required: false
   value: ''
-- description: A base url of sso in the env
-  displayName: sso base URL
-  name: SSO_BASE_URL_VALUE
+- description: A base url of reggie api
+  displayName: host of reggie api
+  name: API_BASE_URL_VALUE
   required: false
   value: ''
 - description: A volumn used for the caddy from config map

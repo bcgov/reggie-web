@@ -11,12 +11,21 @@ module.exports = (settings)=>{
   const buildNamespace = 'devhub-tools'
   const buildVersion = '1.0.0'
   const deploymentVersion = `${oc.options.env}-1.0.0`
+  // remove pr in prefix for test and prod environemnt:
+  const projectPrefix = oc.options.env === "dev" ? `-${oc.options.env}-${oc.options.pr}` : `-${oc.options.env}`
+
+  const extraParam = {
+    API_BASE_URL_VALUE: `https://reggie-api${projectPrefix}-devhub-${oc.options.env}.pathfinder.gov.bc.ca`,
+  }
 
   var objects = oc.process(oc.toFileUrl(templateFile), {
     'param':{
-      'NAME':appName,
-      'SUFFIX':`-${oc.options.env}-${oc.options.pr}`,
-      'VERSION':`${deploymentVersion}`
+      ...{
+        'NAME':appName,
+        'SUFFIX':projectPrefix,
+        'VERSION':`${deploymentVersion}`
+      },
+      ...extraParam,
     }
   })
 
@@ -24,6 +33,6 @@ module.exports = (settings)=>{
   oc.applyRecommendedLabels(objects, appName, oc.options.env, oc.options.pr)
   oc.fetchSecretsAndConfigMaps(objects)
   oc.importImageStreams(objects, deploymentVersion, buildNamespace, buildVersion)
-  oc.applyAndDeploy(objects, `${appName}-${oc.options.env}-${oc.options.pr}`)
+  oc.applyAndDeploy(objects, `${appName}${projectPrefix}`)
 
 }
