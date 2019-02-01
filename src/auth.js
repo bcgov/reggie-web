@@ -29,6 +29,12 @@ const config = {
   clientId: 'reggie-web',
 };
 
+// const config = {
+//   baseURL: '{{.Env.SSO_BASE_URL}}',
+//   realmName: '{{.Env.SSO_REALM_NAME}}',
+//   clientId: '{{.Env.SSO_CLIENT_ID}}',
+// };
+
 const iam = new ImplicitAuthManager(config);
 
 export default iam;

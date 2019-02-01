@@ -43,10 +43,11 @@ class Home extends Component {
     // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
     const intention = localStorage.getItem('emailIntention');
+    const testIt = '{{.Env.API_BASE_URL}}';
 
     // Set the rendering content based on authentication and authorization:
     const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to SSO to proceed ******to test pipeline</p>
+      <p>Please log in to SSO to proceed {testIt}</p>
     );
 
     // Error message:
