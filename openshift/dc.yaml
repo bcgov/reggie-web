@@ -10,7 +10,7 @@ objects:
   kind: ImageStream
   metadata:
     creationTimestamp: null
-    name: ${NAME}
+    name: ${NAME}-static
   spec:
     lookupPolicy:
       local: false
@@ -18,11 +18,11 @@ objects:
   kind: DeploymentConfig
   metadata:
     creationTimestamp: null
-    name: ${NAME}${SUFFIX}
+    name: ${NAME}-static${SUFFIX}
   spec:
     replicas: 2
     selector:
-      deploymentconfig: ${NAME}${SUFFIX}
+      deploymentconfig: ${NAME}-static${SUFFIX}
     strategy:
       resources:
         requests:
@@ -33,13 +33,15 @@ objects:
       metadata:
         creationTimestamp: null
         labels:
-          deploymentconfig: ${NAME}${SUFFIX}
+          deploymentconfig: ${NAME}-static${SUFFIX}
       spec:
         containers:
-        - image: ${NAME}:${VERSION}
+        - image: ${NAME}-static:${VERSION}
           name: reggie-web
+          args:
+          - /tmp/scripts/run
           ports:
-          - containerPort: 3000
+          - containerPort: 2015
             protocol: TCP
           resources:
             requests:
@@ -48,13 +50,32 @@ objects:
               cpu: '150m'
           env:
           - name: SSO_BASE_URL
-            value: ${SSO_BASE_URL_VALUE}
+            valueFrom:
+              secretKeyRef:
+                name: reggie-web-sso-account
+                key: SSO_ACCOUNT_HOST_URL
           - name: SSO_REALM_NAME
-            value: ${SSO_REALM_NAME_VALUE}
+            valueFrom:
+              secretKeyRef:
+                name: reggie-web-sso-account
+                key: SSO_REALM
           - name: SSO_CLIENT_ID
-            value: ${SSO_CLIENT_ID_VALUE}
+            valueFrom:
+              secretKeyRef:
+                name: reggie-web-sso-account
+                key: SSO_CLIENT_ID
           - name: API_BASE_URL
             value: ${API_BASE_URL_VALUE}
+          volumeMounts:
+          - name: ${VOLUMN_NAME}
+            mountPath: /etc/Caddyfile
+            readOnly: true
+            subPath: Caddyfile
+        volumes:
+        - name: ${VOLUMN_NAME}
+          configMap:
+            defaultMode: 420
+            name: ${NAME}-caddy
     test: false
     triggers:
     - type: ConfigChange
@@ -64,26 +85,26 @@ objects:
         - reggie-web
         from:
           kind: ImageStreamTag
-          name: ${NAME}:${VERSION}
+          name: ${NAME}-static:${VERSION}
       type: ImageChange
 - apiVersion: v1
   kind: Service
   metadata:
     creationTimestamp: null
-    name: ${NAME}${SUFFIX}
+    name: ${NAME}-static${SUFFIX}
   spec:
     ports:
     - name: web
-      port: 3000
+      port: 2015
       protocol: TCP
-      targetPort: 3000
+      targetPort: 2015
     selector:
-      deploymentconfig: ${NAME}${SUFFIX}
+      deploymentconfig: ${NAME}-static${SUFFIX}
 - apiVersion: route.openshift.io/v1
   kind: Route
   metadata:
     creationTimestamp: null
-    name: ${NAME}${SUFFIX}
+    name: ${NAME}-static${SUFFIX}
   spec:
     host:
     port:
@@ -93,7 +114,7 @@ objects:
       termination: edge
     to:
       kind: Service
-      name: ${NAME}${SUFFIX}
+      name: ${NAME}-static${SUFFIX}
       weight: 100
     wildcardPolicy: None
 parameters:
@@ -112,24 +133,19 @@ parameters:
   name: VERSION
   required: true
   value: v1.0.0
+- description: A name used for routes/services and deployment configs
+  displayName: Host
+  name: HOST
+  required: false
+  value: ''
 - description: A base url of sso in the env
   displayName: sso base URL
   name: SSO_BASE_URL_VALUE
   required: false
   value: ''
-- description: A sso client id in the env
-  displayName: sso client id
-  name: SSO_CLIENT_ID_VALUE
+- description: A volumn used for the caddy from config map
+  displayName: volumn name
+  name: VOLUMN_NAME
   required: false
-  value: ''
-- description: A sso realm name in the env
-  displayName: sso realm name
-  name: SSO_REALM_NAME_VALUE
-  required: false
-  value: ''
-- description: The url to reggie api
-  displayName: Reggie api
-  name: API_BASE_URL_VALUE
-  required: false
-  value: ''
+  value: web-caddy-config
   
