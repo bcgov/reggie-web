@@ -12,24 +12,6 @@ objects:
     creationTimestamp: null
     labels:
       shared: true
-    name: rhscl-nodejs-8-rhel7
-  spec:
-    lookupPolicy:
-      local: false
-    tags:
-    - name: 8.1-22
-      from:
-        kind: DockerImage
-        name: 'registry.access.redhat.com/rhscl/nodejs-8-rhel7:1-22'
-      importPolicy: {}
-      referencePolicy:
-        type: Source
-- apiVersion: v1
-  kind: ImageStream
-  metadata:
-    creationTimestamp: null
-    labels:
-      shared: true
     name: ${NAME}
   spec:
     lookupPolicy:
