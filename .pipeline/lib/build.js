@@ -7,7 +7,6 @@ module.exports = (settings)=>{
   var templateFile = path.resolve(__dirname, '../../openshift/bc.yaml')
   
   const appName = 'reggie-web'
-  oc.git.uri = 'https://github.com/bcgov/reggie-web.git'
 
   var objects = oc.process(oc.toFileUrl(templateFile), {
     'param':{
@@ -15,7 +14,6 @@ module.exports = (settings)=>{
       'SUFFIX':`-${oc.options.pr}`,
       'VERSION':'1.0.0',
       'SOURCE_REPOSITORY_URL':`${oc.git.uri}`,
-      // 'SOURCE_REPOSITORY_URL':`${oc.git.http_url}`,
       'SOURCE_REPOSITORY_REF':`${oc.git.branch_ref}`
     }
   })
