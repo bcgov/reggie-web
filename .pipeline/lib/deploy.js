@@ -15,7 +15,7 @@ module.exports = (settings)=>{
   const projectPrefix = oc.options.env === "dev" ? `-${oc.options.env}-${oc.options.pr}` : `-${oc.options.env}`
 
   const extraParam = {
-    API_BASE_URL_VALUE: `https://reggie-api${projectPrefix}-devhub-${oc.options.env}.pathfinder.gov.bc.ca`,
+    API_BASE_URL_VALUE: oc.options.env === "prod" ? 'https://reggie-api-prod-devhub-prod.pathfinder.gov.bc.ca': 'https://reggie-api-test-devhub-test.pathfinder.gov.bc.ca',
   }
 
   var objects = oc.process(oc.toFileUrl(templateFile), {

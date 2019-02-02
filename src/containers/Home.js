@@ -47,7 +47,7 @@ class Home extends Component {
 
     // Set the rendering content based on authentication and authorization:
     const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to SSO to proceed {testIt}</p>
+      <p>Please log in to SSO to proceed - {testIt} - </p>
     );
 
     // Error message:
