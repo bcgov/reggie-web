@@ -21,19 +21,10 @@
 import { ImplicitAuthManager } from '@bcgov/common-web-utils';
 
 const config = {
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? 'https://sso.pathfinder.gov.bc.ca'
-      : 'https://sso-dev.pathfinder.gov.bc.ca',
-  realmName: 'devhub',
-  clientId: 'reggie-web',
+  baseURL: '{{.Env.SSO_BASE_URL}}',
+  realmName: '{{.Env.SSO_REALM_NAME}}',
+  clientId: '{{.Env.SSO_CLIENT_ID}}',
 };
-
-// const config = {
-//   baseURL: '{{.Env.SSO_BASE_URL}}',
-//   realmName: '{{.Env.SSO_REALM_NAME}}',
-//   clientId: '{{.Env.SSO_CLIENT_ID}}',
-// };
 
 const iam = new ImplicitAuthManager(config);
 
