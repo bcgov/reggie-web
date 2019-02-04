@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
 import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
-import { JSForm } from '../components/UI/JSForm';
+import { BaseForm } from '../components/UI/BaseForm';
 import { Loader } from '../components/UI/Loader';
 
 // Here check if invited user is valid:
@@ -81,7 +81,7 @@ class Verify extends Component {
       this.props.userInfo.id === null ? (
         Loader
       ) : (
-        <JSForm
+        <BaseForm
           formSchema={schema}
           toggled={true}
           onSubmit={onSubmit}

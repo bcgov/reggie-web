@@ -24,7 +24,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';
-import { JSForm } from '../components/UI/JSForm';
+import { BaseForm } from '../components/UI/BaseForm';
 
 // Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
@@ -86,7 +86,7 @@ class RocketChat extends Component {
             </Button>
           </div>
         </div>
-        <JSForm
+        <BaseForm
           formSchema={schema}
           toggled={this.state.toggled}
           onSubmit={onSubmit}

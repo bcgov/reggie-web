@@ -22,7 +22,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateUser } from '../actionCreators';
-import { JSForm } from '../components/UI/JSForm';
+import { BaseForm } from '../components/UI/BaseForm';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
@@ -60,7 +60,7 @@ class Registration extends Component {
     const formContent = this.props.updated ? (
       <p>Thank you for registering, please check your email!</p>
     ) : (
-      <JSForm
+      <BaseForm
         formSchema={schema}
         toggled={true}
         onSubmit={onSubmit}

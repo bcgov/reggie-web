@@ -25,7 +25,7 @@ import Form from 'react-jsonschema-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader';
-import './JSForm.css';
+import './BaseForm.css';
 
 /**
  * Json Schema Form
@@ -37,7 +37,7 @@ import './JSForm.css';
  * @param {Object} messages The successful or failed msg
  * @return {Object} The form
  */
-export const JSForm = ({ formSchema, toggled, onSubmit, status, messages }) => {
+export const BaseForm = ({ formSchema, toggled, onSubmit, status, messages }) => {
   // Success or error message:
   if (messages.successMsg)
     toast.success(messages.successMsg, {
@@ -77,7 +77,7 @@ export const JSForm = ({ formSchema, toggled, onSubmit, status, messages }) => {
   );
 };
 
-JSForm.propTypes = {
+BaseForm.propTypes = {
   formSchema: PropTypes.object.isRequired,
   toggled: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
