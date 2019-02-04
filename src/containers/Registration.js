@@ -51,13 +51,22 @@ class Registration extends Component {
 
     const formStatus = {
       inProgress: this.props.updateStarted,
+    };
+
+    const formMessages = {
       failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
     };
 
     const formContent = this.props.updated ? (
       <p>Thank you for registering, please check your email!</p>
     ) : (
-      <JSForm formSchema={schema} toggled={true} onSubmit={onSubmit} status={formStatus} />
+      <JSForm
+        formSchema={schema}
+        toggled={true}
+        onSubmit={onSubmit}
+        status={formStatus}
+        messages={formMessages}
+      />
     );
 
     return (

@@ -33,18 +33,19 @@ import './JSForm.css';
  * @param {Object} formSchema The schema to pass into the form
  * @param {boolean} toggled Display the whole form or not
  * @param {Function} onSubmit The action upon clicking submit button
- * @param {Object} status The form submission status: in process, successful or failed msg
+ * @param {Object} status The form submission status: in process (maybe other status)
+ * @param {Object} messages The successful or failed msg
  * @return {Object} The form
  */
-export const JSForm = ({ formSchema, toggled, onSubmit, status }) => {
+export const JSForm = ({ formSchema, toggled, onSubmit, status, messages }) => {
   // Success or error message:
-  if (status.successMsg)
-    toast.success(status.successMsg, {
+  if (messages.successMsg)
+    toast.success(messages.successMsg, {
       position: toast.POSITION.BOTTOM_CENTER,
     });
   // TODO: fix the issue as this get triggered twice, use active check for now
-  if (status.failureMsg && !toast.isActive('failToast')) {
-    toast.error(status.failureMsg, {
+  if (messages.failureMsg && !toast.isActive('failToast')) {
+    toast.error(messages.failureMsg, {
       position: toast.POSITION.BOTTOM_CENTER,
       toastId: 'failToast',
     });
@@ -81,6 +82,5 @@ JSForm.propTypes = {
   toggled: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   status: PropTypes.object.isRequired,
+  messages: PropTypes.object.isRequired,
 };
-
-// export default JSForm;

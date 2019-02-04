@@ -71,6 +71,9 @@ class Verify extends Component {
 
     const formStatus = {
       inProgress: this.props.verifyStarted,
+    };
+
+    const formMessages = {
       failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
     };
 
@@ -78,7 +81,13 @@ class Verify extends Component {
       this.props.userInfo.id === null ? (
         Loader
       ) : (
-        <JSForm formSchema={schema} toggled={true} onSubmit={onSubmit} status={formStatus} />
+        <JSForm
+          formSchema={schema}
+          toggled={true}
+          onSubmit={onSubmit}
+          status={formStatus}
+          messages={formMessages}
+        />
       );
 
     return (

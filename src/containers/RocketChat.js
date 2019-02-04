@@ -63,6 +63,9 @@ class RocketChat extends Component {
 
     const formStatus = {
       inProgress: this.props.invitationStarted,
+    };
+
+    const formMessages = {
       successMsg: this.props.sent ? 'Invitation Sent!' : null,
       failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
     };
@@ -88,6 +91,7 @@ class RocketChat extends Component {
           toggled={this.state.toggled}
           onSubmit={onSubmit}
           status={formStatus}
+          messages={formMessages}
         />
       </div>
     );
