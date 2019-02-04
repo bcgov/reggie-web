@@ -31,12 +31,6 @@ class RocketChat extends Component {
   static displayName = '[Component RocketChat]';
   state = { toggled: false };
 
-  // TODO: check for user info, do authorization or redirect to home
-  // componentDidMount = () => {
-  //   if (this.props.userInfo.id === null) {
-  //   }
-  // };
-
   render() {
     // Json Schema Form:
     const schema = {
