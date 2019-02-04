@@ -27,7 +27,7 @@ const titleForAuthenticationState = isAuthenticated => (isAuthenticated ? 'Logou
 
 const linkForAuthenticationState = isAuthenticated => (isAuthenticated ? '/logout' : '/login');
 
-const AuthButton = ({ isAuthenticated }) => {
+export const AuthButton = ({ isAuthenticated }) => {
   return (
     <span>
       <Link className="auth-button" to={linkForAuthenticationState(isAuthenticated)}>

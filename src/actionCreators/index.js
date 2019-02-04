@@ -129,12 +129,16 @@ export const confirmEmail = (userId, email, jwt) => {
           errMsg = err.response.data;
           if (err.response.status === 500) errMsg = err.response.data.error;
         }
-        return dispatch(confirmEmailError([errMsg.concat(hint)]));
+        return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
       });
   };
 };
-
-export const inviteUser = (userId, email, invitationCode) => {
+// Using a fix code for now as place holder: https://github.com/axios/axios/issues/1104
+export const inviteUser = (
+  userId,
+  email,
+  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE
+) => {
   return dispatch => {
     dispatch(inviteUserStart());
     axi
@@ -150,14 +154,19 @@ export const inviteUser = (userId, email, invitationCode) => {
   };
 };
 
-export const verifyEmail = (userId, email, code, jwt) => {
+export const verifyEmail = (
+  userId,
+  email,
+  jwt,
+  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE // Same as above
+) => {
   return dispatch => {
     dispatch(verifyEmailStart());
     axi
       .get(API.VERIFY_SSO_USER(userId), {
         params: {
           email,
-          code,
+          code: invitationCode,
           token: jwt,
         },
       })
@@ -165,7 +174,7 @@ export const verifyEmail = (userId, email, code, jwt) => {
         return dispatch(verifyEmailSuccess());
       })
       .catch(err => {
-        let errMsg = 'Your email + code pair is invalid.';
+        let errMsg = 'Your invitation link is invalid, please get inivted again';
         return dispatch(verifyEmailError([errMsg]));
       });
   };

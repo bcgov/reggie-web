@@ -21,13 +21,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Row, Button } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
-import Form from 'react-jsonschema-form';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
+import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
 import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
+import { BaseForm } from '../components/UI/BaseForm';
+import { Loader } from '../components/UI/Loader';
 
 // Here check if invited user is valid:
 class Verify extends Component {
@@ -38,72 +36,59 @@ class Verify extends Component {
     this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
   };
 
+  // Remove localstorage when done with the flow:
+  componentWillUnmount = () => {
+    localStorage.removeItem('emailJwt');
+    localStorage.removeItem('emailIntention');
+  };
+
   render() {
     let invitationRedirect = null;
-    // if user is matching the Rocket chat schema, redirect to registration directly:
-    // TODO: update the check that uses isAuthorizing:
-    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.isAuthorizing) {
-      localStorage.removeItem('emailJwt');
-      localStorage.removeItem('emailIntention');
-      invitationRedirect = <Redirect to="/registration" />;
+    // if user is matching the Rocket chat schema, redirect to home directly:
+    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.userInfo.id !== null) {
+      invitationRedirect = <Redirect to="/" />;
     }
+    // After user verifies, go to registration:
+    if (this.props.verfied) invitationRedirect = <Redirect to="/registration" />;
 
     const emailJwt = localStorage.getItem('emailJwt');
     const schema = {
+      title: 'Enter your email address',
       type: 'object',
-      required: ['invitationCode', 'email'],
+      required: ['email'],
       properties: {
         email: {
           type: 'string',
           format: 'email',
-          title: 'Your Email Address',
+          title: 'Email',
         },
-        invitationCode: { type: 'string', title: 'Invitation Code' },
       },
     };
 
     const onSubmit = ({ formData }) => {
-      this.props.verifyEmail(this.props.userId, formData.email, formData.invitationCode, emailJwt);
+      this.props.verifyEmail(this.props.userId, formData.email, emailJwt);
     };
 
-    const updatedContent = this.props.verfied ? (
-      <div>
-        <h4>Verified, please register</h4>
-        <Link className="btn btn-primary" to="/registration">
-          Registration
-        </Link>
-      </div>
-    ) : (
-      <div>
-        <h5>Enter your email and the security code</h5>
-        <Form schema={schema} onSubmit={onSubmit}>
-          <Button type="submit" bsStyle="primary">
-            Submit
-          </Button>
-          <h4>{this.props.errorMessages[0]}</h4>
-        </Form>
-      </div>
-    );
+    const formStatus = {
+      inProgress: this.props.verifyStarted,
+    };
 
-    const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: #003366;
-    `;
+    const formMessages = {
+      failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
+    };
 
-    const loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;
-
-    const loadedContent = this.props.verifyStarted ? (
-      loader
-    ) : (
-      <Grid componentClass="main">
-        <Row>
-          <div className="col-4 mx-auto">{updatedContent}</div>
-        </Row>
-      </Grid>
-    );
-
-    const pageContent = this.props.userInfo.id === null ? loader : loadedContent;
+    const pageContent =
+      this.props.userInfo.id === null ? (
+        Loader
+      ) : (
+        <BaseForm
+          formSchema={schema}
+          toggled={true}
+          onSubmit={onSubmit}
+          status={formStatus}
+          messages={formMessages}
+        />
+      );
 
     return (
       <div>

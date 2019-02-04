@@ -20,13 +20,9 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Grid, Row, Button } from 'react-bootstrap';
-import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 import { updateUser } from '../actionCreators';
-// import Loader from '../components/UI/Loader';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
+import { BaseForm } from '../components/UI/BaseForm';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
@@ -53,37 +49,31 @@ class Registration extends Component {
       this.props.updateUser(this.props.userInfo.id, formData);
     };
 
-    const updatedContent = this.props.updated ? (
-      <h4>Thank you for registering, please check your email!</h4>
-    ) : (
-      <Form schema={schema} onSubmit={onSubmit}>
-        <Button type="submit" bsStyle="primary">
-          Submit
-        </Button>
-        <h4>{this.props.errorMessages[0]}</h4>
-      </Form>
-    );
+    const formStatus = {
+      inProgress: this.props.updateStarted,
+    };
 
-    const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: #003366;
-    `;
+    const formMessages = {
+      failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
+    };
 
-    const pageContent = this.props.updateStarted ? (
-      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+    const formContent = this.props.updated ? (
+      <p>Thank you for registering, please check your email!</p>
     ) : (
-      updatedContent
+      <BaseForm
+        formSchema={schema}
+        toggled={true}
+        onSubmit={onSubmit}
+        status={formStatus}
+        messages={formMessages}
+      />
     );
 
     return (
       <div>
         <h1>Rocket Chat Registration</h1>
-        <Grid componentClass="main">
-          <Row>
-            <div className="col-4 mx-auto">{pageContent}</div>
-          </Row>
-        </Grid>
+        <p>You are almost there, we just need to know some details about you!</p>
+        {formContent}
       </div>
     );
   }
