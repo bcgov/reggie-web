@@ -22,18 +22,10 @@ import React from 'react';
 import { css } from 'react-emotion';
 import { BeatLoader } from 'react-spinners';
 
+// Loader:
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: #003366;
 `;
-
-const Loader = (loading = true, color = '#003366') => {
-  return (
-    <div className="loader">
-      <BeatLoader css={override} sizeUnit={'px'} size={30} color={color} loading={loading} />
-    </div>
-  );
-};
-
-export default Loader;
+export const Loader = <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />;

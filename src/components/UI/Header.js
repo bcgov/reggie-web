@@ -26,7 +26,7 @@ import AuthButton from '../AuthButton/AuthButton';
 import logo from './bcgovlogo.svg';
 import './Header.css';
 
-const Header = ({ authentication }) => {
+export const Header = ({ authentication }) => {
   return (
     <header className="header">
       <div className="banner">

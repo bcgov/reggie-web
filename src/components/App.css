@@ -65,3 +65,12 @@ h1 {
 .display-linebreak {
   white-space: pre-line;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container > div {
+  margin: 0 10px;
+}

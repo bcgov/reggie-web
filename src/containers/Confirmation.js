@@ -21,11 +21,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { BeatLoader } from 'react-spinners';
-import { css } from 'react-emotion';
 import { Redirect, Link } from 'react-router-dom';
 import { confirmEmail } from '../actionCreators';
-// import Loader from '../components/UI/Loader';
+import { Loader } from '../components/UI/Loader';
 
 // Here to confirm if the user email in use is matching the account email:
 class Confirmation extends Component {
@@ -44,6 +42,12 @@ class Confirmation extends Component {
     }
   };
 
+  // Remove localstorage when done with the flow:
+  componentWillUnmount = () => {
+    localStorage.removeItem('emailJwt');
+    localStorage.removeItem('emailIntention');
+  };
+
   render() {
     // Error message:
     const errMsg =
@@ -59,17 +63,11 @@ class Confirmation extends Component {
     // verified action:
     const verifiedRedirect = this.props.confirmed ? <Redirect to="/" /> : null;
 
-    // Loader:
-    // TODO: fix loader component!
-    const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: #003366;
-    `;
-    const loader = this.props.verifyStarted ? (
+    // loading content:
+    const loadingContent = this.props.verifyStarted ? (
       <div>
         <p>Verifying your email as {this.props.email}</p>
-        <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
+        {Loader}
       </div>
     ) : null;
 
@@ -77,7 +75,7 @@ class Confirmation extends Component {
       <div>
         <h1>Welcome back</h1>
         {errMsg}
-        {loader}
+        {loadingContent}
         {verifiedRedirect}
       </div>
     );

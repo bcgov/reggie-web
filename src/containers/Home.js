@@ -21,11 +21,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { css } from 'react-emotion';
-import { BeatLoader } from 'react-spinners';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
 import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
+import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
 class Home extends Component {
@@ -46,22 +45,12 @@ class Home extends Component {
 
     // Set the rendering content based on authentication and authorization:
     const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to SSO to proceed</p>
+      <p>Please log in to proceed</p>
     );
 
     // Error message:
     const errMsg =
       this.props.errorMessages.length > 0 ? <p>{this.props.errorMessages[0]}</p> : null;
-
-    // Loader:
-    const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: #003366;
-    `;
-    const loader = this.props.isAuthorizing ? (
-      <BeatLoader css={override} sizeUnit={'px'} size={25} color="#003366" />
-    ) : null;
 
     /*
       if there exist email payloads in localstorage, go to confirmation page
@@ -72,9 +61,7 @@ class Home extends Component {
     // Redirect based on Email:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) {
-        return <Redirect to="/confirmation" />;
-      }
+      if (intention === ROUTES.EMAIL.CONFIRM) return <Redirect to="/confirmation" />;
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
@@ -108,12 +95,14 @@ class Home extends Component {
         ? setAuthorizationRedirect(this.props.authCode)
         : null;
 
+    const loadingContent = this.props.isAuthorizing ? Loader : null;
+
     return (
       <div className="authed">
         <h1>Welcome to Reggie web</h1>
         {authenticationContent}
         {errMsg}
-        {loader}
+        {loadingContent}
         {emailRedirect}
         {authorizeRedirect}
       </div>
