@@ -19,10 +19,7 @@
 //
 
 export const API = {
-  BASE_URL: () =>
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8000/api/v1/'
-      : '{{.Env.API_BASE_URL}}/api/v1/',
+  BASE_URL: () => '{{.Env.API_BASE_URL}}/api/v1/',
   GET_SSO_USER: userId => `sso/user/${userId}`,
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
