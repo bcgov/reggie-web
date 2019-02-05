@@ -101,7 +101,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web *** test the difference ***</h1>
+        <h1>Welcome to Reggie web *** test the difference 2 ***</h1>
         <h1>test the env {baseurl}</h1>
         {authenticationContent}
         {errMsg}
