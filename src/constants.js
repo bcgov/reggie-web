@@ -21,13 +21,19 @@
 import config from './config.json';
 
 export const API = {
-  BASE_URL: process.env.REACT_APP_API_BASE_URL || config.API_BASE_URL,
+  BASE_URL: `${process.env.REACT_APP_API_BASE_URL}/api/v1/` || `${config.API_BASE_URL}/api/v1/`,
   GET_SSO_USER: userId => `sso/user/${userId}`,
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   INVITE_USER: userId => `sso/user/invite/${userId}`,
   VERIFY_SSO_USER: userId => `sso/user/verify/${userId}`,
   TIME_OUT: 40000,
+};
+
+export const SSO_CONFIG = {
+  baseURL: process.env.REACT_APP_SSO_BASE_URL || config.ssoBaseUrl,
+  realmName: process.env.REACT_APP_SSO_REALM_NAME || config.ssoRealmName,
+  clientId: process.env.REACT_APP_SSO_CLIENT_ID || config.ssoClientId,
 };
 
 export const SELF_SERVER_APP = {

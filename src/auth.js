@@ -19,13 +19,8 @@
 //
 
 import { ImplicitAuthManager } from '@bcgov/common-web-utils';
+import { SSO_CONFIG } from './constants';
 
-const config = {
-  baseURL: '{{.Env.SSO_BASE_URL}}',
-  realmName: '{{.Env.SSO_REALM_NAME}}',
-  clientId: '{{.Env.SSO_CLIENT_ID}}',
-};
-
-const iam = new ImplicitAuthManager(config);
+const iam = new ImplicitAuthManager(SSO_CONFIG);
 
 export default iam;
