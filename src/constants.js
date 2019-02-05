@@ -18,8 +18,10 @@
 // Created by Shelly Xue Han on 2019-01-16.
 //
 
+import config from './config.json';
+
 export const API = {
-  BASE_URL: () => '{{.Env.API_BASE_URL}}/api/v1/',
+  BASE_URL: process.env.REACT_APP_API_BASE_URL || config.API_BASE_URL,
   GET_SSO_USER: userId => `sso/user/${userId}`,
   UPDATE_SSO_USER: userId => `sso/user/${userId}`,
   CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,

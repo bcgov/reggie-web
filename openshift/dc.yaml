@@ -49,22 +49,22 @@ objects:
             limits:
               cpu: '150m'
           env:
-          - name: SSO_BASE_URL
+          - name: REACT_APP_SSO_BASE_URL
             valueFrom:
               secretKeyRef:
                 name: reggie-web-sso-account
                 key: SSO_ACCOUNT_HOST_URL
-          - name: SSO_REALM_NAME
+          - name: REACT_APP_SSO_REALM_NAME
             valueFrom:
               secretKeyRef:
                 name: reggie-web-sso-account
                 key: SSO_REALM
-          - name: SSO_CLIENT_ID
+          - name: REACT_APP_SSO_CLIENT_ID
             valueFrom:
               secretKeyRef:
                 name: reggie-web-sso-account
                 key: SSO_CLIENT_ID
-          - name: API_BASE_URL
+          - name: REACT_APP_API_BASE_URL
             value: ${API_BASE_URL_VALUE}
           volumeMounts:
           - name: ${VOLUMN_NAME}
