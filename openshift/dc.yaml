@@ -65,7 +65,7 @@ objects:
                 name: reggie-web-sso-account
                 key: SSO_CLIENT_ID
           - name: REACT_APP_API_BASE_URL
-            value: ${API_BASE_URL_VALUE}
+            value: ${REACT_APP_API_BASE_URL_VALUE}
           volumeMounts:
           - name: ${VOLUMN_NAME}
             mountPath: /etc/Caddyfile
@@ -140,7 +140,7 @@ parameters:
   value: ''
 - description: A base url of reggie api
   displayName: host of reggie api
-  name: API_BASE_URL_VALUE
+  name: REACT_APP_API_BASE_URL_VALUE
   required: false
   value: ''
 - description: A volumn used for the caddy from config map
