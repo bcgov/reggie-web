@@ -42,11 +42,10 @@ class Home extends Component {
     // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
     const intention = localStorage.getItem('emailIntention');
-    const testIt = '{{.Env.API_BASE_URL}}';
 
     // Set the rendering content based on authentication and authorization:
     const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to SSO to proceed - {testIt} - </p>
+      <p>Please log in to SSO to proceed</p>
     );
 
     // Error message:
@@ -98,10 +97,12 @@ class Home extends Component {
 
     const loadingContent = this.props.isAuthorizing ? Loader : null;
 
+    const baseurl = API.BASE_URL;
+
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web</h1>
-        <h1>test the env var {API.BASE_URL()}</h1>
+        <h1>Welcome to Reggie web *** test the difference ***</h1>
+        <h1>test the env {baseurl}</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
