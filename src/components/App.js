@@ -70,12 +70,14 @@ export class App extends Component {
             updateUser={this.props.updateUser}
             component={Registration}
             shouldRender={currAuthCode !== AUTH_CODE.REJECTED}
+            redirectTo="/"
           />
           <PrivateRoute
             path="/rocketChat"
             authorization={this.props.authorization}
             component={RocketChat}
             shouldRender={currAuthCode === AUTH_CODE.AUTHORIZED}
+            redirectTo="/"
           />
           <Route path="/rejection" component={Rejection} />
           <Route path="/email" component={Email} />
