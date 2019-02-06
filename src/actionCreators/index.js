@@ -92,11 +92,11 @@ export const clearAuthorizationProcess = () => {
   };
 };
 
-export const updateUser = (userId, userProfile) => {
+export const updateUser = (userId, userProfile, webUrl) => {
   return dispatch => {
     dispatch(updateUserStart());
     axi
-      .put(API.UPDATE_SSO_USER(userId), userProfile)
+      .put(API.UPDATE_SSO_USER(userId), { ...userProfile, ...{ refUrl: webUrl } })
       .then(res => {
         // Get the updated the current user info after the API request:
         dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
@@ -110,11 +110,11 @@ export const updateUser = (userId, userProfile) => {
   };
 };
 
-export const confirmEmail = (userId, email, jwt, webUrl) => {
+export const confirmEmail = (userId, email, jwt) => {
   return dispatch => {
     dispatch(confirmEmailStart());
     axi
-      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt, refUrl: webUrl })
+      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
       .then(res => {
         return dispatch(confirmEmailSuccess());
       })

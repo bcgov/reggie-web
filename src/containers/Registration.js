@@ -46,7 +46,7 @@ class Registration extends Component {
     };
 
     const onSubmit = ({ formData }) => {
-      this.props.updateUser(this.props.userInfo.id, formData);
+      this.props.updateUser(this.props.userInfo.id, formData, window.location.origin);
     };
 
     const formStatus = {
