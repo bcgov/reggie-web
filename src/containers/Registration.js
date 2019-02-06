@@ -72,6 +72,8 @@ class Registration extends Component {
     return (
       <div>
         <h1>Rocket Chat Registration</h1>
+        {/* TODOO */}
+        <h1>-{window.location.origin}-</h1>
         <p>You are almost there, we just need to know some details about you!</p>
         {formContent}
       </div>
