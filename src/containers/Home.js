@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE, SELF_SERVER_APP, API } from '../constants';
+import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
@@ -33,6 +33,14 @@ class Home extends Component {
   componentDidUpdate = () => {
     if (this.props.isAuthenticated && this.props.userId) {
       if (this.props.userInfo.id === null && !this.props.isAuthorizing) {
+        this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
+      }
+    }
+  };
+
+  componentDidMount = () => {
+    if (this.props.isAuthenticated && this.props.userId) {
+      if (this.props.userInfo.email === null && !this.props.isAuthorizing) {
         this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
       }
     }
@@ -65,7 +73,10 @@ class Home extends Component {
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
-    const emailRedirect = this.props.isAuthenticated ? setEmailRedirect(emailJwt, intention) : null;
+    const emailRedirect =
+      this.props.isAuthenticated && this.props.userInfo.email
+        ? setEmailRedirect(emailJwt, intention)
+        : null;
 
     // Redirect based on authorization:
     const setAuthorizationRedirect = authCode => {
@@ -97,17 +108,15 @@ class Home extends Component {
 
     const loadingContent = this.props.isAuthorizing ? Loader : null;
 
-    const baseurl = API.BASE_URL;
+    const redirectContent = intention ? emailRedirect : authorizeRedirect;
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web *** test the difference 2 ***</h1>
-        <h1>test the env {baseurl}</h1>
+        <h1>Welcome to Reggie web</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
-        {emailRedirect}
-        {authorizeRedirect}
+        {redirectContent}
       </div>
     );
   }
