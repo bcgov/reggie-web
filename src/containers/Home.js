@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE, SELF_SERVER_APP, API } from '../constants';
+import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
@@ -97,12 +97,9 @@ class Home extends Component {
 
     const loadingContent = this.props.isAuthorizing ? Loader : null;
 
-    const baseurl = API.BASE_URL;
-
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web *** test the difference 2 ***</h1>
-        <h1>test the env {baseurl}</h1>
+        <h1>Welcome to Reggie web *** test the difference 3 ***</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
