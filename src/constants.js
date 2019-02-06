@@ -40,7 +40,7 @@ export const SSO_CONFIG = {
 
 export const SELF_SERVER_APP = {
   ROCKETCHAT: {
-    URL: 'https://www.google.ca',
+    URL: 'https://chat-pilot.pathfinder.gov.bc.ca/',
     NAME: 'rc',
     INVITATION_CODE: 'rc',
   },
