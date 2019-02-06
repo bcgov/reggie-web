@@ -77,6 +77,7 @@ export class App extends Component {
             path="/confirmation"
             component={Confirmation}
             authentication={this.props.authentication}
+            authorization={this.props.authorization}
             confirmEmail={this.props.confirmEmail}
           />
           <Route

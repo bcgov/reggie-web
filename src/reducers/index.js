@@ -154,28 +154,21 @@ const confirmEmail = (
   switch (action.type) {
     case CONFIRM_EMAIL.START:
       return {
-        ...state,
-        ...{
-          verifyStarted: true,
-          errorMessages: [],
-        },
+        verifyStarted: true,
+        confirmed: false,
+        errorMessages: [],
       };
     case CONFIRM_EMAIL.SUCCESS:
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          confirmed: true,
-          errorMessages: [],
-        },
+        verifyStarted: false,
+        confirmed: true,
+        errorMessages: [],
       };
     case CONFIRM_EMAIL.ERROR:
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          errorMessages: action.payload.errorMessages,
-        },
+        verifyStarted: false,
+        confirmed: false,
+        errorMessages: action.payload.errorMessages,
       };
     default:
       return state;

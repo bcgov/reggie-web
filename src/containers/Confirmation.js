@@ -37,7 +37,7 @@ class Confirmation extends Component {
         !this.props.verifyStarted &&
         this.props.errorMessages.length === 0
       ) {
-        this.props.confirmEmail(this.props.userId, this.props.email, emailJwt);
+        this.props.confirmEmail(this.props.userId, this.props.userInfo.email, emailJwt);
       }
     }
   };
@@ -66,7 +66,7 @@ class Confirmation extends Component {
     // loading content:
     const loadingContent = this.props.verifyStarted ? (
       <div>
-        <p>Verifying your email as {this.props.email}</p>
+        <p>Verifying your email as {this.props.userInfo.email}</p>
         {Loader}
       </div>
     ) : null;
@@ -85,11 +85,11 @@ class Confirmation extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    email: state.authentication.email,
     userId: state.authentication.userId,
     verifyStarted: state.confirmEmail.verifyStarted,
     confirmed: state.confirmEmail.confirmed,
     errorMessages: state.confirmEmail.errorMessages,
+    userInfo: state.authorization.userInfo,
   };
 };
 

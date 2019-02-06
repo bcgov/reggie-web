@@ -116,23 +116,21 @@ export const confirmEmail = (userId, email, jwt) => {
     axi
       .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
       .then(res => {
-        // Get the updated the current user info after the API request:
-        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
         return dispatch(confirmEmailSuccess());
       })
       .catch(err => {
-        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
         // Handle error message based on error code:
         const hint = '\nPlease register again.';
         let errMsg = 'Fail to confirm your email.';
         if (err.response) {
-          errMsg = err.response.data;
+          errMsg = 'Please close your browser and register again.';
           if (err.response.status === 500) errMsg = err.response.data.error;
         }
         return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
       });
   };
 };
+
 // Using a fix code for now as place holder: https://github.com/axios/axios/issues/1104
 export const inviteUser = (
   userId,
