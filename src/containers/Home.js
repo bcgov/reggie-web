@@ -111,7 +111,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web</h1>
+        <h1>Welcome to Reggie web ** quickly test the udpated pipeline **</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
