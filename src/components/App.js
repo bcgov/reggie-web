@@ -24,6 +24,7 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
 import implicitAuthManager from '../auth';
+import { AUTH_CODE } from '../constants';
 import {
   Confirmation,
   Home,
