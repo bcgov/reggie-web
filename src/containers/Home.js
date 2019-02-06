@@ -38,6 +38,7 @@ class Home extends Component {
     }
   };
 
+  // TODO: this is not async!
   componentDidMount = () => {
     if (this.props.isAuthenticated && this.props.userId) {
       if (this.props.userInfo.email === null && !this.props.isAuthorizing) {
