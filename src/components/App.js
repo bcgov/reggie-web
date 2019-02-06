@@ -34,6 +34,7 @@ import {
   Verify,
 } from '../containers';
 import Layout from '../hoc/Layout';
+import PrivateRoute from './Navigation/PrivateRoute';
 import './App.css';
 
 export class App extends Component {
@@ -57,19 +58,23 @@ export class App extends Component {
   };
 
   render() {
+    // Get the current authorization status code for private route:
+    const currAuthCode = this.props.authorization.authCode;
     return (
       <Layout>
         <Switch>
-          <Route
+          <PrivateRoute
             path="/registration"
-            component={Registration}
             authorization={this.props.authorization}
             updateUser={this.props.updateUser}
+            component={Registration}
+            shouldRender={currAuthCode !== AUTH_CODE.REJECTED}
           />
-          <Route
+          <PrivateRoute
             path="/rocketChat"
-            component={RocketChat}
             authorization={this.props.authorization}
+            component={RocketChat}
+            shouldRender={currAuthCode === AUTH_CODE.AUTHORIZED}
           />
           <Route path="/rejection" component={Rejection} />
           <Route path="/email" component={Email} />
