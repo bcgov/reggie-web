@@ -113,8 +113,6 @@ class Home extends Component {
     return (
       <div className="authed">
         <h1>Welcome to Reggie web</h1>
-        {/* TODOO */}
-        <h1>-{window.location.origin}-</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}

@@ -37,7 +37,12 @@ class Confirmation extends Component {
         !this.props.verifyStarted &&
         this.props.errorMessages.length === 0
       ) {
-        this.props.confirmEmail(this.props.userId, this.props.userInfo.email, emailJwt);
+        this.props.confirmEmail(
+          this.props.userId,
+          this.props.userInfo.email,
+          emailJwt,
+          window.location.origin
+        );
       }
     }
   };
