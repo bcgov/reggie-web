@@ -38,8 +38,8 @@ class Home extends Component {
     }
   };
 
-  // TODO: this is not async!
   componentDidMount = () => {
+    // update user info if email not found:
     if (this.props.isAuthenticated && this.props.userId) {
       if (this.props.userInfo.email === null && !this.props.isAuthorizing) {
         this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
@@ -109,15 +109,14 @@ class Home extends Component {
 
     const loadingContent = this.props.isAuthorizing ? Loader : null;
 
-    const redirectContent = intention ? emailRedirect : authorizeRedirect;
-
     return (
       <div className="authed">
         <h1>Welcome to Reggie web</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
-        {redirectContent}
+        {emailRedirect}
+        {authorizeRedirect}
       </div>
     );
   }

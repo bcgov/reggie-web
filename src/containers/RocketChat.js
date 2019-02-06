@@ -67,7 +67,7 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
-        <div class="flex-container">
+        <div className="flex-container">
           <div>
             {/* External link */}
             <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>

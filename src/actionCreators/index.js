@@ -21,9 +21,7 @@
 import axios from 'axios';
 import {
   authorizationStart,
-  // authorizationPending,
   authorizationSuccess,
-  // authorizationFailed,
   authorizationError,
   authorizationStop,
   updateUserStart,
@@ -39,7 +37,7 @@ import {
   verifyEmailSuccess,
   verifyEmailError,
 } from '../actions';
-import { API, AUTH_CODE, SELF_SERVER_APP, WEB } from '../constants';
+import { API, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 
 const axi = axios.create({
   baseURL: API.BASE_URL,
@@ -54,9 +52,17 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
   return AUTH_CODE.NEW;
 };
 
-export const authorize = (ssoGroup, userId) => {
+/**
+ * Check user authorization status
+ *
+ * @param {String} ssoGroup The targeted SSO group to check aganst
+ * @param {String} userId The sso user ID
+ * @param {Boolean} doStart Dispatch the start action or not, default is yes
+ * This is for other action to skip the start process when trying to update authCode
+ */
+export const authorize = (ssoGroup, userId, doStart = true) => {
   return dispatch => {
-    dispatch(authorizationStart());
+    if (doStart) dispatch(authorizationStart());
     axi
       .get(API.GET_SSO_USER(userId))
       .then(res => {
@@ -116,6 +122,8 @@ export const confirmEmail = (userId, email, jwt) => {
     axi
       .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
       .then(res => {
+        // Get the updated the current user info after the API request:
+        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId, false));
         return dispatch(confirmEmailSuccess());
       })
       .catch(err => {
