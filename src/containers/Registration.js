@@ -60,19 +60,21 @@ class Registration extends Component {
     const formContent = this.props.updated ? (
       <p>Thank you for registering, please check your email!</p>
     ) : (
-      <BaseForm
-        formSchema={schema}
-        toggled={true}
-        onSubmit={onSubmit}
-        status={formStatus}
-        messages={formMessages}
-      />
+      <div>
+        <p>You are almost there, we just need to know some details about you!</p>
+        <BaseForm
+          formSchema={schema}
+          toggled={true}
+          onSubmit={onSubmit}
+          status={formStatus}
+          messages={formMessages}
+        />
+      </div>
     );
 
     return (
       <div>
         <h1>Rocket Chat Registration</h1>
-        <p>You are almost there, we just need to know some details about you!</p>
         {formContent}
       </div>
     );
