@@ -135,8 +135,8 @@ export const confirmEmail = (userId, email, jwt) => {
 export const inviteUser = (
   userId,
   email,
-  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE,
-  webUrl
+  webUrl,
+  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE
 ) => {
   return dispatch => {
     dispatch(inviteUserStart());
