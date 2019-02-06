@@ -45,7 +45,7 @@ class Home extends Component {
 
     // Set the rendering content based on authentication and authorization:
     const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to SSO to proceed</p>
+      <p>Please log in to proceed</p>
     );
 
     // Error message:
@@ -99,7 +99,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web *** test the difference 3 ***</h1>
+        <h1>Welcome to Reggie web</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
