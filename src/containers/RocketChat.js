@@ -48,7 +48,7 @@ class RocketChat extends Component {
 
     // TODO: disable button when in progress
     const onSubmit = ({ formData }) => {
-      this.props.inviteUser(this.props.userInfo.id, formData.email);
+      this.props.inviteUser(this.props.userInfo.id, formData.email, window.location.origin);
     };
 
     const onClick = () => {

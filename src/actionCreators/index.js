@@ -39,7 +39,7 @@ import {
   verifyEmailSuccess,
   verifyEmailError,
 } from '../actions';
-import { API, AUTH_CODE, SELF_SERVER_APP } from '../constants';
+import { API, AUTH_CODE, SELF_SERVER_APP, WEB } from '../constants';
 
 const axi = axios.create({
   baseURL: API.BASE_URL,
@@ -110,11 +110,11 @@ export const updateUser = (userId, userProfile) => {
   };
 };
 
-export const confirmEmail = (userId, email, jwt) => {
+export const confirmEmail = (userId, email, jwt, webUrl) => {
   return dispatch => {
     dispatch(confirmEmailStart());
     axi
-      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
+      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt, refUrl: webUrl })
       .then(res => {
         return dispatch(confirmEmailSuccess());
       })
@@ -135,12 +135,13 @@ export const confirmEmail = (userId, email, jwt) => {
 export const inviteUser = (
   userId,
   email,
-  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE
+  invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE,
+  webUrl
 ) => {
   return dispatch => {
     dispatch(inviteUserStart());
     axi
-      .post(API.INVITE_USER(userId), { email, code: invitationCode })
+      .post(API.INVITE_USER(userId), { email, code: invitationCode, refUrl: webUrl })
       .then(res => {
         return dispatch(inviteUserSuccess());
       })
