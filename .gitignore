@@ -68,4 +68,4 @@ coverage
 
 # next.js build output
 .next
-.pipeline/.node/
+.pipeline/.node
