@@ -5,11 +5,10 @@
     "es6": true,
     "jest": true
   },
-  "extends": ["react-app"],
   "parserOptions": {
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": [ "prettier"],
   "rules": {
     "prettier/prettier": ["error"],
     "linebreak-style": ["warn", "unix"],

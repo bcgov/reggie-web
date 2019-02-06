@@ -42,7 +42,7 @@ import {
 import { API, AUTH_CODE, SELF_SERVER_APP } from '../constants';
 
 const axi = axios.create({
-  baseURL: API.BASE_URL(),
+  baseURL: API.BASE_URL,
   timeout: API.TIME_OUT,
   headers: { Accept: 'application/json' },
 });

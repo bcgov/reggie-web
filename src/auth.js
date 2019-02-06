@@ -19,16 +19,8 @@
 //
 
 import { ImplicitAuthManager } from '@bcgov/common-web-utils';
+import { SSO_CONFIG } from './constants';
 
-const config = {
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? 'https://sso.pathfinder.gov.bc.ca'
-      : 'https://sso-dev.pathfinder.gov.bc.ca',
-  realmName: 'devhub',
-  clientId: 'reggie-web',
-};
-
-const iam = new ImplicitAuthManager(config);
+const iam = new ImplicitAuthManager(SSO_CONFIG);
 
 export default iam;
