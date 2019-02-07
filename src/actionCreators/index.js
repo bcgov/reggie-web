@@ -27,6 +27,7 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserError,
+  updateUserClear,
   confirmEmailStart,
   confirmEmailSuccess,
   confirmEmailError,
@@ -53,6 +54,36 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
 };
 
 /**
+ * Authorization helper, update authorization states or throw errors
+ *
+ * @param {String} ssoGroup The targeted SSO group to check aganst
+ * @param {String} userId The sso user ID
+ *
+ */
+
+const _authorizeHelper = async (dispatch, userId, ssoGroup) => {
+  let authCode = null;
+  let newUserInfo = {};
+  try {
+    const res = await axi.get(API.GET_SSO_USER(userId));
+    // const data = response.data;
+    authCode = checkStatus(res.data.isPending, res.data.isAuthorized, res.data.isRejected);
+    newUserInfo = {
+      id: res.data.id,
+      email: res.data.email,
+      firstName: res.data.firstName,
+      lastName: res.data.lastName,
+    };
+    console.log('---------------------------newUserInfo');
+    console.log(authCode);
+    console.log(newUserInfo);
+  } catch (error) {
+    throw Error(error);
+  }
+  return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
+};
+
+/**
  * Check user authorization status
  *
  * @param {String} ssoGroup The targeted SSO group to check aganst
@@ -61,28 +92,14 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
  * This is for other action to skip the start process when trying to update authCode
  */
 export const authorize = (ssoGroup, userId, doStart = true) => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     if (doStart) dispatch(authorizationStart());
-    axi
-      .get(API.GET_SSO_USER(userId))
-      .then(res => {
-        const authCode = checkStatus(
-          res.data.isPending,
-          res.data.isAuthorized,
-          res.data.isRejected
-        );
-        const newUserInfo = {
-          id: res.data.id,
-          email: res.data.email,
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
-        };
-        return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
-      })
-      .catch(err => {
-        const message = 'Fail to connect to KeyCloak, please refresh!';
-        return dispatch(authorizationError([message]));
-      });
+    try {
+      return await _authorizeHelper(dispatch, userId, ssoGroup);
+    } catch (err) {
+      const message = 'Fail to connect to KeyCloak, please refresh!';
+      return dispatch(authorizationError([message]));
+    }
   };
 };
 
@@ -93,43 +110,51 @@ export const clearAuthorizationProcess = () => {
 };
 
 export const updateUser = (userId, userProfile, webUrl) => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch(updateUserStart());
-    axi
-      .put(API.UPDATE_SSO_USER(userId), { ...userProfile, ...{ refUrl: webUrl } })
-      .then(res => {
-        // Get the updated the current user info after the API request:
-        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
-        return dispatch(updateUserSuccess());
-      })
-      .catch(err => {
-        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId));
-        const errMsg = 'Fail to register your account, please try again.';
-        return dispatch(updateUserError([errMsg]));
+
+    try {
+      await axi.put(API.UPDATE_SSO_USER(userId), {
+        ...userProfile,
+        ...{ refUrl: webUrl },
       });
+
+      // Get the updated the current user info after the API request:
+      await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
+    } catch (err) {
+      // TODO: need another authorization update?
+      const errMsg = 'Fail to register your account, please try again.';
+      return dispatch(updateUserError([errMsg]));
+    }
+    return dispatch(updateUserSuccess());
+  };
+};
+
+export const clearUpdateUser = () => {
+  return dispatch => {
+    dispatch(updateUserClear());
   };
 };
 
 export const confirmEmail = (userId, email, jwt) => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch(confirmEmailStart());
-    axi
-      .put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt })
-      .then(res => {
-        // Get the updated the current user info after the API request:
-        dispatch(authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, userId, false));
-        return dispatch(confirmEmailSuccess());
-      })
-      .catch(err => {
-        // Handle error message based on error code:
-        const hint = '\nPlease register again.';
-        let errMsg = 'Fail to confirm your email.';
-        if (err.response) {
-          errMsg = 'Please close your browser and register again.';
-          if (err.response.status === 500) errMsg = err.response.data.error;
-        }
-        return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
-      });
+
+    try {
+      await axi.put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt });
+
+      // Get the updated the current user info after the API request:
+      await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
+    } catch (err) {
+      const hint = '\nPlease register again.';
+      let errMsg = 'Fail to confirm your email.';
+      if (err.response) {
+        errMsg = 'Please close your browser and register again.';
+        if (err.response.status === 500) errMsg = err.response.data.error;
+      }
+      return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
+    }
+    return dispatch(confirmEmailSuccess());
   };
 };
 

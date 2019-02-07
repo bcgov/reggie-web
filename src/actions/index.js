@@ -92,6 +92,12 @@ export const updateUserError = errorMessages => {
   };
 };
 
+export const updateUserClear = () => {
+  return {
+    type: UPDATE_USER.CLEAR,
+  };
+};
+
 export const confirmEmailStart = () => {
   return {
     type: CONFIRM_EMAIL.START,

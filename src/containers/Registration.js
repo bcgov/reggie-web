@@ -21,12 +21,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUser } from '../actionCreators';
+import { updateUser, clearUpdateUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
   static displayName = '[Component Registration]';
+
+  // Clear user update states when done with the flow:
+  componentWillUnmount = () => {
+    this.props.clearUpdateUser();
+  };
 
   render() {
     const schema = {
@@ -94,6 +99,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateUser,
+      clearUpdateUser,
     },
     dispatch
   );

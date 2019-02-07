@@ -68,31 +68,11 @@ const authorization = (
           isAuthorizing: true,
         },
       };
-    case AUTHORIZATION.PENDING:
-      return {
-        ...state,
-        ...{
-          authCode: AUTH_CODE.PENDING,
-          isAuthorizing: false,
-          userInfo: action.payload.userInfo,
-          ssoGroup: action.payload.ssoGroup,
-        },
-      };
     case AUTHORIZATION.SUCCESS:
       return {
         ...state,
         ...{
           authCode: action.payload.authCode,
-          isAuthorizing: false,
-          userInfo: action.payload.userInfo,
-          ssoGroup: action.payload.ssoGroup,
-        },
-      };
-    case AUTHORIZATION.FAILED:
-      return {
-        ...state,
-        ...{
-          authCode: AUTH_CODE.REJECTED,
           isAuthorizing: false,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -141,6 +121,12 @@ const updateUser = (
         updateStarted: false,
         updated: false,
         errorMessages: action.payload.errorMessages,
+      };
+    case UPDATE_USER.CLEAR:
+      return {
+        updateStarted: false,
+        updated: false,
+        errorMessages: [],
       };
     default:
       return state;
