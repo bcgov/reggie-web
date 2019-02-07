@@ -74,9 +74,6 @@ const _authorizeHelper = async (dispatch, userId, ssoGroup) => {
       firstName: res.data.firstName,
       lastName: res.data.lastName,
     };
-    console.log('---------------------------newUserInfo');
-    console.log(authCode);
-    console.log(newUserInfo);
   } catch (error) {
     throw Error(error);
   }
@@ -122,8 +119,9 @@ export const updateUser = (userId, userProfile, webUrl) => {
       // Get the updated the current user info after the API request:
       await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
     } catch (err) {
-      // TODO: need another authorization update?
-      const errMsg = 'Fail to register your account, please try again.';
+      const errMsg = err.response.data.error
+        ? err.response.data.error
+        : 'Fail to register your account, please try again.';
       return dispatch(updateUserError([errMsg]));
     }
     return dispatch(updateUserSuccess());
