@@ -45,16 +45,6 @@ export const authorizationStart = () => {
   };
 };
 
-export const authorizationPending = (ssoGroup, userInfo) => {
-  return {
-    type: AUTHORIZATION.PENDING,
-    payload: {
-      ssoGroup,
-      userInfo,
-    },
-  };
-};
-
 export const authorizationSuccess = (ssoGroup, userInfo, authCode) => {
   return {
     type: AUTHORIZATION.SUCCESS,
@@ -62,16 +52,6 @@ export const authorizationSuccess = (ssoGroup, userInfo, authCode) => {
       ssoGroup,
       userInfo,
       authCode,
-    },
-  };
-};
-
-export const authorizationFailed = (ssoGroup, userInfo) => {
-  return {
-    type: AUTHORIZATION.FAILED,
-    payload: {
-      ssoGroup,
-      userInfo,
     },
   };
 };

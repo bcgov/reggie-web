@@ -77,12 +77,6 @@ export const authorize = (ssoGroup, userId, doStart = true) => {
           firstName: res.data.firstName,
           lastName: res.data.lastName,
         };
-        // TODO: remove extra actions. Will keep them for now in case needed.
-        // Use general action for successful request,
-        // Pass in the user status into authorizationSuccess in general for different AUTH_CODE
-        // if (userStatus === AUTH_CODE.AUTHORIZED) return dispatch(authorizationSuccess(ssoGroup, newUserInfo));
-        // if (userStatus === AUTH_CODE.REJECTED) return dispatch(authorizationFailed(ssoGroup, newUserInfo));
-        // return dispatch(authorizationPending(ssoGroup, newUserInfo));
         return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
       })
       .catch(err => {
