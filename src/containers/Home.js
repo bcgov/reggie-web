@@ -70,14 +70,14 @@ class Home extends Component {
     // Redirect based on Email:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) return <Redirect to="/confirmation" />;
+      if (intention === ROUTES.EMAIL.CONFIRM) {
+        if (this.props.userInfo.email) return <Redirect to="/confirmation" />;
+        return null;
+      }
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
-    const emailRedirect =
-      this.props.isAuthenticated && this.props.userInfo.email
-        ? setEmailRedirect(emailJwt, intention)
-        : null;
+    const emailRedirect = this.props.isAuthenticated ? setEmailRedirect(emailJwt, intention) : null;
 
     // Redirect based on authorization:
     const setAuthorizationRedirect = authCode => {
