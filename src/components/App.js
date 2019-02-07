@@ -64,13 +64,11 @@ export class App extends Component {
     return (
       <Layout>
         <Switch>
-          <PrivateRoute
+          <Route
             path="/registration"
+            component={Registration}
             authorization={this.props.authorization}
             updateUser={this.props.updateUser}
-            component={Registration}
-            shouldRender={currAuthCode !== AUTH_CODE.REJECTED}
-            redirectTo="/"
           />
           <PrivateRoute
             path="/rocketChat"
