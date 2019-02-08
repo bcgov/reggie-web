@@ -23,7 +23,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
+import { authorize } from '../actionCreators';
 import implicitAuthManager from '../auth';
+import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
 import {
   Confirmation,
   Home,
@@ -34,6 +36,7 @@ import {
   Verify,
 } from '../containers';
 import Layout from '../hoc/Layout';
+import PrivateRoute from './Navigation/PrivateRoute';
 import './App.css';
 
 export class App extends Component {
@@ -48,28 +51,38 @@ export class App extends Component {
       implicitAuthManager.handleOnPageLoad();
     }
     try {
-      console.log(implicitAuthManager.idToken.data.sub);
-      // Notice: instead of verifying aganst email, it's more rubst to check again sub(ID)
-      // console.log(implicitAuthManager.idToken.data.email);
+      const iamId = implicitAuthManager.idToken.data.sub;
+      // if user authenticated, try authorization:
+      if (iamId) this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, iamId);
     } catch (err) {
       console.log('---implicitAuthManager----not logged in');
     }
   };
 
   render() {
+    // Get the current authorization status code for private route:
+    const currAuthProcess = this.props.authorization.isAuthorizing;
+    const currAuthCode = this.props.authorization.authCode;
+    const currUserVerfied = this.props.verifyEmail.verfied;
     return (
       <Layout>
         <Switch>
-          <Route
+          <PrivateRoute
             path="/registration"
-            component={Registration}
             authorization={this.props.authorization}
             updateUser={this.props.updateUser}
+            component={Registration}
+            shouldRender={
+              !currAuthProcess && (currAuthCode !== AUTH_CODE.REJECTED || currUserVerfied)
+            }
+            redirectTo="/"
           />
-          <Route
+          <PrivateRoute
             path="/rocketChat"
-            component={RocketChat}
             authorization={this.props.authorization}
+            component={RocketChat}
+            shouldRender={currAuthCode === AUTH_CODE.AUTHORIZED}
+            redirectTo="/"
           />
           <Route path="/rejection" component={Rejection} />
           <Route path="/email" component={Email} />
@@ -77,6 +90,7 @@ export class App extends Component {
             path="/confirmation"
             component={Confirmation}
             authentication={this.props.authentication}
+            authorization={this.props.authorization}
             confirmEmail={this.props.confirmEmail}
           />
           <Route
@@ -95,6 +109,7 @@ export class App extends Component {
           <Route
             path="/logout"
             component={() => {
+              this.props.logout();
               window.location = implicitAuthManager.getSSOLogoutURI();
             }}
           />
@@ -120,6 +135,7 @@ function mapDispatchToProps(dispatch) {
     {
       login: () => dispatch(authenticateSuccess()),
       logout: () => dispatch(authenticateFailed()),
+      authorize,
     },
     dispatch
   );

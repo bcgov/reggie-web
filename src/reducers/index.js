@@ -43,7 +43,11 @@ const authentication = (state = { isAuthenticated: false, email: null, userId: n
       };
     case AUTHENTICATION.FAILED:
       implicitAuthManager.clearAuthLocalStorage();
-      return state;
+      return {
+        isAuthenticated: false,
+        email: null,
+        userId: null,
+      };
     default:
       return state;
   }
@@ -66,16 +70,7 @@ const authorization = (
         ...{
           authCode: AUTH_CODE.NEW,
           isAuthorizing: true,
-        },
-      };
-    case AUTHORIZATION.PENDING:
-      return {
-        ...state,
-        ...{
-          authCode: AUTH_CODE.PENDING,
-          isAuthorizing: false,
-          userInfo: action.payload.userInfo,
-          ssoGroup: action.payload.ssoGroup,
+          errorMessages: [],
         },
       };
     case AUTHORIZATION.SUCCESS:
@@ -83,16 +78,6 @@ const authorization = (
         ...state,
         ...{
           authCode: action.payload.authCode,
-          isAuthorizing: false,
-          userInfo: action.payload.userInfo,
-          ssoGroup: action.payload.ssoGroup,
-        },
-      };
-    case AUTHORIZATION.FAILED:
-      return {
-        ...state,
-        ...{
-          authCode: AUTH_CODE.REJECTED,
           isAuthorizing: false,
           userInfo: action.payload.userInfo,
           ssoGroup: action.payload.ssoGroup,
@@ -112,6 +97,7 @@ const authorization = (
         ...state,
         ...{
           isAuthorizing: false,
+          errorMessages: [],
         },
       };
     default:
@@ -142,6 +128,12 @@ const updateUser = (
         updated: false,
         errorMessages: action.payload.errorMessages,
       };
+    case UPDATE_USER.CLEAR:
+      return {
+        updateStarted: false,
+        updated: false,
+        errorMessages: [],
+      };
     default:
       return state;
   }
@@ -154,28 +146,21 @@ const confirmEmail = (
   switch (action.type) {
     case CONFIRM_EMAIL.START:
       return {
-        ...state,
-        ...{
-          verifyStarted: true,
-          errorMessages: [],
-        },
+        verifyStarted: true,
+        confirmed: false,
+        errorMessages: [],
       };
     case CONFIRM_EMAIL.SUCCESS:
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          confirmed: true,
-          errorMessages: [],
-        },
+        verifyStarted: false,
+        confirmed: true,
+        errorMessages: [],
       };
     case CONFIRM_EMAIL.ERROR:
       return {
-        ...state,
-        ...{
-          verifyStarted: false,
-          errorMessages: action.payload.errorMessages,
-        },
+        verifyStarted: false,
+        confirmed: false,
+        errorMessages: action.payload.errorMessages,
       };
     default:
       return state;

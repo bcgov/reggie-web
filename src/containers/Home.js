@@ -23,34 +23,28 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
+import { ROUTES, AUTH_CODE } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
 class Home extends Component {
   static displayName = '[Component Home]';
 
-  componentDidUpdate = () => {
-    if (this.props.isAuthenticated && this.props.userId) {
-      if (this.props.userInfo.id === null && !this.props.isAuthorizing) {
-        this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
-      }
-    }
-  };
-
   render() {
     // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
     const intention = localStorage.getItem('emailIntention');
 
-    // Set the rendering content based on authentication and authorization:
-    const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to proceed</p>
-    );
-
     // Error message:
     const errMsg =
       this.props.errorMessages.length > 0 ? <p>{this.props.errorMessages[0]}</p> : null;
+
+    // Set the rendering content based on authentication and authorization:
+    const authenticationContent = this.props.isAuthenticated ? (
+      errMsg
+    ) : (
+      <p>Please log in to proceed</p>
+    );
 
     /*
       if there exist email payloads in localstorage, go to confirmation page
@@ -61,7 +55,10 @@ class Home extends Component {
     // Redirect based on Email:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) return <Redirect to="/confirmation" />;
+      if (intention === ROUTES.EMAIL.CONFIRM) {
+        if (this.props.userInfo.email) return <Redirect to="/confirmation" />;
+        return null;
+      }
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
@@ -99,7 +96,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie web</h1>
+        <h1>Welcome to Reggie</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}

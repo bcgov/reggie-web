@@ -21,18 +21,23 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUser } from '../actionCreators';
+import { updateUser, clearUpdateUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
   static displayName = '[Component Registration]';
 
+  // Clear user update states when done with the flow:
+  componentWillUnmount = () => {
+    if (this.props.updated || this.props.errorMessages.length > 0) this.props.clearUpdateUser();
+  };
+
   render() {
     const schema = {
       title: 'Please register to continue',
       type: 'object',
-      required: ['firstName', 'lastName', 'email'],
+      required: ['firstName', 'lastName', 'email', 'emailRepeat'],
       properties: {
         email: {
           type: 'string',
@@ -40,13 +45,26 @@ class Registration extends Component {
           title: 'Email',
           default: this.props.userInfo.email,
         },
+        emailRepeat: {
+          type: 'string',
+          format: 'email',
+          title: 'Repeat Email',
+        },
         firstName: { type: 'string', title: 'First Name', default: this.props.userInfo.firstName },
         lastName: { type: 'string', title: 'Last Name', default: this.props.userInfo.lastName },
       },
     };
 
+    const validate = (formData, errors) => {
+      if (formData.email !== formData.emailRepeat) {
+        errors.emailRepeat.__errors = ['Email not matching!'];
+      }
+      return errors;
+    };
+
     const onSubmit = ({ formData }) => {
-      this.props.updateUser(this.props.userInfo.id, formData);
+      delete formData.emailRepeat;
+      this.props.updateUser(this.props.userInfo.id, formData, window.location.origin);
     };
 
     const formStatus = {
@@ -58,21 +76,36 @@ class Registration extends Component {
     };
 
     const formContent = this.props.updated ? (
-      <p>Thank you for registering, please check your email!</p>
+      <p>
+        Thank you for registering, please check your email!
+        <br />
+        If you do not receive an email, please repeat the registration process and double check the
+        email address you've provided.
+      </p>
     ) : (
-      <BaseForm
-        formSchema={schema}
-        toggled={true}
-        onSubmit={onSubmit}
-        status={formStatus}
-        messages={formMessages}
-      />
+      <div>
+        <p>
+          Almost there, we just need to know some details about you!
+          <br />
+          You will need to verify your email address before we can complete the registration.
+          <br />
+          A confirmation link will be sent to you via email shortly.
+          <br />
+        </p>
+        <BaseForm
+          formSchema={schema}
+          formValidate={validate}
+          toggled={true}
+          onSubmit={onSubmit}
+          status={formStatus}
+          messages={formMessages}
+        />
+      </div>
     );
 
     return (
       <div>
         <h1>Rocket Chat Registration</h1>
-        <p>You are almost there, we just need to know some details about you!</p>
         {formContent}
       </div>
     );
@@ -92,6 +125,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateUser,
+      clearUpdateUser,
     },
     dispatch
   );

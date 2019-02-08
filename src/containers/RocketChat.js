@@ -48,7 +48,7 @@ class RocketChat extends Component {
 
     // TODO: disable button when in progress
     const onSubmit = ({ formData }) => {
-      this.props.inviteUser(this.props.userInfo.id, formData.email);
+      this.props.inviteUser(this.props.userInfo.id, formData.email, window.location.origin);
     };
 
     const onClick = () => {
@@ -67,7 +67,13 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
-        <div class="flex-container">
+        <p>
+          You have complete registration process. Please go ahead to RocketChat App!
+          <br />
+          If you need to invite new users, please click the Invite button and provide an email
+          address.
+        </p>
+        <div className="flex-container">
           <div>
             {/* External link */}
             <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
