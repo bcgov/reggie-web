@@ -67,6 +67,12 @@ class RocketChat extends Component {
     return (
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
+        <p>
+          You have complete registration process. Please go ahead to RocketChat App!
+          <br />
+          If you need to invite new users, please click the Invite button and provide an email
+          address.
+        </p>
         <div className="flex-container">
           <div>
             {/* External link */}

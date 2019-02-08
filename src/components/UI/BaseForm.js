@@ -54,14 +54,12 @@ export const BaseForm = ({ formSchema, toggled, onSubmit, status, messages }) =>
   // Form:
   const jsform = (
     <Grid componentClass="main">
-      <Row>
-        <div className="center-form">
-          <Form schema={formSchema} onSubmit={onSubmit}>
-            <Button type="submit" bsStyle="primary">
-              Submit
-            </Button>
-          </Form>
-        </div>
+      <Row className="center-form">
+        <Form schema={formSchema} onSubmit={onSubmit}>
+          <Button type="submit" bsStyle="primary">
+            Submit
+          </Button>
+        </Form>
       </Row>
     </Grid>
   );

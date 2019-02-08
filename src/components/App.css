@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+p {
+  color: #003366;
+}
+
 a {
   color: #003366;
   text-decoration: none;

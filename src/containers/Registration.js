@@ -45,6 +45,7 @@ class Registration extends Component {
           title: 'Email',
           default: this.props.userInfo.email,
         },
+        // TODO: confirmation of email...
         firstName: { type: 'string', title: 'First Name', default: this.props.userInfo.firstName },
         lastName: { type: 'string', title: 'Last Name', default: this.props.userInfo.lastName },
       },
@@ -63,10 +64,22 @@ class Registration extends Component {
     };
 
     const formContent = this.props.updated ? (
-      <p>Thank you for registering, please check your email!</p>
+      <p>
+        Thank you for registering, please check your email!
+        <br />
+        If you do not receive an email, please repeat the registration process and double check the
+        email address you've provided.
+      </p>
     ) : (
       <div>
-        <p>You are almost there, we just need to know some details about you!</p>
+        <p>
+          Almost there, we just need to know some details about you!
+          <br />
+          You will need to verify your email address before we can complete the registration.
+          <br />
+          A confirmation link will be sent to you via email shortly.
+          <br />
+        </p>
         <BaseForm
           formSchema={schema}
           toggled={true}
