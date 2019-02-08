@@ -43,7 +43,11 @@ const authentication = (state = { isAuthenticated: false, email: null, userId: n
       };
     case AUTHENTICATION.FAILED:
       implicitAuthManager.clearAuthLocalStorage();
-      return state;
+      return {
+        isAuthenticated: false,
+        email: null,
+        userId: null,
+      };
     default:
       return state;
   }

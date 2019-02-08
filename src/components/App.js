@@ -54,8 +54,6 @@ export class App extends Component {
       const iamId = implicitAuthManager.idToken.data.sub;
       // if user authenticated, try authorization:
       if (iamId) this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, iamId);
-      // Notice: instead of verifying aganst email, it's more rubst to check again sub(ID)
-      // console.log(implicitAuthManager.idToken.data.email);
     } catch (err) {
       console.log('---implicitAuthManager----not logged in');
     }
@@ -111,6 +109,7 @@ export class App extends Component {
           <Route
             path="/logout"
             component={() => {
+              this.props.logout();
               window.location = implicitAuthManager.getSSOLogoutURI();
             }}
           />

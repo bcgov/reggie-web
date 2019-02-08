@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE, SELF_SERVER_APP } from '../constants';
+import { ROUTES, AUTH_CODE } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
