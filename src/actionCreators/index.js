@@ -113,7 +113,7 @@ export const updateUser = (userId, userProfile, webUrl) => {
     try {
       await axi.put(API.UPDATE_SSO_USER(userId), {
         ...userProfile,
-        ...{ refUrl: webUrl },
+        refUrl: webUrl,
       });
 
       // Get the updated the current user info after the API request:
