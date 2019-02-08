@@ -37,7 +37,7 @@ class Registration extends Component {
     const schema = {
       title: 'Please register to continue',
       type: 'object',
-      required: ['firstName', 'lastName', 'email'],
+      required: ['firstName', 'lastName', 'email', 'emailRepeat'],
       properties: {
         email: {
           type: 'string',
@@ -45,13 +45,25 @@ class Registration extends Component {
           title: 'Email',
           default: this.props.userInfo.email,
         },
-        // TODO: confirmation of email...
+        emailRepeat: {
+          type: 'string',
+          format: 'email',
+          title: 'Repeat Email',
+        },
         firstName: { type: 'string', title: 'First Name', default: this.props.userInfo.firstName },
         lastName: { type: 'string', title: 'Last Name', default: this.props.userInfo.lastName },
       },
     };
 
+    const validate = (formData, errors) => {
+      if (formData.email !== formData.emailRepeat) {
+        errors.emailRepeat.__errors = ['Email not matching!'];
+      }
+      return errors;
+    };
+
     const onSubmit = ({ formData }) => {
+      delete formData.emailRepeat;
       this.props.updateUser(this.props.userInfo.id, formData, window.location.origin);
     };
 
@@ -82,6 +94,7 @@ class Registration extends Component {
         </p>
         <BaseForm
           formSchema={schema}
+          formValidate={validate}
           toggled={true}
           onSubmit={onSubmit}
           status={formStatus}

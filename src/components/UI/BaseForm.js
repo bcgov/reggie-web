@@ -31,13 +31,21 @@ import './BaseForm.css';
  * Json Schema Form
  *
  * @param {Object} formSchema The schema to pass into the form
+ * @param {Function} formValidate Extra validation
  * @param {boolean} toggled Display the whole form or not
  * @param {Function} onSubmit The action upon clicking submit button
  * @param {Object} status The form submission status: in process (maybe other status)
  * @param {Object} messages The successful or failed msg
  * @return {Object} The form
  */
-export const BaseForm = ({ formSchema, toggled, onSubmit, status, messages }) => {
+export const BaseForm = ({
+  formSchema,
+  formValidate = null,
+  toggled,
+  onSubmit,
+  status,
+  messages,
+}) => {
   // Success or error message:
   if (messages.successMsg)
     toast.success(messages.successMsg, {
@@ -55,7 +63,7 @@ export const BaseForm = ({ formSchema, toggled, onSubmit, status, messages }) =>
   const jsform = (
     <Grid componentClass="main">
       <Row className="center-form">
-        <Form schema={formSchema} onSubmit={onSubmit}>
+        <Form schema={formSchema} onSubmit={onSubmit} validate={formValidate} showErrorList={false}>
           <Button type="submit" bsStyle="primary">
             Submit
           </Button>
