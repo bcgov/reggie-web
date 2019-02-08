@@ -120,7 +120,7 @@ export const updateUser = (userId, userProfile, webUrl) => {
       await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
     } catch (err) {
       const errMsg = err.response.data.error
-        ? err.response.data.error
+        ? err.response.data.error.split('=')[1]
         : 'Fail to register your account, please try again.';
       return dispatch(updateUserError([errMsg]));
     }
