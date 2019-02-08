@@ -5,3 +5,8 @@
 .toggled {
   display: block;
 }
+
+.center-form {
+  display: flex;
+  justify-content: center;
+}
