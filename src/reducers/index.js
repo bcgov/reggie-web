@@ -66,6 +66,7 @@ const authorization = (
         ...{
           authCode: AUTH_CODE.NEW,
           isAuthorizing: true,
+          errorMessages: [],
         },
       };
     case AUTHORIZATION.SUCCESS:
@@ -92,6 +93,7 @@ const authorization = (
         ...state,
         ...{
           isAuthorizing: false,
+          errorMessages: [],
         },
       };
     default:

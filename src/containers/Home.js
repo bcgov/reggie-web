@@ -30,36 +30,21 @@ import { Loader } from '../components/UI/Loader';
 class Home extends Component {
   static displayName = '[Component Home]';
 
-  componentDidUpdate = () => {
-    if (this.props.isAuthenticated && this.props.userId) {
-      if (this.props.userInfo.id === null && !this.props.isAuthorizing) {
-        this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
-      }
-    }
-  };
-
-  componentDidMount = () => {
-    // update user info if email not found:
-    if (this.props.isAuthenticated && this.props.userId) {
-      if (this.props.userInfo.email === null && !this.props.isAuthorizing) {
-        this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
-      }
-    }
-  };
-
   render() {
     // get email intention and jwt from localStorage:
     const emailJwt = localStorage.getItem('emailJwt');
     const intention = localStorage.getItem('emailIntention');
 
-    // Set the rendering content based on authentication and authorization:
-    const authenticationContent = this.props.isAuthenticated ? null : (
-      <p>Please log in to proceed</p>
-    );
-
     // Error message:
     const errMsg =
       this.props.errorMessages.length > 0 ? <p>{this.props.errorMessages[0]}</p> : null;
+
+    // Set the rendering content based on authentication and authorization:
+    const authenticationContent = this.props.isAuthenticated ? (
+      errMsg
+    ) : (
+      <p>Please log in to proceed</p>
+    );
 
     /*
       if there exist email payloads in localstorage, go to confirmation page

@@ -23,8 +23,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import { authenticateFailed, authenticateSuccess } from '../actions';
+import { authorize } from '../actionCreators';
 import implicitAuthManager from '../auth';
-import { AUTH_CODE } from '../constants';
+import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
 import {
   Confirmation,
   Home,
@@ -50,7 +51,9 @@ export class App extends Component {
       implicitAuthManager.handleOnPageLoad();
     }
     try {
-      console.log(implicitAuthManager.idToken.data.sub);
+      const iamId = implicitAuthManager.idToken.data.sub;
+      // if user authenticated, try authorization:
+      if (iamId) this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, iamId);
       // Notice: instead of verifying aganst email, it's more rubst to check again sub(ID)
       // console.log(implicitAuthManager.idToken.data.email);
     } catch (err) {
@@ -60,15 +63,21 @@ export class App extends Component {
 
   render() {
     // Get the current authorization status code for private route:
+    const currAuthProcess = this.props.authorization.isAuthorizing;
     const currAuthCode = this.props.authorization.authCode;
+    const currUserVerfied = this.props.verifyEmail.verfied;
     return (
       <Layout>
         <Switch>
-          <Route
+          <PrivateRoute
             path="/registration"
-            component={Registration}
             authorization={this.props.authorization}
             updateUser={this.props.updateUser}
+            component={Registration}
+            shouldRender={
+              !currAuthProcess && (currAuthCode !== AUTH_CODE.REJECTED || currUserVerfied)
+            }
+            redirectTo="/"
           />
           <PrivateRoute
             path="/rocketChat"
@@ -127,6 +136,7 @@ function mapDispatchToProps(dispatch) {
     {
       login: () => dispatch(authenticateSuccess()),
       logout: () => dispatch(authenticateFailed()),
+      authorize,
     },
     dispatch
   );

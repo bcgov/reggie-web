@@ -30,7 +30,7 @@ class Registration extends Component {
 
   // Clear user update states when done with the flow:
   componentWillUnmount = () => {
-    this.props.clearUpdateUser();
+    if (this.props.updated || this.props.errorMessages.length > 0) this.props.clearUpdateUser();
   };
 
   render() {
