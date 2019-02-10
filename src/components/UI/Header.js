@@ -22,7 +22,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import AuthButton from '../AuthButton/AuthButton';
+import AuthButton from '../Auth/AuthButton';
 import logo from './bcgovlogo.svg';
 import './Header.css';
 

@@ -38,7 +38,7 @@ import {
 import Layout from '../hoc/Layout';
 import PrivateRoute from './Navigation/PrivateRoute';
 import './App.css';
-import AuthModal from './AuthButton/AuthModal';
+import AuthModal from './Auth/AuthModal';
 
 export class App extends Component {
   componentDidMount = () => {

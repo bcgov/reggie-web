@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { AuthButton } from '../../components/AuthButton/AuthButton';
+import { AuthButton } from '../../components/Auth/AuthButton';
 
 describe('AuthButton Component', () => {
   it('matches snapshot when Logged in', () => {
