@@ -20,7 +20,7 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';

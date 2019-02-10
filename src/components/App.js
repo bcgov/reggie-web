@@ -38,6 +38,7 @@ import {
 import Layout from '../hoc/Layout';
 import PrivateRoute from './Navigation/PrivateRoute';
 import './App.css';
+import AuthModal from './AuthButton/AuthModal';
 
 export class App extends Component {
   componentDidMount = () => {
@@ -66,6 +67,7 @@ export class App extends Component {
     const currUserVerfied = this.props.verifyEmail.verfied;
     return (
       <Layout>
+        <AuthModal isAuthenticated={this.props.authentication.isAuthenticated} />
         <Switch>
           <PrivateRoute
             path="/registration"
