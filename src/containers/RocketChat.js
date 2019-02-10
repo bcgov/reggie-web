@@ -77,11 +77,11 @@ class RocketChat extends Component {
           <div>
             {/* External link */}
             <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-              <Button bsStyle="primary">Go to Rocket Chat</Button>
+              <Button className="btn btn-primary">Go to Rocket Chat</Button>
             </a>
           </div>
           <div>
-            <Button bsStyle="primary" onClick={onClick}>
+            <Button className="btn btn-primary" onClick={onClick}>
               Invite New User
             </Button>
           </div>

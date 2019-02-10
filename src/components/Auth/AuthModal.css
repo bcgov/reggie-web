@@ -11,6 +11,10 @@
   height: 100px;
 }
 
+.modal-title {
+  width: 400px;
+}
+
 .modal-footer {
   display: block !important;
 }

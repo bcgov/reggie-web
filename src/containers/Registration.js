@@ -57,7 +57,7 @@ class Registration extends Component {
 
     const validate = (formData, errors) => {
       if (formData.email !== formData.emailRepeat) {
-        errors.emailRepeat.__errors = ['Email not matching!'];
+        errors.emailRepeat.addError('Email not matching!');
       }
       return errors;
     };

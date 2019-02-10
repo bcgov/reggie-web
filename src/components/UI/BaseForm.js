@@ -61,10 +61,10 @@ export const BaseForm = ({
 
   // Form:
   const jsform = (
-    <Container componentClass="main">
+    <Container>
       <Row className="center-form">
         <Form schema={formSchema} onSubmit={onSubmit} validate={formValidate} showErrorList={false}>
-          <Button type="submit" bsStyle="primary">
+          <Button type="submit" className="btn btn-primary">
             Submit
           </Button>
         </Form>
