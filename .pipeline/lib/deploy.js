@@ -23,7 +23,7 @@ module.exports = () => {
     REACT_APP_ROCKETCHAT_URL_VALUE:
       oc.options.env === 'prod'
         ? 'https://chat-pilot.pathfinder.gov.bc.ca/'
-        : 'https://chat-pilot.pathfinder.gov.bc.ca/test',
+        : 'https://chat-dev.pathfinder.gov.bc.ca/',
   };
 
   const objects = oc.process(oc.toFileUrl(templateFile), {
