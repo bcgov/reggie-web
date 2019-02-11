@@ -20,6 +20,10 @@ module.exports = () => {
       oc.options.env === 'prod'
         ? 'https://reggie-api-prod-devhub-prod.pathfinder.gov.bc.ca'
         : 'https://reggie-api-test-devhub-test.pathfinder.gov.bc.ca',
+    REACT_APP_ROCKETCHAT_URL_VALUE:
+      oc.options.env === 'prod'
+        ? 'https://chat-pilot.pathfinder.gov.bc.ca/'
+        : 'https://chat-pilot.pathfinder.gov.bc.ca/test',
   };
 
   const objects = oc.process(oc.toFileUrl(templateFile), {
