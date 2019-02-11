@@ -67,6 +67,7 @@ ShallowWrapper {
       "fade": false,
       "isOpen": false,
       "keyboard": true,
+      "modalClassName": "auth-modal",
       "modalTransition": Object {
         "timeout": 300,
       },
@@ -247,6 +248,7 @@ ShallowWrapper {
         "fade": false,
         "isOpen": false,
         "keyboard": true,
+        "modalClassName": "auth-modal",
         "modalTransition": Object {
           "timeout": 300,
         },
@@ -466,6 +468,7 @@ ShallowWrapper {
       "fade": false,
       "isOpen": true,
       "keyboard": true,
+      "modalClassName": "auth-modal",
       "modalTransition": Object {
         "timeout": 300,
       },
@@ -646,6 +649,7 @@ ShallowWrapper {
         "fade": false,
         "isOpen": true,
         "keyboard": true,
+        "modalClassName": "auth-modal",
         "modalTransition": Object {
           "timeout": 300,
         },
