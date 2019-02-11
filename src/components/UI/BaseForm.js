@@ -63,7 +63,13 @@ export const BaseForm = ({
   const jsform = (
     <Container>
       <Row className="center-form">
-        <Form schema={formSchema} onSubmit={onSubmit} validate={formValidate} showErrorList={false}>
+        <Form
+          className="jsform-content"
+          schema={formSchema}
+          onSubmit={onSubmit}
+          validate={formValidate}
+          showErrorList={false}
+        >
           <Button type="submit" className="btn btn-primary">
             Submit
           </Button>
