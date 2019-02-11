@@ -27,7 +27,7 @@ import './AuthModal.css';
 
 export const AuthModal = ({ isAuthenticated }) => {
   return (
-    <Modal isOpen={!isAuthenticated} fade={false}>
+    <Modal modalClassName="auth-modal" isOpen={!isAuthenticated} fade={false}>
       <ModalHeader>
         <div className="banner">
           <img src={logo} className="header-logo" alt="logo" />

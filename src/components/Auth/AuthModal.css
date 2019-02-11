@@ -1,5 +1,5 @@
-.modal {
-  display: flex !important;
+.auth-modal.modal {
+  display: flex;
   align-items: center;
   background-color: white;
 }
@@ -15,8 +15,8 @@
   width: 400px;
 }
 
-.modal-footer {
-  display: block !important;
+.auth-modal .modal-footer {
+  display: block;
 }
 
 .modal-body {
