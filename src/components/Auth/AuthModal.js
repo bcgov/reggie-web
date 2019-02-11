@@ -23,6 +23,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import logo from '../UI/bcgovlogo.svg';
+import { SSO_IDP } from '../../constants';
 import './AuthModal.css';
 
 export const AuthModal = ({ isAuthenticated }) => {
@@ -38,9 +39,15 @@ export const AuthModal = ({ isAuthenticated }) => {
         Please login before starting the Rocketchat Registration process with Reggie
       </ModalBody>
       <ModalFooter>
-        <Link className="auth-button" to="/login">
-          Login
-        </Link>
+        <p>Login with:</p>
+        <div className="auth-buttons">
+          <Link className="auth-button" to={{ pathname: '/login', state: { idp: SSO_IDP.GITHUB } }}>
+            GitHub
+          </Link>
+          <Link className="auth-button" to={{ pathname: '/login', state: { idp: SSO_IDP.IDIR } }}>
+            IDIR
+          </Link>
+        </div>
       </ModalFooter>
     </Modal>
   );

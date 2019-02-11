@@ -37,6 +37,7 @@ import {
 } from '../containers';
 import Layout from '../hoc/Layout';
 import PrivateRoute from './Navigation/PrivateRoute';
+import { LoginRoute } from './Navigation/LoginRoute';
 import './App.css';
 import AuthModal from './Auth/AuthModal';
 
@@ -102,12 +103,7 @@ export class App extends Component {
             authorization={this.props.authorization}
             verifyEmail={this.props.verifyEmail}
           />
-          <Route
-            path="/login"
-            component={() => {
-              window.location = implicitAuthManager.getSSOLoginURI();
-            }}
-          />
+          <Route path="/login" component={LoginRoute} />
           <Route
             path="/logout"
             component={() => {

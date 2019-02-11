@@ -21,6 +21,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { updateUser, clearUpdateUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
 
@@ -75,12 +76,17 @@ class Registration extends Component {
     };
 
     const formContent = this.props.updated ? (
-      <p>
-        Thank you for registering, please check your email!
-        <br />
-        If you do not receive an email, please repeat the registration process and double check the
-        email address you've provided.
-      </p>
+      <div>
+        <p>
+          Thank you for registering, please check your email!
+          <br />
+          If you do not receive an email, please repeat the registration process and double check
+          the email address you've provided.
+        </p>
+        <Link className="btn btn-primary" to="/">
+          Restart Register
+        </Link>
+      </div>
     ) : (
       <div>
         <p>
