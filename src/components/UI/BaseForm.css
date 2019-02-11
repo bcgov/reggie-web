@@ -10,3 +10,17 @@
   display: flex;
   justify-content: center;
 }
+
+.center-form div {
+  text-align: left;
+}
+
+.jsform-content {
+  width: 400px;
+}
+
+.center-form #root__title {
+  text-align: center;
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 30px;
+}

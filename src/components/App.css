@@ -22,7 +22,6 @@ button {
   font-size: 12px;
 }
 
-/* Bootstrap button overrides */
 .btn.btn-primary {
   background-color: #003366; /* Green */
   border: none;
@@ -32,30 +31,14 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 16px;
   font-family: 'Noto Sans','Calibri', 'Arial', 'Sans Serif';
   cursor: pointer;
-  margin: 50px 0;
 }
 
 .btn.btn-primary:hover {
-  text-decoration: underline;
-  opacity: 0.9;
-  background-color: #003366;
-  color: #fff;
-}
-
-input.form-control {
-  height: 25px;
-  border: 2px solid #38598a;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border-radius: 3px;
-  padding: 5px;
-}
-
-input.form-control :focus {
-    outline: 2px solid #38598a;
-    outline-offset: 1px;
+text-decoration: underline;
+opacity: 0.9;
 }
 
 div {
@@ -64,6 +47,11 @@ div {
 
 h1 {
   margin-bottom: 50px;
+}
+
+.container h1 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .display-linebreak {

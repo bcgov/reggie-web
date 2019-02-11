@@ -35,7 +35,6 @@ class Registration extends Component {
 
   render() {
     const schema = {
-      title: 'Please register to continue',
       type: 'object',
       required: ['firstName', 'lastName', 'email', 'emailRepeat'],
       properties: {
@@ -57,7 +56,7 @@ class Registration extends Component {
 
     const validate = (formData, errors) => {
       if (formData.email !== formData.emailRepeat) {
-        errors.emailRepeat.__errors = ['Email not matching!'];
+        errors.emailRepeat.addError('Emails do not match.');
       }
       return errors;
     };

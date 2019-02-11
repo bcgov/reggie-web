@@ -20,7 +20,7 @@
 
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { SELF_SERVER_APP } from '../constants';
 import { inviteUser } from '../actionCreators';
@@ -68,7 +68,7 @@ class RocketChat extends Component {
       <div>
         <h1>Hello {this.props.userInfo.firstName}</h1>
         <p>
-          You have complete registration process. Please go ahead to RocketChat App!
+          You have completed registration process. Please go ahead to RocketChat App!
           <br />
           If you need to invite new users, please click the Invite button and provide an email
           address.
@@ -77,11 +77,11 @@ class RocketChat extends Component {
           <div>
             {/* External link */}
             <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-              <Button bsStyle="primary">Go to Rocket Chat</Button>
+              <Button className="btn btn-primary">Go to Rocket Chat</Button>
             </a>
           </div>
           <div>
-            <Button bsStyle="primary" onClick={onClick}>
+            <Button className="btn btn-primary" onClick={onClick}>
               Invite New User
             </Button>
           </div>

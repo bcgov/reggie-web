@@ -5,7 +5,11 @@ import { App } from '../../components/App';
 describe('App Component', () => {
   it('matches snapshot', () => {
     const wrapper = shallow(
-      <App authentication={{ isAuthenticated: true }} job={{ status: 'testStatus' }} />
+      <App
+        authentication={{ isAuthenticated: true }}
+        authorization={{ isAuthorizing: true, authCode: 'new' }}
+        verifyEmail={{ verfied: false }}
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });

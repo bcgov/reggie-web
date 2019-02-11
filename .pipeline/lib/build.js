@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = () => {
   const oc = new OpenShiftClientX({ namespace: 'devhub-tools' });
-  const templateFile = path.resolve(__dirname, '../../openshift/bc.yaml');;
+  const templateFile = path.resolve(__dirname, '../../openshift/bc.yaml');
 
   const appName = 'reggie-web';
 

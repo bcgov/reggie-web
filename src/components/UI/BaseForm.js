@@ -20,7 +20,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Button } from 'react-bootstrap';
+import { Container, Row, Button } from 'reactstrap';
 import Form from 'react-jsonschema-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,15 +61,21 @@ export const BaseForm = ({
 
   // Form:
   const jsform = (
-    <Grid componentClass="main">
+    <Container>
       <Row className="center-form">
-        <Form schema={formSchema} onSubmit={onSubmit} validate={formValidate} showErrorList={false}>
-          <Button type="submit" bsStyle="primary">
+        <Form
+          className="jsform-content"
+          schema={formSchema}
+          onSubmit={onSubmit}
+          validate={formValidate}
+          showErrorList={false}
+        >
+          <Button type="submit" className="btn btn-primary">
             Submit
           </Button>
         </Form>
       </Row>
-    </Grid>
+    </Container>
   );
 
   // Alter between form and loading indication:

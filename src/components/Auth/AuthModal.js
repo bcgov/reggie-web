@@ -15,42 +15,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Jason Leach on 2018-09-04.
+// Created by Jason Leach on 2018-10-03.
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import AuthButton from '../Auth/AuthButton';
-import logo from './bcgovlogo.svg';
-import './Header.css';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import logo from '../UI/bcgovlogo.svg';
+import './AuthModal.css';
 
-export const Header = ({ authentication }) => {
+export const AuthModal = ({ isAuthenticated }) => {
   return (
-    <header className="header">
-      <div className="banner">
-        <Link to="/">
+    <Modal modalClassName="auth-modal" isOpen={!isAuthenticated} fade={false}>
+      <ModalHeader>
+        <div className="banner">
           <img src={logo} className="header-logo" alt="logo" />
+          <h1>BC Gov Reggie</h1>
+        </div>
+      </ModalHeader>
+      <ModalBody>
+        Please login before starting the Rocketchat Registration process with Reggie
+      </ModalBody>
+      <ModalFooter>
+        <Link className="auth-button" to="/login">
+          Login
         </Link>
-        <h1>BC Gov Reggie</h1>
-      </div>
-      <AuthButton isAuthenticated={authentication.isAuthenticated} />
-    </header>
+      </ModalFooter>
+    </Modal>
   );
 };
 
-Header.propTypes = {
-  authentication: PropTypes.object.isRequired,
+AuthModal.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => {
-  return {
-    authentication: state.authentication,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(Header);
+export default AuthModal;
