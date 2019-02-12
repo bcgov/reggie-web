@@ -66,6 +66,8 @@ objects:
                 key: SSO_CLIENT_ID
           - name: REACT_APP_API_BASE_URL
             value: ${REACT_APP_API_BASE_URL_VALUE}
+          - name: REACT_APP_ROCKETCHAT_URL
+            value: ${REACT_APP_ROCKETCHAT_URL_VALUE}
           volumeMounts:
           - name: ${VOLUMN_NAME}
             mountPath: /etc/Caddyfile
@@ -141,6 +143,11 @@ parameters:
 - description: A base url of reggie api
   displayName: host of reggie api
   name: REACT_APP_API_BASE_URL_VALUE
+  required: false
+  value: ''
+- description: A url of rc app
+  displayName: website of rc
+  name: REACT_APP_ROCKETCHAT_URL_VALUE
   required: false
   value: ''
 - description: A volumn used for the caddy from config map

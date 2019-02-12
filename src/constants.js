@@ -46,7 +46,7 @@ export const SSO_IDP = {
 
 export const SELF_SERVER_APP = {
   ROCKETCHAT: {
-    URL: 'https://chat-pilot.pathfinder.gov.bc.ca/',
+    URL: process.env.REACT_APP_ROCKETCHAT_URL || config.rocketchatUrl,
     NAME: 'rc',
     INVITATION_CODE: 'rc',
   },
