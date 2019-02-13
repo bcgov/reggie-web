@@ -9,11 +9,6 @@
   justify-content: space-between;
 }
 
-.header .banner{
-  display: flex;
-  align-items: center;
-}
-
 @media screen and (max-width: 800px) {
   .header {
     padding: 0 10px;
