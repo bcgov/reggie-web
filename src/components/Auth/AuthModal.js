@@ -22,6 +22,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Textfit } from 'react-textfit';
 import logo from '../UI/bcgovlogo.svg';
 import { SSO_IDP } from '../../constants';
 import './AuthModal.css';
@@ -32,7 +33,9 @@ export const AuthModal = ({ isAuthenticated }) => {
       <ModalHeader>
         <div className="banner">
           <img src={logo} className="header-logo" alt="logo" />
-          <h1>BC Gov Reggie</h1>
+          <Textfit className="header-title" mode="multi">
+            BC Gov Reggie
+          </Textfit>
         </div>
       </ModalHeader>
       <ModalBody>
