@@ -22,7 +22,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { SELF_SERVER_APP } from '../constants';
+import { Element, scroller } from 'react-scroll';
+import { SELF_SERVER_APP, SCROLLER } from '../constants';
 import { inviteUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
 
@@ -53,6 +54,7 @@ class RocketChat extends Component {
 
     const onClick = () => {
       this.setState({ toggled: !this.state.toggled });
+      scroller.scrollTo(SCROLLER.TARGET, SCROLLER.CONFIG);
     };
 
     const formStatus = {
@@ -86,13 +88,15 @@ class RocketChat extends Component {
             </Button>
           </div>
         </div>
-        <BaseForm
-          formSchema={schema}
-          toggled={this.state.toggled}
-          onSubmit={onSubmit}
-          status={formStatus}
-          messages={formMessages}
-        />
+        <Element name={SCROLLER.TARGET}>
+          <BaseForm
+            formSchema={schema}
+            toggled={this.state.toggled}
+            onSubmit={onSubmit}
+            status={formStatus}
+            messages={formMessages}
+          />
+        </Element>
       </div>
     );
   }

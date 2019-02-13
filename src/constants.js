@@ -65,3 +65,13 @@ export const AUTH_CODE = {
   AUTHORIZED: 'authorized',
   REJECTED: 'rejected',
 };
+
+export const SCROLLER = {
+  CONFIG: {
+    duration: 800,
+    delay: 80,
+    smooth: true,
+    offset: 50,
+  },
+  TARGET: 'scorllerTarget',
+};
