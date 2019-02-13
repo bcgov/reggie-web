@@ -20,6 +20,10 @@
 
 import config from './config.json';
 
+export const APP_INFO = {
+  NAME: 'BC Gov Reggie',
+};
+
 export const API = {
   BASE_URL: process.env.REACT_APP_API_BASE_URL
     ? `${process.env.REACT_APP_API_BASE_URL}/api/v1/`

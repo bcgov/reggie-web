@@ -22,21 +22,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Textfit } from 'react-textfit';
-import logo from '../UI/bcgovlogo.svg';
-import { SSO_IDP } from '../../constants';
+import Title from '../UI/Title';
+import { SSO_IDP, APP_INFO } from '../../constants';
 import './AuthModal.css';
 
 export const AuthModal = ({ isAuthenticated }) => {
   return (
     <Modal modalClassName="auth-modal" isOpen={!isAuthenticated} fade={false}>
       <ModalHeader>
-        <div className="banner">
-          <img src={logo} className="header-logo" alt="logo" />
-          <Textfit className="header-title" mode="multi">
-            BC Gov Reggie
-          </Textfit>
-        </div>
+        <Title titleText={APP_INFO.NAME} />
       </ModalHeader>
       <ModalBody>
         Please login before starting the Rocketchat Registration process with Reggie
