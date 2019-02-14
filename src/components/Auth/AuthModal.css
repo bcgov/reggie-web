@@ -32,23 +32,6 @@
   height: 100px;
 }
 
-.modal-header .banner{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.modal-header .header-title {
-  font-family: 'Noto Sans','Calibri', 'Arial', 'Sans Serif';
-  font-weight: normal;
-  padding-left: 15px;
-  margin-bottom: 0;
-}
-
-.modal-header .header-logo {
-  height: 75px;
-}
-
 @media screen and (max-width: 500px) {
   .auth-modal .modal-dialog {
     width: 100%;

@@ -22,9 +22,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/App';
-import './index.css';
 import 'bootstrap-css-only/css/bootstrap-reboot.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
+import './index.css';
 
 import serviceWorker from './serviceWorker';
 import configureStore from './configureStore';
