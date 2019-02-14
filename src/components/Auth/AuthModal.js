@@ -22,7 +22,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Title from '../UI/Title';
+import Banner from '../UI/Banner';
 import { SSO_IDP, APP_INFO } from '../../constants';
 import './AuthModal.css';
 
@@ -30,7 +30,7 @@ export const AuthModal = ({ isAuthenticated }) => {
   return (
     <Modal modalClassName="auth-modal" isOpen={!isAuthenticated} fade={false}>
       <ModalHeader>
-        <Title titleText={APP_INFO.NAME} />
+        <Banner titleText={APP_INFO.NAME} />
       </ModalHeader>
       <ModalBody>
         Please login before starting the Rocketchat Registration process with Reggie

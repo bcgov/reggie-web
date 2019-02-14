@@ -23,13 +23,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AuthButton from '../Auth/AuthButton';
 import { APP_INFO } from '../../constants';
-import Title from './Title';
+import Banner from './Banner';
 import './Header.css';
 
 export const Header = ({ authentication }) => {
   return (
     <header className="header">
-      <Title link="/" titleText={APP_INFO.NAME} />
+      <Banner link="/" titleText={APP_INFO.NAME} />
       <AuthButton isAuthenticated={authentication.isAuthenticated} />
     </header>
   );

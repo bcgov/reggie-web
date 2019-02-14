@@ -34,7 +34,7 @@ ShallowWrapper {
           tag="h5"
           wrapTag="div"
         >
-          <Title
+          <Banner
             titleText="BC Gov Reggie"
           />
         </ModalHeader>,
@@ -103,7 +103,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "charCode": 215,
-          "children": <Title
+          "children": <Banner
             titleText="BC Gov Reggie"
           />,
           "closeAriaLabel": "Close",
@@ -299,7 +299,7 @@ ShallowWrapper {
             tag="h5"
             wrapTag="div"
           >
-            <Title
+            <Banner
               titleText="BC Gov Reggie"
             />
           </ModalHeader>,
@@ -368,7 +368,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "charCode": 215,
-            "children": <Title
+            "children": <Banner
               titleText="BC Gov Reggie"
             />,
             "closeAriaLabel": "Close",
@@ -603,7 +603,7 @@ ShallowWrapper {
           tag="h5"
           wrapTag="div"
         >
-          <Title
+          <Banner
             titleText="BC Gov Reggie"
           />
         </ModalHeader>,
@@ -672,7 +672,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "charCode": 215,
-          "children": <Title
+          "children": <Banner
             titleText="BC Gov Reggie"
           />,
           "closeAriaLabel": "Close",
@@ -868,7 +868,7 @@ ShallowWrapper {
             tag="h5"
             wrapTag="div"
           >
-            <Title
+            <Banner
               titleText="BC Gov Reggie"
             />
           </ModalHeader>,
@@ -937,7 +937,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "charCode": 215,
-            "children": <Title
+            "children": <Banner
               titleText="BC Gov Reggie"
             />,
             "closeAriaLabel": "Close",

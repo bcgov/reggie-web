@@ -23,9 +23,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Textfit } from 'react-textfit';
 import logo from './bcgovlogo.svg';
-import './Title.css';
+import './Banner.css';
 
-export const Title = ({ link = '', titleText }) => {
+export const Banner = ({ link = '', titleText }) => {
   return (
     <div className="banner">
       <Link to={link}>
@@ -38,9 +38,9 @@ export const Title = ({ link = '', titleText }) => {
   );
 };
 
-Title.propTypes = {
+Banner.propTypes = {
   link: PropTypes.string,
   titleText: PropTypes.string.isRequired,
 };
 
-export default Title;
+export default Banner;
