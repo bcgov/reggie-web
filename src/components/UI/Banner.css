@@ -1,0 +1,15 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.header-title {
+  font-weight: normal;
+  margin: 13px 18px;
+  padding: 0.5em 0;
+}
+
+.header-logo {
+  height: 80px;
+}

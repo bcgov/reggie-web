@@ -9,29 +9,7 @@
   justify-content: space-between;
 }
 
-.header .banner{
-  display: flex;
-  align-items: center;
-}
-
-.header h1 {
-  font-family: 'Noto Sans','Calibri', 'Arial', 'Sans Serif';
-  font-size: 24px;
-  font-weight: normal;
-  margin: 13px 18px;
-  padding: 0.5em 0;
-}
-
-.header-logo {
-  animation: logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.header-intro {
-  font-size: large;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .header {
     padding: 0 10px;
   }

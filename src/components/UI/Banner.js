@@ -20,32 +20,27 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import AuthButton from '../Auth/AuthButton';
-import { APP_INFO } from '../../constants';
-import Banner from './Banner';
-import './Header.css';
+import { Link } from 'react-router-dom';
+import { Textfit } from 'react-textfit';
+import logo from './bcgovlogo.svg';
+import './Banner.css';
 
-export const Header = ({ authentication }) => {
+export const Banner = ({ link = '', titleText }) => {
   return (
-    <header className="header">
-      <Banner link="/" titleText={APP_INFO.NAME} />
-      <AuthButton isAuthenticated={authentication.isAuthenticated} />
-    </header>
+    <div className="banner">
+      <Link to={link}>
+        <img src={logo} className="header-logo" alt="logo" />
+      </Link>
+      <Textfit className="header-title" mode="multi">
+        {titleText}
+      </Textfit>
+    </div>
   );
 };
 
-Header.propTypes = {
-  authentication: PropTypes.object.isRequired,
+Banner.propTypes = {
+  link: PropTypes.string,
+  titleText: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => {
-  return {
-    authentication: state.authentication,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(Header);
+export default Banner;

@@ -17,7 +17,7 @@
 //
 // Created by Shelly Xue Han on 2019-02-11.
 //
-
+// eslint-disable-next-line
 import React, { Component } from 'react';
 import implicitAuthManager from '../../auth';
 

@@ -20,6 +20,10 @@
 
 import config from './config.json';
 
+export const APP_INFO = {
+  NAME: 'BC Gov Reggie',
+};
+
 export const API = {
   BASE_URL: process.env.REACT_APP_API_BASE_URL
     ? `${process.env.REACT_APP_API_BASE_URL}/api/v1/`
@@ -64,4 +68,14 @@ export const AUTH_CODE = {
   PENDING: 'pending',
   AUTHORIZED: 'authorized',
   REJECTED: 'rejected',
+};
+
+export const SCROLLER = {
+  CONFIG: {
+    duration: 800,
+    delay: 80,
+    smooth: true,
+    offset: 50,
+  },
+  TARGET: 'scorllerTarget',
 };

@@ -25,23 +25,10 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className="banner"
-        >
-          <Link
-            replace={false}
-            to="/"
-          >
-            <img
-              alt="logo"
-              className="header-logo"
-              src="bcgovlogo.svg"
-            />
-          </Link>
-          <h1>
-            BC Gov Reggie
-          </h1>
-        </div>,
+        <Banner
+          link="/"
+          titleText="BC Gov Reggie"
+        />,
         <AuthButton
           isAuthenticated={false}
         />,
@@ -53,69 +40,14 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": Array [
-            <Link
-              replace={false}
-              to="/"
-            >
-              <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />
-            </Link>,
-            <h1>
-              BC Gov Reggie
-            </h1>,
-          ],
-          "className": "banner",
+          "link": "/",
+          "titleText": "BC Gov Reggie",
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />,
-              "replace": false,
-              "to": "/",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "alt": "logo",
-                "className": "header-logo",
-                "src": "bcgovlogo.svg",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "img",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "BC Gov Reggie",
-            },
-            "ref": null,
-            "rendered": "BC Gov Reggie",
-            "type": "h1",
-          },
-        ],
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -138,23 +70,10 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <div
-            className="banner"
-          >
-            <Link
-              replace={false}
-              to="/"
-            >
-              <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />
-            </Link>
-            <h1>
-              BC Gov Reggie
-            </h1>
-          </div>,
+          <Banner
+            link="/"
+            titleText="BC Gov Reggie"
+          />,
           <AuthButton
             isAuthenticated={false}
           />,
@@ -166,69 +85,14 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": Array [
-              <Link
-                replace={false}
-                to="/"
-              >
-                <img
-                  alt="logo"
-                  className="header-logo"
-                  src="bcgovlogo.svg"
-                />
-              </Link>,
-              <h1>
-                BC Gov Reggie
-              </h1>,
-            ],
-            "className": "banner",
+            "link": "/",
+            "titleText": "BC Gov Reggie",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <img
-                  alt="logo"
-                  className="header-logo"
-                  src="bcgovlogo.svg"
-                />,
-                "replace": false,
-                "to": "/",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "alt": "logo",
-                  "className": "header-logo",
-                  "src": "bcgovlogo.svg",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "img",
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "BC Gov Reggie",
-              },
-              "ref": null,
-              "rendered": "BC Gov Reggie",
-              "type": "h1",
-            },
-          ],
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
@@ -294,23 +158,10 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className="banner"
-        >
-          <Link
-            replace={false}
-            to="/"
-          >
-            <img
-              alt="logo"
-              className="header-logo"
-              src="bcgovlogo.svg"
-            />
-          </Link>
-          <h1>
-            BC Gov Reggie
-          </h1>
-        </div>,
+        <Banner
+          link="/"
+          titleText="BC Gov Reggie"
+        />,
         <AuthButton
           isAuthenticated={true}
         />,
@@ -322,69 +173,14 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": Array [
-            <Link
-              replace={false}
-              to="/"
-            >
-              <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />
-            </Link>,
-            <h1>
-              BC Gov Reggie
-            </h1>,
-          ],
-          "className": "banner",
+          "link": "/",
+          "titleText": "BC Gov Reggie",
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />,
-              "replace": false,
-              "to": "/",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "alt": "logo",
-                "className": "header-logo",
-                "src": "bcgovlogo.svg",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "img",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "BC Gov Reggie",
-            },
-            "ref": null,
-            "rendered": "BC Gov Reggie",
-            "type": "h1",
-          },
-        ],
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -407,23 +203,10 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <div
-            className="banner"
-          >
-            <Link
-              replace={false}
-              to="/"
-            >
-              <img
-                alt="logo"
-                className="header-logo"
-                src="bcgovlogo.svg"
-              />
-            </Link>
-            <h1>
-              BC Gov Reggie
-            </h1>
-          </div>,
+          <Banner
+            link="/"
+            titleText="BC Gov Reggie"
+          />,
           <AuthButton
             isAuthenticated={true}
           />,
@@ -435,69 +218,14 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": Array [
-              <Link
-                replace={false}
-                to="/"
-              >
-                <img
-                  alt="logo"
-                  className="header-logo"
-                  src="bcgovlogo.svg"
-                />
-              </Link>,
-              <h1>
-                BC Gov Reggie
-              </h1>,
-            ],
-            "className": "banner",
+            "link": "/",
+            "titleText": "BC Gov Reggie",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <img
-                  alt="logo"
-                  className="header-logo"
-                  src="bcgovlogo.svg"
-                />,
-                "replace": false,
-                "to": "/",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "alt": "logo",
-                  "className": "header-logo",
-                  "src": "bcgovlogo.svg",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "img",
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "BC Gov Reggie",
-              },
-              "ref": null,
-              "rendered": "BC Gov Reggie",
-              "type": "h1",
-            },
-          ],
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
