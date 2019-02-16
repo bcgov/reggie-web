@@ -103,6 +103,14 @@ export class App extends Component {
             authorization={this.props.authorization}
             verifyEmail={this.props.verifyEmail}
           />
+          <Route
+            path="/ssoLogin/:loginIdp"
+            component={({ match }) => {
+              if (match.params.loginIdp)
+                implicitAuthManager.config.kcIDPHint = match.params.loginIdp;
+              window.location = implicitAuthManager.getSSOLoginURI();
+            }}
+          />
           <Route path="/login" component={LoginRoute} />
           <Route
             path="/logout"
