@@ -109,6 +109,10 @@ ShallowWrapper {
           />
           <Route
             component={[Function]}
+            path="/ssoLogin/:loginIdp"
+          />
+          <Route
+            component={[Function]}
             path="/login"
           />
           <Route
@@ -212,6 +216,10 @@ ShallowWrapper {
                   "verfied": false,
                 }
               }
+            />,
+            <Route
+              component={[Function]}
+              path="/ssoLogin/:loginIdp"
             />,
             <Route
               component={[Function]}
@@ -343,6 +351,18 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "component": [Function],
+              "path": "/ssoLogin/:loginIdp",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": [Function],
               "path": "/login",
             },
             "ref": null,
@@ -462,6 +482,10 @@ ShallowWrapper {
             />
             <Route
               component={[Function]}
+              path="/ssoLogin/:loginIdp"
+            />
+            <Route
+              component={[Function]}
               path="/login"
             />
             <Route
@@ -565,6 +589,10 @@ ShallowWrapper {
                     "verfied": false,
                   }
                 }
+              />,
+              <Route
+                component={[Function]}
+                path="/ssoLogin/:loginIdp"
               />,
               <Route
                 component={[Function]}
@@ -685,6 +713,18 @@ ShallowWrapper {
                 "verifyEmail": Object {
                   "verfied": false,
                 },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "path": "/ssoLogin/:loginIdp",
               },
               "ref": null,
               "rendered": null,
