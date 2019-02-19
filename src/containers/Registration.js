@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateUser, clearUpdateUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
+import './Registration.css';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
@@ -76,16 +77,17 @@ class Registration extends Component {
     };
 
     const formContent = this.props.updated ? (
-      <div>
-        <p>
-          Thank you for registering, please check your email!
-          <br />
-          If you do not receive an email, please repeat the registration process and double check
-          the email address you've provided.
-        </p>
-        <Link className="btn btn-primary" to="/">
-          Restart Register
-        </Link>
+      <div className="flex-box">
+        <div className="placeholder-message" />
+        <div className="success-message">
+          <p>Thank you for registering, please check your email!</p>
+        </div>
+        <div className="hint-message">
+          <p>Not receiving email?</p>
+          <Link className="hint-link" to="/">
+            Restart Registration
+          </Link>
+        </div>
       </div>
     ) : (
       <div>
