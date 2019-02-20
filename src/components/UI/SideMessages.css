@@ -1,0 +1,40 @@
+.message-group {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.center-message {
+  flex-grow: 4;
+}
+
+.left-message {
+  flex-grow: 1;
+  width: 150px;
+}
+
+.right-message {
+  font-size: 13px;
+  border-left: 1px solid #ced4da;
+  flex-grow: 1;
+  width: 150px;
+}
+
+.right-message p {
+  margin: 0 !important;
+  color: #7c8084;
+}
+
+@media screen and (max-width: 760px) {
+  .left-message {
+    display: none;
+  }
+
+  .right-message {
+    width: 150px;
+    flex-grow: 1;
+    border-left: none;
+    border-top: 1px solid #ced4da;
+    margin-top: 50px;
+    padding-top: 20px;
+  }
+}
