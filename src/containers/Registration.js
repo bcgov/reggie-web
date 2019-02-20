@@ -82,7 +82,14 @@ class Registration extends Component {
         rightContent={
           <div>
             <p>Not receiving email?</p>
-            <Link className="hint-link" to="/">
+            <Link
+              style={{
+                color: '#7c8084',
+                textDecoration: 'underline',
+                ':hover': { color: '#7c8084' },
+              }}
+              to="/"
+            >
               Restart Registration
             </Link>
           </div>
