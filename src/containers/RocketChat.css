@@ -1,0 +1,12 @@
+.invite-message {
+  height: 100%;
+}
+
+.invite-message p {
+  margin: 10px 0 !important;
+}
+
+.invite-button {
+  margin: auto 5px 0 5px;
+  width: 150px;
+}

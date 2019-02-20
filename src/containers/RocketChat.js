@@ -26,6 +26,8 @@ import { Element, scroller } from 'react-scroll';
 import { SELF_SERVER_APP, SCROLLER } from '../constants';
 import { inviteUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
+import SideMessages from '../components/UI/SideMessages';
+import './RocketChat.css';
 
 // Only authorized user can access the app and invite new user:
 class RocketChat extends Component {
@@ -35,14 +37,14 @@ class RocketChat extends Component {
   render() {
     // Json Schema Form:
     const schema = {
-      // title: 'Please register to continue',
+      title: 'Invite User via Email',
       type: 'object',
       required: ['email'],
       properties: {
         email: {
           type: 'string',
           format: 'email',
-          title: 'Email to invite',
+          title: 'Email Address',
         },
       },
     };
@@ -68,26 +70,30 @@ class RocketChat extends Component {
 
     return (
       <div>
-        <h1>Hello {this.props.userInfo.firstName}</h1>
-        <p>
-          You have completed registration process. Please go ahead to RocketChat App!
-          <br />
-          If you need to invite new users, please click the Invite button and provide an email
-          address.
-        </p>
-        <div className="flex-container">
-          <div>
-            {/* External link */}
-            <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-              <Button className="btn btn-primary">Go to Rocket Chat</Button>
-            </a>
-          </div>
-          <div>
-            <Button className="btn btn-primary" onClick={onClick}>
-              Invite New User
-            </Button>
-          </div>
-        </div>
+        <h1>Registration Completed</h1>
+        <SideMessages
+          centerContent={
+            <div>
+              <p>
+                Hello {this.props.userInfo.firstName}
+                <br />
+                You have completed registration process. Please go ahead to RocketChat App!
+              </p>
+              {/* External link */}
+              <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
+                <Button className="btn btn-primary">Go to Rocket Chat</Button>
+              </a>
+            </div>
+          }
+          rightContent={
+            <div className="invite-message">
+              <p>Team member having issue logging in?</p>
+              <Button className="invite-button" outline color="secondary" onClick={onClick}>
+                Invite New User
+              </Button>
+            </div>
+          }
+        />
         <Element name={SCROLLER.TARGET}>
           <BaseForm
             formSchema={schema}
