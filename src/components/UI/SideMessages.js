@@ -20,15 +20,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'reactstrap';
 import './SideMessages.css';
 
-const SideMessages = ({ leftContent, centerContent, rightContent }) => {
+const SideMessages = ({ centerContent, rightContent }) => {
   return (
-    <div className="message-group">
-      <div className="left-message">{leftContent}</div>
-      <div className="center-message">{centerContent}</div>
-      <div className="right-message">{rightContent}</div>
-    </div>
+    <Container>
+      <Row>
+        <Col xs="0" sm="2" />
+        <Col sm="8">{centerContent}</Col>
+        <Col xs="12" sm="2" className="side-message">
+          {rightContent}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

@@ -8,5 +8,6 @@
 
 .invite-button {
   margin: auto 5px 0 5px;
-  width: 150px;
+  font-size: 11px !important;
+  width: 110px;
 }
