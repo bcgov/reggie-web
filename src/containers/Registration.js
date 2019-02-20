@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateUser, clearUpdateUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
-import './Registration.css';
+import SideMessages from '../components/UI/SideMessages';
 
 // Here is the form for user to complete profile infomation and register for app:
 class Registration extends Component {
@@ -76,19 +76,22 @@ class Registration extends Component {
       failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
     };
 
+    const messages = (
+      <SideMessages
+        centerContent={<p>Thank you for registering, please check your email!</p>}
+        rightContent={
+          <div>
+            <p>Not receiving email?</p>
+            <Link className="hint-link" to="/">
+              Restart Registration
+            </Link>
+          </div>
+        }
+      />
+    );
+
     const formContent = this.props.updated ? (
-      <div className="flex-box">
-        <div className="placeholder-message" />
-        <div className="success-message">
-          <p>Thank you for registering, please check your email!</p>
-        </div>
-        <div className="hint-message">
-          <p>Not receiving email?</p>
-          <Link className="hint-link" to="/">
-            Restart Registration
-          </Link>
-        </div>
-      </div>
+      messages
     ) : (
       <div>
         <p>

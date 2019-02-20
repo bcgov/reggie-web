@@ -65,3 +65,8 @@ h1 {
 .flex-container > div {
   margin: 0 10px;
 }
+
+.hint-link {
+  color: #7c8084;
+  text-decoration: underline;
+}
