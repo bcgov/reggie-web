@@ -27,9 +27,9 @@ const SideMessages = ({ centerContent, rightContent }) => {
   return (
     <Container>
       <Row>
-        <Col xs="0" sm="2" />
-        <Col sm="8">{centerContent}</Col>
-        <Col xs="12" sm="2" className="side-message">
+        <Col xs="0" sm="3" />
+        <Col sm="6">{centerContent}</Col>
+        <Col xs="12" sm="3" className="side-message">
           {rightContent}
         </Col>
       </Row>
