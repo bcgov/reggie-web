@@ -106,8 +106,9 @@ export class App extends Component {
           <Route
             path="/ssoLogin/:loginIdp"
             component={({ match }) => {
-              if (match.params.loginIdp)
+              if (match.params.loginIdp) {
                 implicitAuthManager.config.kcIDPHint = match.params.loginIdp;
+              }
               window.location = implicitAuthManager.getSSOLoginURI();
             }}
           />
