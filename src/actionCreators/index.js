@@ -184,22 +184,22 @@ export const verifyEmail = (
   jwt,
   invitationCode = SELF_SERVER_APP.ROCKETCHAT.INVITATION_CODE // Same as above
 ) => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch(verifyEmailStart());
-    axi
-      .get(API.VERIFY_SSO_USER(userId), {
-        params: {
-          email,
-          code: invitationCode,
-          token: jwt,
-        },
-      })
-      .then(res => {
-        return dispatch(verifyEmailSuccess());
-      })
-      .catch(err => {
-        let errMsg = 'Your invitation link is invalid, please get inivted again';
-        return dispatch(verifyEmailError([errMsg]));
+
+    try {
+      await axi.put(API.VERIFY_SSO_USER(userId), {
+        email,
+        code: invitationCode,
+        token: jwt,
       });
+
+      // Get the updated the current user info after the API request:
+      await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
+    } catch (err) {
+      const errMsg = 'Your invitation link is invalid, please get invited again';
+      return dispatch(verifyEmailError([errMsg]));
+    }
+    return dispatch(verifyEmailSuccess());
   };
 };

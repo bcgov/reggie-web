@@ -45,6 +45,10 @@ class Verify extends Component {
     let invitationRedirect = null;
     const ssoErrMsg = 'Your SSO account is not complete, please update your profile by login again';
 
+    // Error message:
+    const errMsg =
+      this.props.errorMessages.length > 0 ? <p>{this.props.errorMessages[0]}</p> : null;
+
     // Redirect if email invitation is verified:
     if (this.props.verfied) invitationRedirect = <Redirect to="/" />;
 
@@ -62,6 +66,7 @@ class Verify extends Component {
         {invitationRedirect}
         <h1>Verify Invitation to Rocket Chat</h1>
         <h4>{this.props.authErrorMessages[0]}</h4>
+        {errMsg}
         {pageContent}
       </div>
     );
