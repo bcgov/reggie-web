@@ -21,7 +21,7 @@
 import config from './config.json';
 
 export const APP_INFO = {
-  NAME: 'BC Gov Reggie',
+  NAME: 'BC Gov RocketChat Invitation App',
 };
 
 export const API = {
