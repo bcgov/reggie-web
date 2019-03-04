@@ -41,7 +41,7 @@ ShallowWrapper {
         <ModalBody
           tag="div"
         >
-          Please login before starting the Rocketchat Registration process with Reggie
+          Please login before starting the Rocketchat Invitation with Reggie
         </ModalBody>,
         <ModalFooter
           tag="div"
@@ -129,11 +129,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Please login before starting the Rocketchat Registration process with Reggie",
+          "children": "Please login before starting the Rocketchat Invitation with Reggie",
           "tag": "div",
         },
         "ref": null,
-        "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+        "rendered": "Please login before starting the Rocketchat Invitation with Reggie",
         "type": [Function],
       },
       Object {
@@ -306,7 +306,7 @@ ShallowWrapper {
           <ModalBody
             tag="div"
           >
-            Please login before starting the Rocketchat Registration process with Reggie
+            Please login before starting the Rocketchat Invitation with Reggie
           </ModalBody>,
           <ModalFooter
             tag="div"
@@ -394,11 +394,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Please login before starting the Rocketchat Registration process with Reggie",
+            "children": "Please login before starting the Rocketchat Invitation with Reggie",
             "tag": "div",
           },
           "ref": null,
-          "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+          "rendered": "Please login before starting the Rocketchat Invitation with Reggie",
           "type": [Function],
         },
         Object {
@@ -610,7 +610,7 @@ ShallowWrapper {
         <ModalBody
           tag="div"
         >
-          Please login before starting the Rocketchat Registration process with Reggie
+          Please login before starting the Rocketchat Invitation with Reggie
         </ModalBody>,
         <ModalFooter
           tag="div"
@@ -698,11 +698,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Please login before starting the Rocketchat Registration process with Reggie",
+          "children": "Please login before starting the Rocketchat Invitation with Reggie",
           "tag": "div",
         },
         "ref": null,
-        "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+        "rendered": "Please login before starting the Rocketchat Invitation with Reggie",
         "type": [Function],
       },
       Object {
@@ -875,7 +875,7 @@ ShallowWrapper {
           <ModalBody
             tag="div"
           >
-            Please login before starting the Rocketchat Registration process with Reggie
+            Please login before starting the Rocketchat Invitation with Reggie
           </ModalBody>,
           <ModalFooter
             tag="div"
@@ -963,11 +963,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Please login before starting the Rocketchat Registration process with Reggie",
+            "children": "Please login before starting the Rocketchat Invitation with Reggie",
             "tag": "div",
           },
           "ref": null,
-          "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+          "rendered": "Please login before starting the Rocketchat Invitation with Reggie",
           "type": [Function],
         },
         Object {
