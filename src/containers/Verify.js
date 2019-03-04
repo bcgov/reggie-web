@@ -23,8 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
-import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
-// import { BaseForm } from '../components/UI/BaseForm';
+import { SELF_SERVER_APP } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here check if invited user is valid:
@@ -46,8 +45,7 @@ class Verify extends Component {
     let invitationRedirect = null;
     const ssoErrMsg = 'Your SSO account is not complete, please update your profile by login again';
 
-    // If user not logged in, go to registration;
-    // After user verifies, go to registration.
+    // Redirect if email invitation is verified:
     if (this.props.verfied) invitationRedirect = <Redirect to="/" />;
 
     const emailJwt = localStorage.getItem('emailJwt');
@@ -76,8 +74,6 @@ const mapStateToProps = state => {
     verifyStarted: state.verifyEmail.verifyStarted,
     verfied: state.verifyEmail.verfied,
     errorMessages: state.verifyEmail.errorMessages,
-    authCode: state.authorization.authCode,
-    isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,
     authErrorMessages: state.authorization.errorMessages,
   };

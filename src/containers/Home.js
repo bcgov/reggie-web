@@ -21,7 +21,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
 import { ROUTES, AUTH_CODE } from '../constants';
 import { Loader } from '../components/UI/Loader';
@@ -46,13 +46,7 @@ class Home extends Component {
       <p>Please log in to proceed</p>
     );
 
-    /*
-      if there exist email payloads in localstorage, go to confirmation page
-      if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
-      else if user does not meet the requirement to join Rocket chat, go to rejection page
-      else, stay in the home page untill user pick an option
-    */
-    // Redirect based on Email:
+    // Redirect for email invitation verification:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
@@ -79,7 +73,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie</h1>
+        <h1>Welcome to Rocket Chat Invitation App</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
@@ -93,7 +87,6 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    userId: state.authentication.userId,
     authCode: state.authorization.authCode,
     isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,

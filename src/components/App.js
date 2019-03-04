@@ -26,15 +26,7 @@ import { authenticateFailed, authenticateSuccess } from '../actions';
 import { authorize } from '../actionCreators';
 import implicitAuthManager from '../auth';
 import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
-import {
-  Confirmation,
-  Home,
-  Registration,
-  RocketChat,
-  Rejection,
-  Email,
-  Verify,
-} from '../containers';
+import { Home, RocketChat, Rejection, Email, Verify } from '../containers';
 import Layout from '../hoc/Layout';
 import PrivateRoute from './Navigation/PrivateRoute';
 import { LoginRoute } from './Navigation/LoginRoute';
@@ -63,23 +55,11 @@ export class App extends Component {
 
   render() {
     // Get the current authorization status code for private route:
-    const currAuthProcess = this.props.authorization.isAuthorizing;
     const currAuthCode = this.props.authorization.authCode;
-    const currUserVerfied = this.props.verifyEmail.verfied;
     return (
       <Layout>
         <AuthModal isAuthenticated={this.props.authentication.isAuthenticated} />
         <Switch>
-          <PrivateRoute
-            path="/registration"
-            authorization={this.props.authorization}
-            updateUser={this.props.updateUser}
-            component={Registration}
-            shouldRender={
-              !currAuthProcess && (currAuthCode !== AUTH_CODE.REJECTED || currUserVerfied)
-            }
-            redirectTo="/"
-          />
           <PrivateRoute
             path="/rocketChat"
             authorization={this.props.authorization}
@@ -89,13 +69,6 @@ export class App extends Component {
           />
           <Route path="/rejection" component={Rejection} />
           <Route path="/email" component={Email} />
-          <Route
-            path="/confirmation"
-            component={Confirmation}
-            authentication={this.props.authentication}
-            authorization={this.props.authorization}
-            confirmEmail={this.props.confirmEmail}
-          />
           <Route
             path="/verify"
             component={Verify}
@@ -131,8 +104,6 @@ function mapStateToProps(state) {
   return {
     authentication: state.authentication,
     authorization: state.authorization,
-    updateUser: state.updateUser,
-    confirmEmail: state.confirmEmail,
     verifyEmail: state.verifyEmail,
   };
 }

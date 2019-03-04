@@ -70,14 +70,14 @@ class RocketChat extends Component {
 
     return (
       <div>
-        <h1>Registration Completed</h1>
+        <h1>Welcome</h1>
         <SideMessages
           centerContent={
             <div>
               <p>
-                Hello {this.props.userInfo.firstName}
+                Hello {this.props.userInfo.lastName}
                 <br />
-                You have completed registration process. Please go ahead to RocketChat App!
+                You are a member of RocketChat. Please go ahead to the RocketChat App!
               </p>
               {/* External link */}
               <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
