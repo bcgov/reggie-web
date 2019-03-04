@@ -55,10 +55,6 @@ class Home extends Component {
     // Redirect based on Email:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) {
-        if (this.props.userInfo.email) return <Redirect to="/confirmation" />;
-        return null;
-      }
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
@@ -69,21 +65,8 @@ class Home extends Component {
       switch (authCode) {
         case AUTH_CODE.AUTHORIZED:
           return <Redirect to="/rocketChat" />;
-        case AUTH_CODE.REJECTED:
-          return <Redirect to="/rejection" />;
-        case AUTH_CODE.NEW:
-          return <Redirect to="/registration" />;
-        case AUTH_CODE.PENDING:
-          return (
-            <div>
-              <p>You have a pending registration!</p>
-              <Link className="btn btn-primary" to="/registration">
-                Update Registation Profile
-              </Link>
-            </div>
-          );
         default:
-          return null;
+          return <Redirect to="/rejection" />;
       }
     };
 
