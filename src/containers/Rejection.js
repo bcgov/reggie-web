@@ -27,10 +27,10 @@ export class Rejection extends Component {
   render() {
     return (
       <div>
-        <h1>Registration Failed</h1>
+        <h1>Failed to Login to Rocket Chat</h1>
         <p>
-          You do not meet the requirement to join Rocket Chat <br />
-          Please request invitation from your team lead
+          Hello, looks like you do not have the membership to join Rocket Chat. <br />
+          Please request an invitation from your team lead.
         </p>
       </div>
     );
