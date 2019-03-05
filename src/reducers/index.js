@@ -20,14 +20,7 @@
 
 import { combineReducers } from 'redux';
 import implicitAuthManager from '../auth';
-import {
-  AUTHENTICATION,
-  AUTHORIZATION,
-  UPDATE_USER,
-  CONFIRM_EMAIL,
-  INIVITE_USER,
-  VERIFY_EMAIL,
-} from '../actions/actionTypes';
+import { AUTHENTICATION, AUTHORIZATION, INIVITE_USER, VERIFY_EMAIL } from '../actions/actionTypes';
 import { AUTH_CODE } from '../constants';
 
 const authentication = (state = { isAuthenticated: false, email: null, userId: null }, action) => {
@@ -105,68 +98,6 @@ const authorization = (
   }
 };
 
-const updateUser = (
-  state = { updateStarted: false, updated: false, errorMessages: [] },
-  action
-) => {
-  switch (action.type) {
-    case UPDATE_USER.START:
-      return {
-        updateStarted: true,
-        updated: false,
-        errorMessages: [],
-      };
-    case UPDATE_USER.SUCCESS:
-      return {
-        updateStarted: false,
-        updated: true,
-        errorMessages: [],
-      };
-    case UPDATE_USER.ERROR:
-      return {
-        updateStarted: false,
-        updated: false,
-        errorMessages: action.payload.errorMessages,
-      };
-    case UPDATE_USER.CLEAR:
-      return {
-        updateStarted: false,
-        updated: false,
-        errorMessages: [],
-      };
-    default:
-      return state;
-  }
-};
-
-const confirmEmail = (
-  state = { verifyStarted: false, confirmed: false, errorMessages: [] },
-  action
-) => {
-  switch (action.type) {
-    case CONFIRM_EMAIL.START:
-      return {
-        verifyStarted: true,
-        confirmed: false,
-        errorMessages: [],
-      };
-    case CONFIRM_EMAIL.SUCCESS:
-      return {
-        verifyStarted: false,
-        confirmed: true,
-        errorMessages: [],
-      };
-    case CONFIRM_EMAIL.ERROR:
-      return {
-        verifyStarted: false,
-        confirmed: false,
-        errorMessages: action.payload.errorMessages,
-      };
-    default:
-      return state;
-  }
-};
-
 const inviteUser = (
   state = { invitationStarted: false, sent: false, errorMessages: [] },
   action
@@ -226,8 +157,6 @@ const verifyEmail = (
 const rootReducer = combineReducers({
   authentication,
   authorization,
-  updateUser,
-  confirmEmail,
   inviteUser,
   verifyEmail,
 });

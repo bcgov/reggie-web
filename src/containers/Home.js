@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE } from '../constants';
+import { ROUTES, AUTH_CODE, APP_INFO } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
@@ -73,7 +73,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Rocket Chat Invitation App</h1>
+        <h1>Welcome to {APP_INFO.DISPLAY_NAME}</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}

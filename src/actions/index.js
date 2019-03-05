@@ -18,14 +18,7 @@
 // Created by Jason Leach on 2018-08-24.
 //
 
-import {
-  AUTHENTICATION,
-  AUTHORIZATION,
-  UPDATE_USER,
-  CONFIRM_EMAIL,
-  INIVITE_USER,
-  VERIFY_EMAIL,
-} from './actionTypes';
+import { AUTHENTICATION, AUTHORIZATION, INIVITE_USER, VERIFY_EMAIL } from './actionTypes';
 
 export const authenticateSuccess = () => {
   return {
@@ -68,54 +61,6 @@ export const authorizationError = errorMessages => {
 export const authorizationStop = () => {
   return {
     type: AUTHORIZATION.STOP,
-  };
-};
-
-export const updateUserStart = () => {
-  return {
-    type: UPDATE_USER.START,
-  };
-};
-
-export const updateUserSuccess = () => {
-  return {
-    type: UPDATE_USER.SUCCESS,
-  };
-};
-
-export const updateUserError = errorMessages => {
-  return {
-    type: UPDATE_USER.ERROR,
-    payload: {
-      errorMessages,
-    },
-  };
-};
-
-export const updateUserClear = () => {
-  return {
-    type: UPDATE_USER.CLEAR,
-  };
-};
-
-export const confirmEmailStart = () => {
-  return {
-    type: CONFIRM_EMAIL.START,
-  };
-};
-
-export const confirmEmailSuccess = () => {
-  return {
-    type: CONFIRM_EMAIL.SUCCESS,
-  };
-};
-
-export const confirmEmailError = errorMessages => {
-  return {
-    type: CONFIRM_EMAIL.ERROR,
-    payload: {
-      errorMessages,
-    },
   };
 };
 

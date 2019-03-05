@@ -22,6 +22,7 @@ import config from './config.json';
 
 export const APP_INFO = {
   NAME: 'BC Gov RocketChat Invitation',
+  DISPLAY_NAME: 'BC Gov RocketChat Invitation',
 };
 
 export const API = {
@@ -29,8 +30,6 @@ export const API = {
     ? `${process.env.REACT_APP_API_BASE_URL}/api/v1/`
     : `${config.apiBaseUrl}/api/v1/`,
   GET_SSO_USER: userId => `sso/user/${userId}`,
-  UPDATE_SSO_USER: userId => `sso/user/${userId}`,
-  CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   INVITE_USER: userId => `sso/user/invite/${userId}`,
   VERIFY_SSO_USER: userId => `sso/user/verify/${userId}`,
   TIME_OUT: 40000,
@@ -58,16 +57,13 @@ export const SELF_SERVER_APP = {
 
 export const ROUTES = {
   EMAIL: {
-    CONFIRM: 'confirm',
     VERIFY: 'invite',
   },
 };
 
 export const AUTH_CODE = {
   NEW: 'new',
-  PENDING: 'pending',
   AUTHORIZED: 'authorized',
-  REJECTED: 'rejected',
 };
 
 export const SCROLLER = {

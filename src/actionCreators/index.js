@@ -24,13 +24,6 @@ import {
   authorizationSuccess,
   authorizationError,
   authorizationStop,
-  updateUserStart,
-  updateUserSuccess,
-  updateUserError,
-  updateUserClear,
-  confirmEmailStart,
-  confirmEmailSuccess,
-  confirmEmailError,
   inviteUserStart,
   inviteUserSuccess,
   inviteUserError,
@@ -46,9 +39,7 @@ const axi = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-const checkStatus = (isPending = false, isAuthorized = false, isRejected = false) => {
-  if (isRejected) return AUTH_CODE.REJECTED;
-  if (isPending) return AUTH_CODE.PENDING;
+const checkStatus = (isAuthorized = false) => {
   if (isAuthorized) return AUTH_CODE.AUTHORIZED;
   return AUTH_CODE.NEW;
 };
@@ -60,14 +51,12 @@ const checkStatus = (isPending = false, isAuthorized = false, isRejected = false
  * @param {String} userId The sso user ID
  *
  */
-
 const _authorizeHelper = async (dispatch, userId, ssoGroup) => {
   let authCode = null;
   let newUserInfo = {};
   try {
     const res = await axi.get(API.GET_SSO_USER(userId));
-    // const data = response.data;
-    authCode = checkStatus(res.data.isPending, res.data.isAuthorized, res.data.isRejected);
+    authCode = checkStatus(res.data.isAuthorized);
     newUserInfo = {
       id: res.data.id,
       email: res.data.email,
@@ -103,56 +92,6 @@ export const authorize = (ssoGroup, userId, doStart = true) => {
 export const clearAuthorizationProcess = () => {
   return dispatch => {
     dispatch(authorizationStop());
-  };
-};
-
-export const updateUser = (userId, userProfile, webUrl) => {
-  return async (dispatch, getState) => {
-    dispatch(updateUserStart());
-
-    try {
-      await axi.put(API.UPDATE_SSO_USER(userId), {
-        ...userProfile,
-        refUrl: webUrl,
-      });
-
-      // Get the updated the current user info after the API request:
-      await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
-    } catch (err) {
-      const errMsg = err.response.data.error
-        ? err.response.data.error.split('=')[1]
-        : 'Fail to register your account, please try again.';
-      return dispatch(updateUserError([errMsg]));
-    }
-    return dispatch(updateUserSuccess());
-  };
-};
-
-export const clearUpdateUser = () => {
-  return dispatch => {
-    dispatch(updateUserClear());
-  };
-};
-
-export const confirmEmail = (userId, email, jwt) => {
-  return async (dispatch, getState) => {
-    dispatch(confirmEmailStart());
-
-    try {
-      await axi.put(API.CONFIRM_SSO_USER(userId), { userEmail: email, token: jwt });
-
-      // Get the updated the current user info after the API request:
-      await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
-    } catch (err) {
-      const hint = '\nPlease register again.';
-      let errMsg = 'Fail to confirm your email.';
-      if (err.response) {
-        errMsg = 'Please close your browser and register again.';
-        if (err.response.status === 500) errMsg = err.response.data.error;
-      }
-      return dispatch(confirmEmailError([`${errMsg} ${hint}`]));
-    }
-    return dispatch(confirmEmailSuccess());
   };
 };
 
@@ -193,10 +132,15 @@ export const verifyEmail = (
         code: invitationCode,
         token: jwt,
       });
+      console.log('-------------------i m here');
 
       // Get the updated the current user info after the API request:
       await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
     } catch (err) {
+      console.log('----------------verify err');
+      console.log(err);
+      console.log(err.message);
+      console.log(err.code);
       const errMsg = 'Your invitation link is invalid, please get invited again';
       return dispatch(verifyEmailError([errMsg]));
     }

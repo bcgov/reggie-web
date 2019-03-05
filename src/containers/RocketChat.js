@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Element, scroller } from 'react-scroll';
-import { SELF_SERVER_APP, SCROLLER } from '../constants';
+import { SELF_SERVER_APP, SCROLLER, APP_INFO } from '../constants';
 import { inviteUser } from '../actionCreators';
 import { BaseForm } from '../components/UI/BaseForm';
 import SideMessages from '../components/UI/SideMessages';
@@ -70,7 +70,7 @@ class RocketChat extends Component {
 
     return (
       <div>
-        <h1>Welcome</h1>
+        <h1>Welcome to {APP_INFO.DISPLAY_NAME}</h1>
         <SideMessages
           centerContent={
             <div>
