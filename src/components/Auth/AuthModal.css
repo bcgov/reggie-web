@@ -9,7 +9,7 @@
   border-bottom: 2px solid #fcba19;
   color: #fff;
   height: 100px;
-  padding-top: 0 !important;
+  padding: 0.5rem 1rem !important;
 }
 
 .modal-title {
@@ -34,10 +34,6 @@
 }
 
 @media screen and (max-width: 500px) {
-  .modal-header {
-    padding-top: 0.5em !important;
-  }
-
   .auth-modal .modal-dialog {
     width: 100%;
     margin: 0;
