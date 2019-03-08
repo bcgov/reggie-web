@@ -34,6 +34,10 @@
 }
 
 @media screen and (max-width: 500px) {
+  .modal-header {
+    padding-top: 0.5em !important;
+  }
+
   .auth-modal .modal-dialog {
     width: 100%;
     margin: 0;
