@@ -9,6 +9,7 @@
   border-bottom: 2px solid #fcba19;
   color: #fff;
   height: 100px;
+  padding-top: 0 !important;
 }
 
 .modal-title {
