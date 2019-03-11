@@ -20,6 +20,7 @@
 
 // Here shows the infomation/next step if user is rejected to enter the app:
 import React, { Component } from 'react';
+import { SELF_SERVER_APP } from '../constants';
 
 export class Rejection extends Component {
   static displayName = '[Component Rejection]';
@@ -27,10 +28,13 @@ export class Rejection extends Component {
   render() {
     return (
       <div>
-        <h1>Failed to Login to Rocket Chat</h1>
+        <h1>Failed to join to Pathfinder Rocket.Chat</h1>
         <p>
-          Hello, looks like you do not have the membership to join Rocket Chat. <br />
-          Please request an invitation from your team lead.
+          Thank you for completing the account registration process. <br />
+          However, you do not have the correct membership to join Rocket.Chat. <br />
+          Please request an invitation from your product owner or team lead who has joined
+          Rocket.Chat, and continue with the account currently used. <br /> <br />
+          For more help, please refer to <a href={SELF_SERVER_APP.REGGIE.README}>instruction</a>.
         </p>
       </div>
     );

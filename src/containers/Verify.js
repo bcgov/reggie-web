@@ -73,7 +73,7 @@ class Verify extends Component {
     return (
       <div>
         {invitationRedirect}
-        <h1>Verify Invitation to Rocket Chat</h1>
+        <h1>Verify Invitation to Rocket.Chat</h1>
         {errMsg}
         {pageContent}
       </div>

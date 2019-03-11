@@ -1,7 +1,7 @@
 ## About
 
-This is the invitation app for [Pathfinder RocketChat](https://github.com/BCDevOps/platform-services/tree/master/apps/rocketchat)
-It support invitation of new users to the RocketChat App. Instruction on how to use the app is [here](https://github.com/bcgov/reggie-web/blob/master/README-user-instructions.md).
+This is the invitation app for [Pathfinder Rocket.Chat](https://github.com/BCDevOps/platform-services/tree/master/apps/rocketchat)
+It support invitation of new users to the Pathfinder Rocket.Chat App. Instruction on how to use the app is [here](https://github.com/bcgov/reggie-web/blob/master/README-user-instructions.md).
 
 ## Usage
 

@@ -77,11 +77,11 @@ class RocketChat extends Component {
               <p>
                 Hello {this.props.userInfo.lastName}
                 <br />
-                You are a member of RocketChat. Please go ahead to the RocketChat App!
+                You are a member of Rocket.Chat. Please go ahead to the Pathfinder Rocket.Chat App!
               </p>
               {/* External link */}
               <a href={SELF_SERVER_APP.ROCKETCHAT.URL}>
-                <Button className="btn btn-primary">Go to Rocket Chat</Button>
+                <Button className="btn btn-primary">Go to Rocket.Chat</Button>
               </a>
             </div>
           }

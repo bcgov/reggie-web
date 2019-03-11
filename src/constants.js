@@ -21,8 +21,8 @@
 import config from './config.json';
 
 export const APP_INFO = {
-  NAME: 'BC Gov RocketChat Invitation',
-  DISPLAY_NAME: 'BC Gov RocketChat Invitation',
+  NAME: 'Pathfinder Rocket.Chat Invitation',
+  DISPLAY_NAME: 'Pathfinder Rocket.Chat Invitation',
 };
 
 export const API = {
@@ -52,6 +52,9 @@ export const SELF_SERVER_APP = {
     URL: process.env.REACT_APP_ROCKETCHAT_URL || config.rocketchatUrl,
     NAME: 'rc',
     INVITATION_CODE: 'rc',
+  },
+  REGGIE: {
+    README: 'https://github.com/bcgov/reggie-web/blob/master/README-user-instructions.md',
   },
 };
 
