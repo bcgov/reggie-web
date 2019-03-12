@@ -75,7 +75,7 @@ class RocketChat extends Component {
           centerContent={
             <div>
               <p>
-                Hello {this.props.userInfo.lastName}
+                Hello {this.props.userInfo.firstName}
                 <br />
                 You are a member of Rocket.Chat. Please go ahead to the Pathfinder Rocket.Chat App!
               </p>
