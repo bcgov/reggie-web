@@ -1,3 +1,8 @@
+---
+title: Steps to join Pathfinder Rocket.Chat
+description: Instruction on registering and joining Pathfinder Rocket.Chat
+---
+
 ## Steps to join Pathfinder Rocket.Chat
 
 ### Prerequsites to join Rocket.Chat:

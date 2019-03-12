@@ -1,3 +1,7 @@
+---
+ignore: true
+---
+
 ## About
 
 This is the invitation app for [Pathfinder Rocket.Chat](https://github.com/BCDevOps/platform-services/tree/master/apps/rocketchat)
