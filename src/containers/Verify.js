@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
 import { Loader } from '../components/UI/Loader';
+import { ERROR_MESSAGES } from '../constants';
 
 // Here check if invited user is valid:
 class Verify extends Component {
@@ -37,7 +38,7 @@ class Verify extends Component {
 
   render() {
     let invitationRedirect = null;
-    const ssoErrMsg = 'Your SSO account is not complete, please update your profile by login again';
+    const ssoErrMsg = ERROR_MESSAGES.INCOMPLETE_ACCOUNT;
 
     // Error messages from either email verification or authorization:
     const errMsg =

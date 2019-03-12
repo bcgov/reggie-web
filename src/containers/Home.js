@@ -23,7 +23,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE, APP_INFO } from '../constants';
+import { ROUTES, AUTH_CODE, APP_INFO, ERROR_MESSAGES } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
@@ -59,6 +59,8 @@ class Home extends Component {
       switch (authCode) {
         case AUTH_CODE.AUTHORIZED:
           return <Redirect to="/rocketChat" />;
+        case AUTH_CODE.PENDING:
+          return <p>{ERROR_MESSAGES.INCOMPLETE_ACCOUNT}</p>;
         default:
           return <Redirect to="/rejection" />;
       }
