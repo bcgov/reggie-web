@@ -39,8 +39,9 @@ const axi = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-const checkStatus = (isAuthorized = false) => {
+const checkStatus = (isAuthorized = false, isPending = false) => {
   if (isAuthorized) return AUTH_CODE.AUTHORIZED;
+  if (isPending) return AUTH_CODE.PENDING;
   return AUTH_CODE.NEW;
 };
 
@@ -56,7 +57,7 @@ const _authorizeHelper = async (dispatch, userId, ssoGroup) => {
   let newUserInfo = {};
   try {
     const res = await axi.get(API.GET_SSO_USER(userId));
-    authCode = checkStatus(res.data.isAuthorized);
+    authCode = checkStatus(res.data.isAuthorized, res.data.isPending);
     newUserInfo = {
       id: res.data.id,
       email: res.data.email,
@@ -132,15 +133,10 @@ export const verifyEmail = (
         code: invitationCode,
         token: jwt,
       });
-      console.log('-------------------i m here');
 
       // Get the updated the current user info after the API request:
       await _authorizeHelper(dispatch, userId, SELF_SERVER_APP.ROCKETCHAT.NAME);
     } catch (err) {
-      console.log('----------------verify err');
-      console.log(err);
-      console.log(err.message);
-      console.log(err.code);
       const errMsg = 'Your invitation link is invalid, please get invited again';
       return dispatch(verifyEmailError([errMsg]));
     }

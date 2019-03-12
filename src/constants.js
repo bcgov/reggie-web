@@ -67,6 +67,7 @@ export const ROUTES = {
 export const AUTH_CODE = {
   NEW: 'new',
   AUTHORIZED: 'authorized',
+  PENDING: 'pending',
 };
 
 export const SCROLLER = {
@@ -77,4 +78,9 @@ export const SCROLLER = {
     offset: 50,
   },
   TARGET: 'scorllerTarget',
+};
+
+export const ERROR_MESSAGES = {
+  INCOMPLETE_ACCOUNT:
+    'Your DevHub KeyCloak account is not complete, please update your profile by closing the browser and login again',
 };
