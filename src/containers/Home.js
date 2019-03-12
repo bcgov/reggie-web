@@ -21,9 +21,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { authorize } from '../actionCreators';
-import { ROUTES, AUTH_CODE } from '../constants';
+import { ROUTES, AUTH_CODE, APP_INFO, ERROR_MESSAGES } from '../constants';
 import { Loader } from '../components/UI/Loader';
 
 // Here provides option to access different services/apps
@@ -46,19 +46,9 @@ class Home extends Component {
       <p>Please log in to proceed</p>
     );
 
-    /*
-      if there exist email payloads in localstorage, go to confirmation page
-      if user is authorized for Rocket chat, go to invitation page (as there's only one option atm)
-      else if user does not meet the requirement to join Rocket chat, go to rejection page
-      else, stay in the home page untill user pick an option
-    */
-    // Redirect based on Email:
+    // Redirect for email invitation verification:
     const setEmailRedirect = (emailJwt, intention) => {
       if (!emailJwt || !intention) return null;
-      if (intention === ROUTES.EMAIL.CONFIRM) {
-        if (this.props.userInfo.email) return <Redirect to="/confirmation" />;
-        return null;
-      }
       if (intention === ROUTES.EMAIL.VERIFY) return <Redirect to="/verify" />;
       return null;
     };
@@ -69,21 +59,10 @@ class Home extends Component {
       switch (authCode) {
         case AUTH_CODE.AUTHORIZED:
           return <Redirect to="/rocketChat" />;
-        case AUTH_CODE.REJECTED:
-          return <Redirect to="/rejection" />;
-        case AUTH_CODE.NEW:
-          return <Redirect to="/registration" />;
         case AUTH_CODE.PENDING:
-          return (
-            <div>
-              <p>You have a pending registration!</p>
-              <Link className="btn btn-primary" to="/registration">
-                Update Registation Profile
-              </Link>
-            </div>
-          );
+          return <p>{ERROR_MESSAGES.INCOMPLETE_ACCOUNT}</p>;
         default:
-          return null;
+          return <Redirect to="/rejection" />;
       }
     };
 
@@ -96,7 +75,7 @@ class Home extends Component {
 
     return (
       <div className="authed">
-        <h1>Welcome to Reggie</h1>
+        <h1>Welcome to {APP_INFO.DISPLAY_NAME}</h1>
         {authenticationContent}
         {errMsg}
         {loadingContent}
@@ -110,7 +89,6 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    userId: state.authentication.userId,
     authCode: state.authorization.authCode,
     isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,

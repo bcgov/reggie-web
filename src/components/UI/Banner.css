@@ -6,10 +6,22 @@
 
 .header-title {
   font-weight: normal;
-  margin: 13px 18px;
+  margin: 0 18px;
   padding: 0.5em 0;
 }
 
 .header-logo {
   height: 80px;
+}
+
+@media screen and (max-width: 500px) {
+  .header-title {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .header-title {
+    font-size: 18px;
+  }
 }

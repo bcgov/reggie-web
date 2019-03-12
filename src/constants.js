@@ -21,7 +21,8 @@
 import config from './config.json';
 
 export const APP_INFO = {
-  NAME: 'BC Gov Reggie',
+  NAME: 'Pathfinder Rocket.Chat Invitation App',
+  DISPLAY_NAME: 'Pathfinder Rocket.Chat Invitation App',
 };
 
 export const API = {
@@ -29,8 +30,6 @@ export const API = {
     ? `${process.env.REACT_APP_API_BASE_URL}/api/v1/`
     : `${config.apiBaseUrl}/api/v1/`,
   GET_SSO_USER: userId => `sso/user/${userId}`,
-  UPDATE_SSO_USER: userId => `sso/user/${userId}`,
-  CONFIRM_SSO_USER: userId => `sso/user/confirmed/${userId}`,
   INVITE_USER: userId => `sso/user/invite/${userId}`,
   VERIFY_SSO_USER: userId => `sso/user/verify/${userId}`,
   TIME_OUT: 40000,
@@ -54,20 +53,21 @@ export const SELF_SERVER_APP = {
     NAME: 'rc',
     INVITATION_CODE: 'rc',
   },
+  REGGIE: {
+    README: 'https://github.com/bcgov/reggie-web/blob/master/README-user-instructions.md',
+  },
 };
 
 export const ROUTES = {
   EMAIL: {
-    CONFIRM: 'confirm',
     VERIFY: 'invite',
   },
 };
 
 export const AUTH_CODE = {
   NEW: 'new',
-  PENDING: 'pending',
   AUTHORIZED: 'authorized',
-  REJECTED: 'rejected',
+  PENDING: 'pending',
 };
 
 export const SCROLLER = {
@@ -78,4 +78,9 @@ export const SCROLLER = {
     offset: 50,
   },
   TARGET: 'scorllerTarget',
+};
+
+export const ERROR_MESSAGES = {
+  INCOMPLETE_ACCOUNT:
+    'Your DevHub KeyCloak account profile is incomplete, please update your profile by closing the browser and login again.',
 };

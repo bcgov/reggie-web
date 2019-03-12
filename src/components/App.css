@@ -15,7 +15,11 @@ p {
 
 a {
   color: #003366;
-  text-decoration: none;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #003366;
 }
 
 button {
@@ -64,4 +68,15 @@ h1 {
 
 .flex-container > div {
   margin: 0 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn.btn-primary {
+    font-size: 13px;
+    padding: 10px;
+  }
 }

@@ -35,13 +35,13 @@ ShallowWrapper {
           wrapTag="div"
         >
           <Banner
-            titleText="BC Gov Reggie"
+            titleText="Pathfinder Rocket.Chat Invitation App"
           />
         </ModalHeader>,
         <ModalBody
           tag="div"
         >
-          Please login before starting the Rocketchat Registration process with Reggie
+          Please login before starting Rocket.Chat Invitation with Reggie
         </ModalBody>,
         <ModalFooter
           tag="div"
@@ -104,7 +104,7 @@ ShallowWrapper {
         "props": Object {
           "charCode": 215,
           "children": <Banner
-            titleText="BC Gov Reggie"
+            titleText="Pathfinder Rocket.Chat Invitation App"
           />,
           "closeAriaLabel": "Close",
           "tag": "h5",
@@ -116,7 +116,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "titleText": "BC Gov Reggie",
+            "titleText": "Pathfinder Rocket.Chat Invitation App",
           },
           "ref": null,
           "rendered": null,
@@ -129,11 +129,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Please login before starting the Rocketchat Registration process with Reggie",
+          "children": "Please login before starting Rocket.Chat Invitation with Reggie",
           "tag": "div",
         },
         "ref": null,
-        "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+        "rendered": "Please login before starting Rocket.Chat Invitation with Reggie",
         "type": [Function],
       },
       Object {
@@ -300,13 +300,13 @@ ShallowWrapper {
             wrapTag="div"
           >
             <Banner
-              titleText="BC Gov Reggie"
+              titleText="Pathfinder Rocket.Chat Invitation App"
             />
           </ModalHeader>,
           <ModalBody
             tag="div"
           >
-            Please login before starting the Rocketchat Registration process with Reggie
+            Please login before starting Rocket.Chat Invitation with Reggie
           </ModalBody>,
           <ModalFooter
             tag="div"
@@ -369,7 +369,7 @@ ShallowWrapper {
           "props": Object {
             "charCode": 215,
             "children": <Banner
-              titleText="BC Gov Reggie"
+              titleText="Pathfinder Rocket.Chat Invitation App"
             />,
             "closeAriaLabel": "Close",
             "tag": "h5",
@@ -381,7 +381,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "titleText": "BC Gov Reggie",
+              "titleText": "Pathfinder Rocket.Chat Invitation App",
             },
             "ref": null,
             "rendered": null,
@@ -394,11 +394,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Please login before starting the Rocketchat Registration process with Reggie",
+            "children": "Please login before starting Rocket.Chat Invitation with Reggie",
             "tag": "div",
           },
           "ref": null,
-          "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+          "rendered": "Please login before starting Rocket.Chat Invitation with Reggie",
           "type": [Function],
         },
         Object {
@@ -604,13 +604,13 @@ ShallowWrapper {
           wrapTag="div"
         >
           <Banner
-            titleText="BC Gov Reggie"
+            titleText="Pathfinder Rocket.Chat Invitation App"
           />
         </ModalHeader>,
         <ModalBody
           tag="div"
         >
-          Please login before starting the Rocketchat Registration process with Reggie
+          Please login before starting Rocket.Chat Invitation with Reggie
         </ModalBody>,
         <ModalFooter
           tag="div"
@@ -673,7 +673,7 @@ ShallowWrapper {
         "props": Object {
           "charCode": 215,
           "children": <Banner
-            titleText="BC Gov Reggie"
+            titleText="Pathfinder Rocket.Chat Invitation App"
           />,
           "closeAriaLabel": "Close",
           "tag": "h5",
@@ -685,7 +685,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "titleText": "BC Gov Reggie",
+            "titleText": "Pathfinder Rocket.Chat Invitation App",
           },
           "ref": null,
           "rendered": null,
@@ -698,11 +698,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "Please login before starting the Rocketchat Registration process with Reggie",
+          "children": "Please login before starting Rocket.Chat Invitation with Reggie",
           "tag": "div",
         },
         "ref": null,
-        "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+        "rendered": "Please login before starting Rocket.Chat Invitation with Reggie",
         "type": [Function],
       },
       Object {
@@ -869,13 +869,13 @@ ShallowWrapper {
             wrapTag="div"
           >
             <Banner
-              titleText="BC Gov Reggie"
+              titleText="Pathfinder Rocket.Chat Invitation App"
             />
           </ModalHeader>,
           <ModalBody
             tag="div"
           >
-            Please login before starting the Rocketchat Registration process with Reggie
+            Please login before starting Rocket.Chat Invitation with Reggie
           </ModalBody>,
           <ModalFooter
             tag="div"
@@ -938,7 +938,7 @@ ShallowWrapper {
           "props": Object {
             "charCode": 215,
             "children": <Banner
-              titleText="BC Gov Reggie"
+              titleText="Pathfinder Rocket.Chat Invitation App"
             />,
             "closeAriaLabel": "Close",
             "tag": "h5",
@@ -950,7 +950,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "titleText": "BC Gov Reggie",
+              "titleText": "Pathfinder Rocket.Chat Invitation App",
             },
             "ref": null,
             "rendered": null,
@@ -963,11 +963,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "Please login before starting the Rocketchat Registration process with Reggie",
+            "children": "Please login before starting Rocket.Chat Invitation with Reggie",
             "tag": "div",
           },
           "ref": null,
-          "rendered": "Please login before starting the Rocketchat Registration process with Reggie",
+          "rendered": "Please login before starting Rocket.Chat Invitation with Reggie",
           "type": [Function],
         },
         Object {

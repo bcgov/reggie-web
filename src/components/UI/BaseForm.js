@@ -47,11 +47,14 @@ export const BaseForm = ({
   messages,
 }) => {
   // Success or error message:
-  if (messages.successMsg)
+  // TODO: fix the issue as this get triggered twice, use active check for now
+  if (messages.successMsg && !toast.isActive('successToast'))
     toast.success(messages.successMsg, {
       position: toast.POSITION.BOTTOM_CENTER,
+      toastId: 'successToast',
+      autoClose: 3000,
     });
-  // TODO: fix the issue as this get triggered twice, use active check for now
+
   if (messages.failureMsg && !toast.isActive('failToast')) {
     toast.error(messages.failureMsg, {
       position: toast.POSITION.BOTTOM_CENTER,

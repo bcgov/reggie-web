@@ -32,9 +32,7 @@ export const AuthModal = ({ isAuthenticated }) => {
       <ModalHeader>
         <Banner titleText={APP_INFO.NAME} />
       </ModalHeader>
-      <ModalBody>
-        Please login before starting the Rocketchat Registration process with Reggie
-      </ModalBody>
+      <ModalBody>Please login before starting Rocket.Chat Invitation with Reggie</ModalBody>
       <ModalFooter>
         <p>Login with:</p>
         <div className="auth-buttons">

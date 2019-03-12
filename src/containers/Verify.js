@@ -23,18 +23,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { authorize, verifyEmail } from '../actionCreators';
-import { AUTH_CODE, SELF_SERVER_APP } from '../constants';
-import { BaseForm } from '../components/UI/BaseForm';
 import { Loader } from '../components/UI/Loader';
+import { ERROR_MESSAGES } from '../constants';
 
 // Here check if invited user is valid:
 class Verify extends Component {
   static displayName = '[Component Verify]';
-
-  // check for authorization status first:
-  componentWillMount = () => {
-    this.props.authorize(SELF_SERVER_APP.ROCKETCHAT.NAME, this.props.userId);
-  };
 
   // Remove localstorage when done with the flow:
   componentWillUnmount = () => {
@@ -44,57 +38,44 @@ class Verify extends Component {
 
   render() {
     let invitationRedirect = null;
-    // if user is matching the Rocket chat schema, redirect to home directly:
-    if (this.props.authCode !== AUTH_CODE.REJECTED && this.props.userInfo.id !== null) {
-      invitationRedirect = <Redirect to="/" />;
-    }
-    // After user verifies, go to registration:
-    if (this.props.verfied) invitationRedirect = <Redirect to="/registration" />;
+    const ssoErrMsg = ERROR_MESSAGES.INCOMPLETE_ACCOUNT;
 
+    // Error messages from either email verification or authorization:
+    const errMsg =
+      this.props.errorMessages.length > 0 ? (
+        <p>{this.props.errorMessages[0]}</p>
+      ) : this.props.authErrorMessages.length > 0 ? (
+        <p>{this.props.authErrorMessages[0]}</p>
+      ) : null;
+
+    // Redirect if email invitation is verified:
+    if (this.props.verfied) invitationRedirect = <Redirect to="/" />;
+
+    // Get the previously stored jwt:
     const emailJwt = localStorage.getItem('emailJwt');
-    const schema = {
-      title: 'Enter your email address',
-      type: 'object',
-      required: ['email'],
-      properties: {
-        email: {
-          type: 'string',
-          format: 'email',
-          title: 'Email',
-        },
-      },
-    };
 
-    const onSubmit = ({ formData }) => {
-      this.props.verifyEmail(this.props.userId, formData.email, emailJwt);
-    };
-
-    const formStatus = {
-      inProgress: this.props.verifyStarted,
-    };
-
-    const formMessages = {
-      failureMsg: this.props.errorMessages.length > 0 ? this.props.errorMessages[0] : null,
-    };
+    // When not loading process or error message, start to verify email:
+    if (
+      this.props.userInfo.id !== null &&
+      !this.props.verifyStarted &&
+      this.props.userInfo.email !== null &&
+      errMsg === null
+    ) {
+      this.props.verifyEmail(this.props.userId, this.props.userInfo.email, emailJwt);
+    }
 
     const pageContent =
-      this.props.userInfo.id === null ? (
-        Loader
-      ) : (
-        <BaseForm
-          formSchema={schema}
-          toggled={true}
-          onSubmit={onSubmit}
-          status={formStatus}
-          messages={formMessages}
-        />
-      );
+      this.props.userInfo.id === null || this.props.verifyStarted
+        ? Loader
+        : this.props.userInfo.email === null
+        ? ssoErrMsg
+        : null;
 
     return (
       <div>
         {invitationRedirect}
-        <h1>Welcome to Rocket chat</h1>
-        <h4>{this.props.authErrorMessages[0]}</h4>
+        <h1>Verify Invitation to Rocket.Chat</h1>
+        {errMsg}
         {pageContent}
       </div>
     );
@@ -107,8 +88,6 @@ const mapStateToProps = state => {
     verifyStarted: state.verifyEmail.verifyStarted,
     verfied: state.verifyEmail.verfied,
     errorMessages: state.verifyEmail.errorMessages,
-    authCode: state.authorization.authCode,
-    isAuthorizing: state.authorization.isAuthorizing,
     userInfo: state.authorization.userInfo,
     authErrorMessages: state.authorization.errorMessages,
   };

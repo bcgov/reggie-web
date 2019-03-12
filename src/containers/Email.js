@@ -24,14 +24,14 @@ import qs from 'query-string';
 
 // Here checks for the parameters that come with the email link:
 export class Email extends Component {
-  static displayName = '[Component Confirmation]';
+  static displayName = '[Component Email JWT]';
   componentWillMount = () => {
     try {
       const parsed = qs.parse(this.props.location.search);
       localStorage.setItem('emailJwt', parsed.jwt);
       localStorage.setItem('emailIntention', parsed.emailIntention);
     } catch (err) {
-      console.log('---email confirmation JWT not found---');
+      console.log('---email verification JWT not found---');
     }
   };
 
