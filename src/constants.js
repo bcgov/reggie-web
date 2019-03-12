@@ -21,8 +21,8 @@
 import config from './config.json';
 
 export const APP_INFO = {
-  NAME: 'Pathfinder Rocket.Chat Invitation',
-  DISPLAY_NAME: 'Pathfinder Rocket.Chat Invitation',
+  NAME: 'Pathfinder Rocket.Chat Invitation App',
+  DISPLAY_NAME: 'Pathfinder Rocket.Chat Invitation App',
 };
 
 export const API = {
@@ -82,5 +82,5 @@ export const SCROLLER = {
 
 export const ERROR_MESSAGES = {
   INCOMPLETE_ACCOUNT:
-    'Your DevHub KeyCloak account is not complete, please update your profile by closing the browser and login again',
+    'Your DevHub KeyCloak account profile is incomplete, please update your profile by closing the browser and login again.',
 };
