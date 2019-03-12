@@ -4,6 +4,16 @@
   margin-bottom: 15px;
 }
 
+.rejection-instructions {
+  margin: 0;
+}
+
+@media screen and (min-width: 1300px) {
+  .rejection-instructions {
+    margin: 0 150px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .rejection-hints {
     text-align: justify;
@@ -11,5 +21,6 @@
   
   .rejection-instructions {
     text-align: justify;
+    margin: 0;
   }
 }
