@@ -18,6 +18,10 @@
   .header-title {
     margin: 0;
   }
+
+  .header-logo {
+    height: 50px;
+  }
 }
 
 @media screen and (max-width: 350px) {
