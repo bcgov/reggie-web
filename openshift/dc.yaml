@@ -158,5 +158,4 @@ parameters:
 - description: Set route with specific host.
   displayName: Host route
   name: HOST
-  required: false
   value: ''
