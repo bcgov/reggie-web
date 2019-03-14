@@ -138,7 +138,7 @@ parameters:
 - description: A name used for routes/services and deployment configs
   displayName: Host
   name: HOST
-  required: true
+  required: false
   value: ''
 - description: A base url of reggie api
   displayName: host of reggie api
