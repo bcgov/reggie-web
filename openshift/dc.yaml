@@ -138,7 +138,7 @@ parameters:
 - description: A name used for routes/services and deployment configs
   displayName: Host
   name: HOST
-  required: false
+  required: true
   value: ''
 - description: A base url of reggie api
   displayName: host of reggie api
@@ -155,7 +155,3 @@ parameters:
   name: VOLUMN_NAME
   required: false
   value: web-caddy-config
-- description: Set route with specific host.
-  displayName: Host route
-  name: HOST
-  value: ''
