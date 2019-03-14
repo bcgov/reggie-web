@@ -108,7 +108,7 @@ objects:
     creationTimestamp: null
     name: ${NAME}-static${SUFFIX}
   spec:
-    host:
+    host: ${HOST}
     port:
       targetPort: web
     tls:
@@ -155,4 +155,8 @@ parameters:
   name: VOLUMN_NAME
   required: false
   value: web-caddy-config
-  
+- description: Set route with specific host.
+  displayName: Host route
+  name: HOST
+  required: false
+  value: ''

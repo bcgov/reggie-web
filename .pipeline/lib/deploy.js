@@ -24,6 +24,10 @@ module.exports = () => {
       oc.options.env === 'prod'
         ? 'https://chat.pathfinder.gov.bc.ca/'
         : 'https://chat-test.pathfinder.gov.bc.ca/',
+    HOST:
+      oc.options.env === 'prod'
+      ? 'reggie.pathfinder.gov.bc.ca'
+      : '',
   };
 
   const objects = oc.process(oc.toFileUrl(templateFile), {
