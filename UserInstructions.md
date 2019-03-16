@@ -36,9 +36,9 @@ Users who *do not* have an account that satisfies prerequisite 1. or 2., above, 
 1. Once logged into Reggie, click on the `Invite New User` button and enter the email address of the person you wish to invite to Pathfinder Rocket.Chat.  Please double check that you have provided the correct email address, as Reggie verifies new users based on this email.
 1. If the invitation successfully sent, a green message will be displayed pop up. If not, please contact BC Gov DevHub team for help - something unexpected has happened!
 
-### 3. Receiving an invited
+### 3. Receiving and accepting an invitation
 
-If you've received an invite from an existing Pathfinder Rocket.Chat user, you can accept the invite and complete your own registration following the steps below.  
+If you've received an invitation from an existing Pathfinder Rocket.Chat user, you can accept the invite and complete your own registration following the steps below.  
 
 - When you receive an email inviting you to join Rocket.Chat, please click on the link
 - You will be asked to login first, via either `GitHub` or `IDIR`
