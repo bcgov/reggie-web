@@ -34,11 +34,11 @@ export class Rejection extends Component {
           Thank you for completing the account registration process.
         </p>
         <p className="rejection-instructions">
-          However, you do not have the correct membership to join Rocket.Chat. Please request an
-          invitation from your <b>product owner or team lead who has joined Rocket.Chat</b>
+          We are unable to automatically add you to the Rocket.Chat service. Please request an
+          invitation from your <b>product owner or team lead</b>.
           <br />
           <br />
-          For more help, please refer to <a href={SELF_SERVER_APP.REGGIE.README}>instruction</a>.
+          For more help, please refer to <a href={SELF_SERVER_APP.REGGIE.README}>steps to join Rocket.Chat</a>.
         </p>
       </div>
     );

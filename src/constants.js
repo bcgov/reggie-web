@@ -54,7 +54,8 @@ export const SELF_SERVER_APP = {
     INVITATION_CODE: 'rc',
   },
   REGGIE: {
-    README: 'https://github.com/bcgov/reggie-web/blob/master/README-user-instructions.md',
+    README:
+      'https://developer.gov.bc.ca/Community-Enablers-and-Events/Steps-to-join-Pathfinder-Rocket.Chat',
   },
 };
 
