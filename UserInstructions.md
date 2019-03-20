@@ -18,15 +18,15 @@ Pathfinder Rocket.Chat Users must:
 
 If you have an account that satisfies prerequisite 1. or 2. above, you can follow the steps below to register and access Pathfinder Rocket.Chat.  
 
-1. Go to [Pathfinder Rocket.Chat login page](https://chat.pathfinder.gov.bc.ca/), click on `Login` button
-2. You will be redirected to the KeyCloak login page with 2 different options to login: `GitHub` or `IDIR`
-3. Pick one of the login options based on the prerequisites above and complete the login process 
-4. When prompted, please verify and update the contact attributes shown below. **Note: even if these values are pre-populated,  please check and update them if they are not accurate.**
+- Go to [Pathfinder Rocket.Chat login page](https://chat.pathfinder.gov.bc.ca/), click on `Login` button
+- You will be redirected to the KeyCloak login page with 2 different options to login: `GitHub` or `IDIR`
+- Pick one of the login options based on the prerequisites above and complete the login process 
+- When prompted, please verify and update the contact attributes shown below. **Note: even if these values are pre-populated,  please check and update them if they are not accurate.**
   - `Email`
   - `First name`
   - `Last name`
-5. A verification email will be sent to the email address you've provided. Please follow the steps in the email to complete the registration process.
-6. You will be directed back to Patfinder Rocket.Chat once the email verification is complete. *Note:* email verification is only required once.
+- A verification email will be sent to the email address you've provided. Please follow the steps in the email to complete the registration process.
+- You will be directed back to Patfinder Rocket.Chat once the email verification is complete. *Note:* email verification is only required once.
 
 ### 2. How to invite new users:
 
@@ -40,10 +40,10 @@ Users who *do not* have an account that satisfies prerequisite 1. or 2., above, 
 
 If you've received an invitation from an existing Pathfinder Rocket.Chat user, you can accept the invite and complete your own registration following the steps below.  
 
-1. When you receive an email inviting you to join Rocket.Chat, please click on the link.
-2. You will be asked to login first, via either `GitHub` or `IDIR`.
+- When you receive an email inviting you to join Rocket.Chat, please click on the link.
+- You will be asked to login first, via either `GitHub` or `IDIR`.
   - Please make sure to login to the account that has the same email address associated with it that your invitation was sent to, otherwise validation will fail.
-3. Continue and complete your business contact information.
-4. Once logged into Reggie, the app will validate your invitation.
+- Continue and complete your business contact information.
+- Once logged into Reggie, the app will validate your invitation.
   - If the invitation is valid, you will see a button to continue to Rocket.Chat.
   - If not, please ask the person who invited you for another invite, and double check the email address you receive the invitation with is the same as the one associated with the account you log in with.
