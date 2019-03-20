@@ -55,7 +55,7 @@ export const SELF_SERVER_APP = {
   },
   REGGIE: {
     README:
-      'https://developer.gov.bc.ca/Community-Enablers-and-Events/BC-Gov-Development-Community-Events',
+      'https://developer.gov.bc.ca/Community-Enablers-and-Events/Steps-to-join-Pathfinder-Rocket.Chat',
   },
 };
 
