@@ -84,7 +84,7 @@ export const authorize = (ssoGroup, userId, doStart = true) => {
     try {
       return await _authorizeHelper(dispatch, userId, ssoGroup);
     } catch (err) {
-      const message = 'Fail to connect to KeyCloak, please refresh!';
+      const message = 'Fail to connect to KeyCloak, please refresh! ' + err;
       return dispatch(authorizationError([message]));
     }
   };
