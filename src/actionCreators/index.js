@@ -65,7 +65,7 @@ const _authorizeHelper = async (dispatch, userId, ssoGroup) => {
       lastName: res.data.lastName,
     };
   } catch (error) {
-    throw Error(error);
+    throw Error(error + res);
   }
   return dispatch(authorizationSuccess(ssoGroup, newUserInfo, authCode));
 };
