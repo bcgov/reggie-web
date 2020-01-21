@@ -47,3 +47,13 @@ If you've received an invitation from an existing Pathfinder Rocket.Chat user, y
 - Once logged into Reggie, the app will validate your invitation.
   - If the invitation is valid, you will see a button to continue to Rocket.Chat.
   - If not, please ask the person who invited you for another invite, and double check the email address you receive the invitation with is the same as the one associated with the account you log in with.
+
+## Rocket.Chat Desktop App Troubleshooting
+
+People have had trouble logging in with the latest versions (2.15+) of the desktop app.
+
+Instead of downloading the latest version, go [here](https://github.com/RocketChat/Rocket.Chat.Electron/releases/tag/2.14.7) and download **rocketchat-2.14.7.dmg**. 
+
+If you still have trouble logging in, wait until the countdown timer reaches ~40s and click the 'Retry' button.
+
+Please report any other problems by [opening an Issue](https://github.com/RocketChat/Rocket.Chat.Electron/issues/new).
